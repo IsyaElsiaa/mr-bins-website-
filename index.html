@@ -478,7 +478,7 @@ footer{background:var(--navy);padding:clamp(56px,7vw,96px) clamp(20px,5vw,44px) 
 <!-- WALKTHROUGH — the opening: video plays, captions swap on scroll -->
 <section id="walk">
  <div class="stage">
-  <video class="walkvid" id="walkvid" muted playsinline preload="auto" poster="mrbins-store.jpg">
+  <video class="walkvid" id="walkvid" muted playsinline webkit-playsinline preload="auto" poster="mrbins-store.jpg">
    <source src="mrbins-walk.mp4" type="video/mp4"></video>
   <div class="tint"></div>
   <div class="wcaps" id="wcaps">
@@ -816,8 +816,20 @@ function seekTo(v,t){if(v.fastSeek){try{v.fastSeek(t);return;}catch(e){}}try{v.c
      hcue=document.getElementById('hcue'),hprog=document.getElementById('hprog');
  var n=caps.length,cur=-1,dur=0,ticking=false;
  v.addEventListener('loadedmetadata',function(){dur=v.duration||10;paint();});
- /* nudge the video to buffer so the first seek is instant */
- try{v.play().then(function(){v.pause();}).catch(function(){});}catch(e){}
+ /* MOBILE/iOS: swap to the lightweight 720p rendition — iPhone Safari ignores
+    preload="auto", blocks muted play() in Low Power Mode, and chokes scrubbing
+    a 19MB file over cellular. Smaller file + faststart = instant frames. */
+ var mob=window.matchMedia('(max-width:940px)').matches||/iPhone|iPad|iPod/.test(navigator.userAgent);
+ if(mob){var ws=v.querySelector('source');
+  if(ws&&ws.getAttribute('src').indexOf('walk-mobile')<0){ws.setAttribute('src','mrbins-walk-mobile.mp4');v.load();}}
+ /* prime the decoder so seeks paint frames; re-run on first real touch because
+    iOS only trusts play() from a user gesture (Low Power Mode, Data Saver) */
+ function primeAll(){
+  [].forEach.call(document.querySelectorAll('#walkvid,#cartvid,#clothesvid,#shoesvid,.boxvid'),function(x){
+   try{var q=x.play();if(q&&q.then)q.then(function(){x.pause();}).catch(function(){});}catch(e){}});}
+ primeAll();
+ ['touchstart','pointerdown'].forEach(function(ev){
+  window.addEventListener(ev,function h(){window.removeEventListener(ev,h,true);primeAll();},{passive:true,capture:true,once:true});});
  function paint(){
   ticking=false;
   var total=walk.offsetHeight-window.innerHeight;

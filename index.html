@@ -25,11 +25,12 @@ a{color:inherit}
 h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.02em;line-height:1.02}
 
 /* header */
-header.bar{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(9,20,40,.92);border-bottom:1px solid rgba(255,255,255,.09)}
+header.bar{position:fixed;top:0;left:0;right:0;z-index:80;background:#091529;border-bottom:1px solid rgba(255,255,255,.09)}
 .bar .row{max-width:1280px;margin:0 auto;padding:12px clamp(16px,4vw,44px);display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:12px}
-.brand .brandlive{height:76px;width:auto;object-fit:cover;border-radius:12px;display:block;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.28);margin:6px 0}
-@media(max-width:820px){.brand .brandlive{height:58px}}
+.brand .brandlive{height:104px;width:auto;object-fit:cover;border-radius:12px;display:block;background:#091529;margin:2px 0}
+.brand .brandlogo{height:44px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.35))}
+@media(max-width:820px){.brand .brandlive{height:76px}.brand .brandlogo{height:32px}}
 .brand .brandimg{display:none}
 .clock{display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);padding:7px 14px;border-radius:999px}
 .clock .dot{width:7px;height:7px;border-radius:50%;background:var(--bright);box-shadow:0 0 0 4px rgba(59,227,122,.22)}
@@ -72,11 +73,16 @@ header.bar{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(9,20,4
 .walkvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#04070e}
 .tint{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(4,10,22,.78),rgba(4,10,22,.5) 30%,rgba(4,10,22,.18) 55%,rgba(4,10,22,.34))}
 .wcaps{position:absolute;inset:0;z-index:2;pointer-events:none}
-.wcap{position:absolute;left:0;right:0;top:0;height:52vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(70px,9vh,120px) clamp(20px,6vw,64px) 0;opacity:0;transform:translateY(22px) scale(.985);transition:opacity .22s ease,transform .22s ease}
+.wcaps::before{content:'';position:absolute;left:0;right:0;top:0;height:64vh;background:linear-gradient(180deg,rgba(4,10,24,.58),rgba(4,10,24,.30) 55%,rgba(4,10,24,0));pointer-events:none}
+.wcap{position:absolute;left:0;right:0;top:0;height:52vh;display:flex;flex-direction:column;align-items:center;justify-content:center;justify-content:safe center;text-align:center;padding:clamp(130px,16vh,185px) clamp(20px,6vw,64px) 0;opacity:0;transform:translateY(22px) scale(.985);transition:opacity .22s ease,transform .22s ease;will-change:transform,opacity}
 .wcap.on{opacity:1;transform:none;transition:opacity .6s ease .04s,transform .72s cubic-bezier(.2,.8,.2,1) .04s}
-.wcap .k{display:inline-block;font-family:'Space Mono',monospace;font-weight:700;font-size:clamp(17px,2.4vw,30px);letter-spacing:.24em;text-transform:uppercase;color:#fff;background:rgba(11,58,166,.72);padding:.5em .95em;border-radius:999px;margin-bottom:clamp(18px,2.4vw,32px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.wcap .k{display:inline-block;font-family:'Space Mono',monospace;font-weight:700;font-size:clamp(15px,2vw,24px);letter-spacing:.22em;text-transform:uppercase;color:#fff;background:rgba(14,63,166,.92);border:1px solid rgba(255,255,255,.22);padding:.55em 1.05em;border-radius:999px;margin-bottom:clamp(14px,1.6vw,22px);box-shadow:0 8px 30px rgba(0,0,0,.45)}
 .wcap h1,.wcap h2{font-weight:800;font-size:clamp(52px,9.4vw,150px);line-height:.9;letter-spacing:-.035em;color:#fff;text-shadow:0 10px 64px rgba(0,0,0,.66);max-width:15ch;margin:0 auto}
+.wcap h2.h2m{font-size:clamp(38px,6.4vw,96px);max-width:none}
 .wcap h1 .o,.wcap h2 .o{color:var(--orange)}.wcap h1 .g,.wcap h2 .g{color:var(--bright)}.wcap h1 .b,.wcap h2 .b{color:var(--sky)}
+.wcap .stk{display:inline-block;background:var(--orange);color:#0B2447;padding:.02em .2em .08em;border-radius:.12em;transform:rotate(-1.5deg);text-shadow:none;box-shadow:0 10px 34px rgba(0,0,0,.35)}
+.wcap .sub{font-family:'Hanken Grotesk',system-ui,sans-serif;font-weight:600;font-size:clamp(15px,1.8vw,21px);line-height:1.35;color:#fff;text-shadow:0 3px 18px rgba(0,0,0,.85),0 1px 4px rgba(0,0,0,.6);margin:clamp(12px,1.6vw,20px) auto 0;max-width:46ch}
+.wcap .sub b{color:var(--orange);font-weight:800}
 .hcue{position:absolute;bottom:26px;left:0;right:0;text-align:center;z-index:3;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65);transition:opacity .3s}
 .hcue.bob{animation:bob 1.9s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
@@ -455,6 +461,7 @@ footer{background:var(--navy);padding:clamp(56px,7vw,96px) clamp(20px,5vw,44px) 
   .stage,.cartstage{height:100svh}
   .wcap{height:52svh}
  }
+ .wcap{padding-top:clamp(92px,12vh,130px)}
  /* comfortable ≥44px tap targets (Apple HIG) */
  .cartbtn,.menubtn{width:44px;height:44px}
  .social a{width:44px;height:44px}
@@ -467,6 +474,9 @@ footer{background:var(--navy);padding:clamp(56px,7vw,96px) clamp(20px,5vw,44px) 
 @media(max-width:520px){
  /* tighter header so more of the show fits on a phone screen */
  .brand .brandlive{height:48px}
+ .brand .brandlogo{height:21px}
+ .brand{gap:8px}
+ .clock{white-space:nowrap}
  .clock{font-size:11.5px;padding:6px 11px;gap:6px}
  .hright{gap:8px}
 }
@@ -486,8 +496,9 @@ footer{background:var(--navy);padding:clamp(56px,7vw,96px) clamp(20px,5vw,44px) 
 
 <header class="bar"><div class="row">
   <div class="brand">
-   <video class="brandlive" id="brandlive" autoplay muted loop playsinline poster="mrbins-navbin-poster.jpg" onloadeddata="this.classList.add('ready')" aria-label="Mr. Bins">
-    <source src="mrbins-navbin.mp4" type="video/mp4"></video>
+   <video class="brandlive" id="brandlive" autoplay muted loop playsinline poster="mrbins-navbin-navy.jpg" onloadeddata="this.classList.add('ready')" aria-label="">
+    <source src="mrbins-navbin-navy.mp4" type="video/mp4"></video>
+   <img class="brandlogo" src="mrbins-logo-dark.png" alt="Mr. Bins">
   </div>
   <nav class="tabs">
    <a href="#footer">Locations</a>
@@ -521,8 +532,8 @@ footer{background:var(--navy);padding:clamp(56px,7vw,96px) clamp(20px,5vw,44px) 
   <div class="tint"></div>
   <div class="wcaps" id="wcaps">
    <div class="wcap"><div class="k">Welcome to</div><h1 class="sr-hide" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Mr. Bins</h1><img src="mrbins-logo-dark.png" alt="" style="width:min(560px,72vw);height:auto;filter:drop-shadow(0 10px 44px rgba(0,0,0,.55))"></div>
-   <div class="wcap"><div class="k">Pallets of Amazon returns, dumped in</div><h2><span class="o">Unsorted.</span></h2></div>
-   <div class="wcap"><div class="k">Now it&rsquo;s your turn</div><h2>You dig.<br><span class="g">You score.</span></h2></div>
+   <div class="wcap"><div class="k">Truckloads, straight off the pallet</div><h2 class="h2m"><span class="stk">Brand&#8209;new</span><br>Amazon returns.</h2><p class="sub">Returns &amp; overstock from Amazon and big&#8209;box stores &mdash; <b>new in box, never used</b> &mdash; dumped into our bins.</p></div>
+   <div class="wcap"><div class="k">Dumped in &mdash; totally unsorted</div><h2>You dig.<br><span class="g">You score.</span></h2></div>
    <div class="wcap"><div class="k">One price, dropping daily</div><h2><span class="g">$14</span> &rarr; <span class="o">$9</span></h2></div>
   </div>
   <div class="hcue bob" id="hcue">scroll to walk in &darr;</div>
@@ -855,6 +866,11 @@ function seekTo(v,t){if(v.fastSeek){try{v.fastSeek(t);return;}catch(e){}}try{v.c
      caps=[].slice.call(document.querySelectorAll('#wcaps .wcap')),
      hcue=document.getElementById('hcue'),hprog=document.getElementById('hprog');
  var n=caps.length,cur=-1,dur=0,ticking=false;
+ /* LIVE CAPTIONS: scroll-scrubbed crossfade + zoom. Each caption eases in,
+    gently scales up as you scroll through its segment, then hands off to the
+    next. Falls back to the class-toggle reveal for prefers-reduced-motion. */
+ var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(!RM)for(var ci=0;ci<n;ci++)caps[ci].style.transition='none';
  v.addEventListener('loadedmetadata',function(){dur=v.duration||10;paint();});
  /* MOBILE/iOS: swap to the lightweight 720p rendition — iPhone Safari ignores
     preload="auto", blocks muted play() in Low Power Mode, and chokes scrubbing
@@ -885,8 +901,18 @@ function seekTo(v,t){if(v.fastSeek){try{v.fastSeek(t);return;}catch(e){}}try{v.c
   /* fade captions out over the last 8% so the final line never clips under the header at the unpin */
   document.getElementById('wcaps').style.opacity=(p>0.92?String(clampN((1-p)/0.08)):'1');
   if(dur){seekTo(v,p*(dur-0.05));}
-  var idx=Math.min(n-1,Math.floor(p*n*0.9999));
+  var seg=p*n,idx=Math.min(n-1,Math.floor(seg*0.9999));
   if(idx!==cur){cur=idx;for(var i=0;i<n;i++)caps[i].classList.toggle('on',i===idx);}
+  if(!RM)for(var i=0;i<n;i++){
+   var t=seg-i,op,sc;
+   if(t<=-0.02||t>=1.16){op=0;sc=0.94;}
+   else{
+    var fin=(i===0?1:clampN(t/0.16)),fout=(i===n-1?1:1-clampN((t-0.84)/0.32));
+    op=Math.min(fin,fout);sc=0.94+0.12*clampN(t);
+   }
+   caps[i].style.opacity=op.toFixed(3);
+   caps[i].style.transform='translateY('+((1-op)*16).toFixed(1)+'px) scale('+sc.toFixed(4)+')';
+  }
  }
  function onScroll(){if(!ticking){requestAnimationFrame(paint);ticking=true;}}
  window.addEventListener('scroll',onScroll,{passive:true});

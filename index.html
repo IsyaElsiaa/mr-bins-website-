@@ -12,11 +12,13 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B2447'/%3E%3Cpath d='M6 13h14.5l5.5 5-5.5 5H6z' fill='%23FF8F52'/%3E%3Ccircle cx='10' cy='18' r='1.8' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.simpleicons.org">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#0B2447;--blue:#1455D6;--blued:#0E3FA6;--sky:#7FB0FF;--green:#15A34A;--bright:#3BE37A;--orange:#FF8F52;--paper:#F4F7FB;--grey:#E3E9F2;--muted:#5B6B82}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{background:var(--navy);font-family:'Hanken Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#fff;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit}
@@ -442,6 +444,42 @@ footer{background:var(--navy);padding:clamp(56px,7vw,96px) clamp(20px,5vw,44px) 
  .locs{grid-template-columns:1fr}
  .ladder{grid-template-columns:repeat(3,1fr)}
 }
+
+/* ============ MOBILE-ONLY OPTIMIZATION PASS (Jul 8) ============
+   Everything below is gated to small screens / touch pointers —
+   desktop rendering stays byte-identical. */
+@media(max-width:940px){
+ /* iOS Safari: small-viewport units so pinned stages don't jump/reflow
+    as the URL bar collapses while scrolling */
+ @supports(height:100svh){
+  .stage,.cartstage{height:100svh}
+  .wcap{height:52svh}
+ }
+ /* comfortable ≥44px tap targets (Apple HIG) */
+ .cartbtn,.menubtn{width:44px;height:44px}
+ .social a{width:44px;height:44px}
+ .social svg{width:21px;height:21px}
+ .loc .tel,.loc .dir{padding:8px 0}
+ #faq summary{padding:22px 2px}
+ .mnav{padding-top:96px}
+ .mnav a,#faq summary,.dbtn,.mcta,.ccta,.cnav,.sw-btn,.cartbtn,.menubtn{-webkit-tap-highlight-color:transparent}
+}
+@media(max-width:520px){
+ /* tighter header so more of the show fits on a phone screen */
+ .brand .brandlive{height:48px}
+ .clock{font-size:11.5px;padding:6px 11px;gap:6px}
+ .hright{gap:8px}
+}
+/* touch devices: neutralize sticky :hover states (iOS double-tap trap) */
+@media(hover:none){
+ .pcard:hover{transform:none;box-shadow:0 14px 30px rgba(11,36,71,.1)}
+ .fcard:hover{transform:none;box-shadow:0 16px 40px rgba(11,36,71,.07)}
+ .dbtn:hover,.mcta:hover,.ccta:hover{transform:none}
+ .mcta.big:hover{transform:none;box-shadow:0 10px 26px rgba(240,120,40,.3)}
+ .fcard .flk:hover{gap:8px;color:var(--blue)}
+ .tabs a:hover::after{right:100%}
+ .cartbtn:hover{transform:none;background:rgba(255,255,255,.09)}
+}
 </style>
 </head>
 <body>
@@ -765,6 +803,8 @@ footer{background:var(--navy);padding:clamp(56px,7vw,96px) clamp(20px,5vw,44px) 
 
 <script>
 var LADDER={0:14,1:13,2:12,3:11,4:10,5:9,6:null};
+/* shared mobile flag — same breakpoint as the walk-mobile video swap */
+var MRB_MOB=window.matchMedia('(max-width:940px)').matches||/iPhone|iPad|iPod/.test(navigator.userAgent);
 var day=new Date().getDay(),tp=LADDER[day],FRI=9;
 document.getElementById('clk').textContent=(tp===null)?'Closed today':('$'+tp+' today');
 if(tp===null){var _d=document.querySelector('.clock .dot'),_p=document.querySelector('.clock .p');
@@ -827,7 +867,13 @@ function seekTo(v,t){if(v.fastSeek){try{v.fastSeek(t);return;}catch(e){}}try{v.c
  function primeAll(){
   [].forEach.call(document.querySelectorAll('#walkvid,#cartvid,#clothesvid,#shoesvid,.boxvid'),function(x){
    try{var q=x.play();if(q&&q.then)q.then(function(){x.pause();}).catch(function(){});}catch(e){}});}
- primeAll();
+ /* MOBILE: prime only the walk video up front (7 simultaneous decoders on load
+    killed phone load perf); everything else gets primed on the first touch —
+    which on iOS always happens before any scrub is visible. Desktop unchanged. */
+ if(mob){
+  try{var q0=v.play();if(q0&&q0.then)q0.then(function(){v.pause();}).catch(function(){});}catch(e){}
+  [].forEach.call(document.querySelectorAll('#clothesvid,#shoesvid,.boxvid'),function(x){try{x.preload='metadata';}catch(e){}});
+ }else{primeAll();}
  ['touchstart','pointerdown'].forEach(function(ev){
   window.addEventListener(ev,function h(){window.removeEventListener(ev,h,true);primeAll();},{passive:true,capture:true,once:true});});
  function paint(){
@@ -858,7 +904,7 @@ function seekTo(v,t){if(v.fastSeek){try{v.fastSeek(t);return;}catch(e){}}try{v.c
  v.addEventListener('loadedmetadata',function(){dur=v.duration||4;seek();});
  cv.addEventListener('loadedmetadata',function(){cdur=cv.duration||5;seek();});
  sv.addEventListener('loadedmetadata',function(){sdur=sv.duration||5;seek();});
- [v,cv,sv].forEach(function(x){try{x.play().then(function(){x.pause();}).catch(function(){});}catch(e){}});
+ if(!MRB_MOB)[v,cv,sv].forEach(function(x){try{x.play().then(function(){x.pause();}).catch(function(){});}catch(e){}}); /* mobile: primed on first touch instead */
  /* window helper: progress 0→1 across [a,b] of the pin */
  function win(p,a,b){return clampN((p-a)/(b-a));}
  var bi=document.getElementById('binItem');
@@ -903,7 +949,7 @@ function seekTo(v,t){if(v.fastSeek){try{v.fastSeek(t);return;}catch(e){}}try{v.c
  var durs=[],ticking=false;
  vids.forEach(function(v,i){
   v.addEventListener('loadedmetadata',function(){durs[i]=v.duration||5;seek();});
-  try{v.play().then(function(){v.pause();}).catch(function(){});}catch(e){}
+  if(!MRB_MOB){try{v.play().then(function(){v.pause();}).catch(function(){});}catch(e){}} /* mobile: primed on first touch */
  });
  function seek(){ticking=false;
   var total=sec.offsetHeight-window.innerHeight;
@@ -1036,6 +1082,10 @@ function seekTo(v,t){if(v.fastSeek){try{v.fastSeek(t);return;}catch(e){}}try{v.c
  /* ALWAYS-ON small loops: the live brand-band background + the bike clip never pause,
     no matter what — force-played on load, on any interaction, and re-played if paused. */
  var always=[document.getElementById('bbg'),document.getElementById('bikevid')].filter(Boolean);
+ /* mobile/Low Power Mode: iOS blocks autoplay until a gesture — fold the header
+    logo loop + sign-off logo into the same keep-alive so they recover on touch */
+ if(MRB_MOB){var xa=document.getElementById('brandlive'),xb=document.querySelector('#brandsign video');
+  if(xa)always.push(xa);if(xb)always.push(xb);}
  function playAlways(){always.forEach(play);}
  always.forEach(function(v){
   v.addEventListener('pause',function(){setTimeout(function(){play(v);},0);});

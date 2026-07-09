@@ -151,8 +151,8 @@ section{position:relative}
 /* Mr. Bins hanging lamp over the row — off on load, lights up on scroll-in */
 .dstage{--lit:0}
 .dstage .dnight{position:absolute;inset:0;z-index:4;background:rgba(4,9,20,.54);opacity:calc(1 - var(--lit));pointer-events:none;transition:opacity .1s linear}
-.lamp{position:absolute;top:clamp(118px,15vh,152px);left:50%;transform:translateX(-50%);z-index:6;pointer-events:none;display:flex;flex-direction:column;align-items:center;width:clamp(88px,8vw,120px)}
-.lamp .cord{width:3px;height:clamp(8px,2.6vh,30px);background:linear-gradient(#0a0f1a,#25344a)}
+.lamp{position:absolute;top:clamp(104px,13vh,132px);left:50%;transform:translateX(-50%);z-index:6;pointer-events:none;display:flex;flex-direction:column;align-items:center;width:clamp(72px,6.6vw,98px)}
+.lamp .cord{width:3px;height:clamp(6px,1.8vh,20px);background:linear-gradient(#0a0f1a,#25344a)}
 .lamp .shade{width:100%;display:block;filter:brightness(calc(.56 + .54*var(--lit))) contrast(1.02) saturate(calc(.84 + .2*var(--lit)));transition:filter .1s linear}
 .lamp .glow{position:absolute;left:50%;bottom:-4%;width:58%;height:28%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.98),rgba(240,247,255,.5) 46%,rgba(240,247,255,0) 74%);opacity:var(--lit);filter:blur(5px);transition:opacity .1s linear}
 .beam{position:absolute;top:clamp(185px,24vh,255px);left:50%;transform:translateX(-50%);width:min(96vw,1200px);height:66vh;z-index:5;pointer-events:none;opacity:var(--lit);transition:opacity .1s linear;mix-blend-mode:screen;background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(244,250,255,.16) 48%,rgba(244,250,255,0) 82%);-webkit-clip-path:polygon(45% 0,55% 0,100% 100%,0 100%);clip-path:polygon(45% 0,55% 0,100% 100%,0 100%)}

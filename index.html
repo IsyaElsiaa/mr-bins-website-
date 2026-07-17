@@ -399,16 +399,29 @@ section{position:relative}
 #hauls h2{font-size:clamp(30px,5vw,56px);font-weight:800;margin-top:10px;color:#fff}
 #hauls h2 .o{color:var(--orange)}
 #hauls .sub{color:rgba(255,255,255,.72);font-size:15px;margin-top:12px}
-.hgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px);max-width:1100px;margin:clamp(30px,3.5vw,46px) auto 0}
-.hcard{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#0d2c55}
-.hcard img{width:100%;height:100%;object-fit:cover;display:block;opacity:.88}
-.hcard .cap{position:absolute;left:12px;right:12px;bottom:12px;text-align:left;font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.65);line-height:1.15}
-.hcard .chip{position:absolute;top:10px;left:10px;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,143,82,.92);color:#0B2447;padding:4px 8px;border-radius:6px}
-.hcard.ghost{border:2px dashed rgba(255,255,255,.28);background:rgba(255,255,255,.04);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px}
-.hcard.ghost svg{width:30px;height:30px;stroke:var(--sky);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.hcard.ghost .gt{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sky)}
-.hcard.ghost .gd{font-family:'Bricolage Grotesque';font-weight:800;font-size:16px;color:#fff;line-height:1.25}
-@media(max-width:760px){.hgrid{grid-template-columns:repeat(2,1fr)}}
+/* focus carousel — active clip center-stage and crisp, neighbors blurred & shrunk,
+   brand info card riding under each slide, arrows + auto-advance */
+.hstage{position:relative;max-width:1240px;margin:clamp(30px,3.5vw,46px) auto 0;height:calc(clamp(200px,22vw,300px)*1.7778 + 112px);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.hslides{position:absolute;inset:0}
+.hslide{position:absolute;left:50%;top:0;width:clamp(200px,22vw,300px);margin:0;cursor:pointer;transition:transform .55s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.hslide .hmedia{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#0d2c55;transition:filter .5s ease,opacity .5s ease;box-shadow:0 24px 54px rgba(0,0,0,.4)}
+.hslide .hmedia img,.hslide .hmedia video{width:100%;height:100%;object-fit:cover;display:block}
+.hslide:not(.act) .hmedia{filter:blur(7px) saturate(.85);opacity:.6}
+.hslide:not(.act){pointer-events:auto}
+.hslide .chip{position:absolute;top:10px;left:10px;z-index:2;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,143,82,.92);color:#0B2447;padding:4px 8px;border-radius:6px}
+.hslide .hinfo{display:block;margin-top:12px;background:linear-gradient(135deg,#1455D6,#0E3FA6);border-radius:14px;padding:12px 16px;text-align:left;opacity:0;transform:translateY(6px);transition:opacity .45s ease .12s,transform .45s ease .12s;box-shadow:0 14px 30px rgba(0,0,0,.3)}
+.hslide.act .hinfo{opacity:1;transform:none}
+.hslide .hinfo b{display:block;font-family:'Bricolage Grotesque';font-weight:800;font-size:14.5px;color:#fff;line-height:1.2}
+.hslide .hinfo span{display:block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.06em;color:rgba(255,255,255,.75);margin-top:4px}
+.hslide .hinfo span em{font-style:normal;color:var(--orange);font-weight:700}
+.hslide .gbox{position:absolute;inset:0;border:2px dashed rgba(255,255,255,.28);border-radius:18px;background:rgba(255,255,255,.04);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px;text-align:center}
+.hslide .gbox svg{width:30px;height:30px;stroke:var(--sky);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.hslide .gbox .gt{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sky)}
+.hslide .gbox .gd{font-family:'Bricolage Grotesque';font-weight:800;font-size:16px;color:#fff;line-height:1.25}
+.hnav{position:absolute;top:calc(50% - 40px);z-index:30;width:46px;height:46px;border-radius:50%;border:none;background:#fff;color:var(--navy);font-family:'Bricolage Grotesque';font-size:26px;font-weight:800;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .18s}
+.hnav:hover{transform:scale(1.1)}
+.hnav.prev{left:max(8px,3vw)}.hnav.next{right:max(8px,3vw)}
+.hwrap{position:relative}
 
 /* faq */
 #faq{padding:clamp(64px,9vw,110px) clamp(20px,5vw,44px);background:#fff;color:var(--navy)}
@@ -996,11 +1009,27 @@ footer{background:#fff;color:var(--navy);padding:clamp(40px,5vw,72px) clamp(20px
  <div class="k">Real hauls &middot; shot in store</div>
  <h2>See it happen <span class="o">for real.</span></h2>
  <p class="sub">This section runs on real phone footage from the floor &mdash; new clips every week, straight from the store.</p>
- <div class="hgrid">
-  <div class="hcard"><span class="chip">Sample</span><img src="mrbins-store.jpg" alt="Inside the Mr. Bins store" loading="lazy"><div class="cap">Sunday: fresh bins hit the floor</div></div>
-  <div class="hcard ghost"><svg viewBox="0 0 24 24"><rect x="2.5" y="6.5" width="13" height="11" rx="2.5"/><path d="M15.5 10.5l6-3.2v9.4l-6-3.2z"/></svg><div class="gt">Film this</div><div class="gd">Someone pulling a big-brand find out of the pile</div></div>
-  <div class="hcard ghost"><svg viewBox="0 0 24 24"><rect x="2.5" y="6.5" width="13" height="11" rx="2.5"/><path d="M15.5 10.5l6-3.2v9.4l-6-3.2z"/></svg><div class="gt">Film this</div><div class="gd">A full $9-Friday haul laid out on the tailgate</div></div>
-  <div class="hcard"><span class="chip">Sample</span><img src="mrbins-couple.jpg" alt="Opening a mystery box at home" loading="lazy"><div class="cap">Mystery box, opened at home</div></div>
+ <div class="hwrap">
+  <button class="hnav prev" id="hcprev" aria-label="Previous clip">&lsaquo;</button>
+  <div class="hstage"><div class="hslides" id="hslidesEl">
+   <figure class="hslide">
+    <div class="hmedia"><span class="chip">Sample</span><img src="mrbins-store.jpg" alt="Inside the Mr. Bins store" loading="lazy"></div>
+    <figcaption class="hinfo"><b>Sunday: fresh bins hit the floor</b><span>Drop day &middot; <em>$14</em> &middot; best selection of the week</span></figcaption>
+   </figure>
+   <figure class="hslide">
+    <div class="hmedia"><div class="gbox"><svg viewBox="0 0 24 24"><rect x="2.5" y="6.5" width="13" height="11" rx="2.5"/><path d="M15.5 10.5l6-3.2v9.4l-6-3.2z"/></svg><div class="gt">Film this</div><div class="gd">Someone pulling a big-brand find out of the pile</div></div></div>
+    <figcaption class="hinfo"><b>The big-brand pull</b><span>New clips every week &middot; <em>coming soon</em></span></figcaption>
+   </figure>
+   <figure class="hslide">
+    <div class="hmedia"><div class="gbox"><svg viewBox="0 0 24 24"><rect x="2.5" y="6.5" width="13" height="11" rx="2.5"/><path d="M15.5 10.5l6-3.2v9.4l-6-3.2z"/></svg><div class="gt">Film this</div><div class="gd">A full $9-Friday haul laid out on the tailgate</div></div></div>
+    <figcaption class="hinfo"><b>The $9-Friday haul</b><span>Whole tailgate for pocket change &middot; <em>coming soon</em></span></figcaption>
+   </figure>
+   <figure class="hslide">
+    <div class="hmedia"><span class="chip">Sample</span><img src="mrbins-couple.jpg" alt="Opening a mystery box at home" loading="lazy"></div>
+    <figcaption class="hinfo"><b>Mystery box, opened at home</b><span>Shipped anywhere &middot; from <em>$25</em></span></figcaption>
+   </figure>
+  </div></div>
+  <button class="hnav next" id="hcnext" aria-label="Next clip">&rsaquo;</button>
  </div>
 </section>
 
@@ -1452,6 +1481,34 @@ function seekTo(v,t){if(v.fastSeek){try{v.fastSeek(t);return;}catch(e){}}try{v.c
   if(pv)pv.addEventListener('click',function(){nudge(-1);});
   if(nx)nx.addEventListener('click',function(){nudge(1);});
  }
+})();
+
+/* ---- REAL HAULS: focus carousel — active clip crisp center-stage, neighbors
+        blurred and shrunk, info card rides under each; arrows + auto-advance.
+        Video-ready: drop a <video> inside .hmedia and it auto-plays when active. ---- */
+(function(){
+ var host=document.getElementById('hslidesEl');if(!host)return;
+ var slides=[].slice.call(host.children),N=slides.length,a=0,timer;
+ function step(){var r=slides[0].getBoundingClientRect();return r.width+28;}
+ function paint(){
+  var w=step();
+  slides.forEach(function(s,i){
+   var d=i-a;
+   s.style.transform='translateX(calc(-50% + '+(d*w).toFixed(1)+'px)) scale('+(d===0?1.05:0.87)+')';
+   s.style.zIndex=String(20-Math.abs(d));
+   s.classList.toggle('act',d===0);
+   var v=s.querySelector('video');
+   if(v){if(d===0){v.muted=true;var q=v.play();if(q&&q.catch)q.catch(function(){});}else{try{v.pause();}catch(e){}}}
+  });
+ }
+ function go(n){a=((n%N)+N)%N;paint();}
+ function kick(){clearInterval(timer);timer=setInterval(function(){go(a+1);},4500);}
+ var pv=document.getElementById('hcprev'),nx=document.getElementById('hcnext');
+ if(pv)pv.addEventListener('click',function(){go(a-1);kick();});
+ if(nx)nx.addEventListener('click',function(){go(a+1);kick();});
+ slides.forEach(function(s,i){s.addEventListener('click',function(){if(i!==a){go(i);kick();}});});
+ window.addEventListener('resize',paint);
+ paint();kick();
 })();
 
 /* ---- reviews marquee ---- */

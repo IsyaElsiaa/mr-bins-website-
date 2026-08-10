@@ -525,7 +525,7 @@
       .cartstage {
         position: sticky;
         top: 0;
-        height: 100vh;
+        height: 100svh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -603,13 +603,16 @@
         bottom: clamp(10px, 2.2vh, 24px);
         z-index: 2;
         font-family: "Bricolage Grotesque", sans-serif;
-        font-size: clamp(14px, 1.5vw, 19px);
+        font-size: clamp(11.5px, 1.5vw, 19px);
         font-weight: 800;
         letter-spacing: -0.01em;
         color: #fff;
-        padding: 10px 22px;
+        padding: 8px 16px;
         border-radius: 999px;
         white-space: nowrap;
+        max-width: 94%;
+        overflow: hidden;
+        text-overflow: ellipsis;
         box-shadow: 0 10px 24px rgba(11, 36, 71, 0.22);
         transform: translateX(-50%) translateY(14px) scale(0.7);
         opacity: 0;
@@ -1524,50 +1527,23 @@
       .lyintro .lytext .sub {
         margin-left: 0;
       }
-      /* she pushes the cart across the section as you scroll: travel + stride bob + ground shadow */
+      /* loyalty hero — she walks her cart on a clean white card */
       .lywalk {
         position: relative;
-        width: min(360px, 82%);
+        width: min(400px, 88%);
         justify-self: center;
-        --lyx: 0px;
-        --lybob: 0px;
-        --lyrot: 0deg;
-        --lysh: 1;
       }
       .lyhero {
         width: 100%;
         height: auto;
         display: block;
-        transform: translate3d(var(--lyx), 0, 0);
-        will-change: transform;
-        mix-blend-mode: multiply; /* pale studio bg of the clip melts into the paper section bg */
-        filter: brightness(1.16) saturate(1.06); /* white-point lift: 222-grey studio bg maps to pure white, multiply vanishes it */
-        border-radius: 18px;
-        -webkit-mask-image: radial-gradient(105% 105% at 50% 50%, #000 55%, transparent 82%);
-        mask-image: radial-gradient(105% 105% at 50% 50%, #000 55%, transparent 82%);
+        background: #fff;
+        border-radius: 22px;
+        box-shadow: 0 24px 60px rgba(11, 36, 71, 0.16);
       }
-      .lyshadow {
-        position: absolute;
-        left: 50%;
-        bottom: 1%;
-        width: 58%;
-        height: 16px;
-        border-radius: 50%;
-        background: radial-gradient(
-          ellipse at center,
-          rgba(11, 36, 71, 0.3),
-          rgba(11, 36, 71, 0) 70%
-        );
-        transform: translate3d(calc(-50% + var(--lyx)), 0, 0) scale(var(--lysh));
-        pointer-events: none;
-        will-change: transform;
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .lyhero {
-          transform: none;
-        }
-        .lyshadow {
-          display: none;
+      @media (max-width: 820px) {
+        .lywalk {
+          width: min(290px, 78%);
         }
       }
       /* UNBOX — prize burst video, scrubbed by scroll */
@@ -2999,21 +2975,36 @@
         }
         .cartvid {
           height: auto;
-          width: 92vw;
-          max-width: 92vw;
+          width: min(74vw, 44svh);
+          max-width: 74vw;
           order: 1;
         }
         .tside {
           order: 2;
-          width: 45vw;
+          width: 41vw;
+        }
+        .tside video {
+          max-height: 30svh;
+          object-fit: contain;
         }
         .tside video {
           height: auto;
           width: 100%;
         }
         .tchip {
-          font-size: 13px;
-          padding: 8px 15px;
+          position: static;
+          transform: none;
+          margin: 8px auto 0;
+          display: block;
+          width: fit-content;
+          font-size: 11.5px;
+          padding: 7px 12px;
+          white-space: nowrap;
+        }
+        .tside.on .tchip,
+        .titem.on .tchip {
+          transform: none;
+          animation: none;
         }
         /* discover: the hanging-lamp effect needs the tall pinned stage — on phones it
     overlapped the heading, so drop the theatrics and keep the content lit */
@@ -3122,16 +3113,6 @@
           gap: 8px;
         }
       }
-      /* ============ PHONE BUILD (<768px) ============
-   Dedicated mobile flow: static hero walkthrough, native scrolling only,
-   condensed section order. Desktop (≥768px) is untouched. */
-      #wm1,
-      #wm2,
-      #wm3,
-      #wmnav,
-      #locm {
-        display: none;
-      }
       @media (max-width: 767px) {
         body {
           display: flex;
@@ -3221,146 +3202,15 @@
           font-size: 13.5px;
           padding: 11px 18px;
         }
-        /* condensed mobile order: walk-in → bin → clothing → shoes → the rest */
-        #walk {
-          order: 1;
-        }
-        #wm1 {
-          display: block;
-          order: 2;
-        }
-        #wm2 {
-          display: block;
-          order: 3;
-        }
-        #wm3 {
-          display: block;
-          order: 4;
-        }
-        #wmnav {
-          display: block;
-          order: 5;
-        }
-        #discover {
-          order: 6;
-        }
-        #price {
-          order: 7;
-        }
+        /* phones follow the same flow as desktop; locations block shows before the footer */
         #locm {
           display: block;
-          order: 8;
-        }
-        #unbox {
-          order: 9;
-        }
-        #online {
-          order: 10;
-        }
-        #loyalty {
-          order: 11;
-        }
-        #faq {
-          order: 12;
-        }
-        footer {
-          order: 13;
-        }
-        #wm1,
-        #discover,
-        #price,
-        #locm,
-        #unbox,
-        #online,
-        #loyalty,
-        #faq {
-          scroll-margin-top: 86px;
         }
         /* trim the FAQ on phones */
         #faq details.mtrim {
           display: none;
         }
-        /* mobile scroll stages — pinned, scrubbed by scroll like the desktop show */
-        #wm1,
-        #wm2,
-        #wm3 {
-          position: relative;
-          height: 190vh;
-          background: #fff;
-        }
-        .wmstage {
-          position: sticky;
-          top: 0;
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          background: #fff;
-        }
         @supports (height: 100svh) {
-          .wmstage {
-            height: 100svh;
-          }
-        }
-        .wmstage video {
-          width: min(96vw, 560px);
-          height: auto;
-          display: block;
-          background: #fff;
-        }
-        .wmcap {
-          position: absolute;
-          left: 18px;
-          top: 96px;
-          z-index: 2;
-          text-align: left;
-          opacity: 0;
-          transform: translateY(10px);
-          transition:
-            opacity 0.5s ease,
-            transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .wmcap.on {
-          opacity: 1;
-          transform: none;
-        }
-        .wmcap .wk {
-          font-family: "Space Mono", monospace;
-          font-size: 10px;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          color: var(--blue);
-        }
-        .wmcap h3 {
-          font-family: "Bricolage Grotesque", sans-serif;
-          font-weight: 800;
-          font-size: 26px;
-          line-height: 1.02;
-          letter-spacing: -0.02em;
-          color: var(--navy);
-          margin-top: 6px;
-        }
-        .wmcap .wprice {
-          font-family: "Bricolage Grotesque", sans-serif;
-          font-weight: 800;
-          font-size: 38px;
-          line-height: 1;
-          color: var(--green);
-          margin-top: 10px;
-        }
-        .wmcap .wsub {
-          font-family: "Space Mono", monospace;
-          font-size: 9.5px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: var(--muted);
-          margin-top: 6px;
-          max-width: 16ch;
-        }
-        #wmnav {
-          background: #fff;
-          padding: 6px 18px 36px;
         }
         .wm-btns {
           display: flex;
@@ -3369,42 +3219,6 @@
           margin: 0 auto;
           max-width: 400px;
           text-align: left;
-        }
-        .wmb {
-          display: block;
-          text-decoration: none;
-          font-family: "Bricolage Grotesque", sans-serif;
-          font-weight: 800;
-          font-size: 17px;
-          color: #fff;
-          padding: 14px 20px;
-          border-radius: 14px;
-          box-shadow: 0 10px 24px rgba(11, 36, 71, 0.16);
-        }
-        .wmb span {
-          display: block;
-          font-family: "Hanken Grotesk", system-ui, sans-serif;
-          font-weight: 600;
-          font-size: 12.5px;
-          margin-top: 3px;
-        }
-        .wmb.b1 {
-          background: #1455d6;
-        }
-        .wmb.b1 span {
-          color: #ffd9bd;
-        }
-        .wmb.b2 {
-          background: #0e3fa6;
-        }
-        .wmb.b2 span {
-          color: #9fe8bc;
-        }
-        .wmb.b3 {
-          background: #3e7be8;
-        }
-        .wmb.b3 span {
-          color: #fff3b0;
         }
         /* mobile locations */
         #locm {
@@ -3555,12 +3369,8 @@
       <a href="locations.html">Locations &amp; Hours</a>
     </nav>
 
-    <!-- MOBILE SCROLL STAGES (phones <768px only). The page opens with the same
-     scroll-scrubbed walk-in as desktop (#walk, mobile rendition), then each of
-     these pinned stages scrubs its animation with the scroll — bin, clothing,
-     shoes — so you go through them in order before the rest of the site. -->
 
-    <!-- WALKTHROUGH — the opening: video plays, captions swap on scroll -->
+    <!-- CART ROLL-IN: holds the screen -->
     <section id="walk">
       <div class="stage">
         <video
@@ -3621,65 +3431,12 @@
         <div class="hprog" id="hprog"></div>
       </div>
     </section>
-    <section id="wm1" aria-label="One bin, one price">
-      <div class="wmstage">
-        <video id="wm1v" muted playsinline preload="metadata" poster="mrbins-cart-poster.jpg">
-          <source data-mob="mrbins-cart.mp4" type="video/mp4" />
-        </video>
-        <div class="wmcap">
-          <div class="wk">In store</div>
-          <h3>One bin.<br />One price.</h3>
-          <div class="wprice" id="wmP1">$&mdash;</div>
-          <div class="wsub">everything in the bins today</div>
-        </div>
-      </div>
-    </section>
-    <section id="wm2" aria-label="Clothing">
-      <div class="wmstage">
-        <video id="wm2v" muted playsinline preload="metadata" poster="mrbins-clothes-poster.jpg">
-          <source data-mob="mrbins-clothes.mp4" type="video/mp4" />
-        </video>
-        <div class="wmcap">
-          <div class="wk">Restocked daily</div>
-          <h3>We sell<br />clothing.</h3>
-          <div class="wprice" id="wmP2">$&mdash;</div>
-          <div class="wsub">all clothing today</div>
-        </div>
-      </div>
-    </section>
-    <section id="wm3" aria-label="Shoes">
-      <div class="wmstage">
-        <video id="wm3v" muted playsinline preload="metadata" poster="mrbins-shoes-poster.jpg">
-          <source data-mob="mrbins-shoes.mp4" type="video/mp4" />
-        </video>
-        <div class="wmcap">
-          <div class="wk">Name brands</div>
-          <h3>We sell<br />shoes.</h3>
-          <div class="wprice" id="wmP3">$&mdash;</div>
-          <div class="wsub">all shoes today</div>
-        </div>
-      </div>
-    </section>
-    <section id="wmnav" aria-label="Quick links">
-      <div class="wm-btns">
-        <a class="wmb b1" href="#locm"
-          >Directions &rarr;<span>Four stores across Northeast PA &mdash; find yours</span></a
-        >
-        <a class="wmb b2" href="#discover"
-          >Discover &rarr;<span>See what&rsquo;s in the bins this week</span></a
-        >
-        <a class="wmb b3" href="#price"
-          >Deals &rarr;<span>One price for everything &mdash; it drops a dollar a day</span></a
-        >
-      </div>
-    </section>
 
-    <!-- CART ROLL-IN: holds the screen -->
     <section id="cart">
       <div class="cartstage">
         <div class="cartcap">
-          <div class="k">This week in store</div>
-          <h2>The bins are just <span class="o">the beginning.</span></h2>
+          <div class="k">Scroll &mdash; watch the store fill up</div>
+          <h2>Bins. Racks. <span class="o">Kicks.</span></h2>
         </div>
         <div class="trio">
           <div class="tside" id="clothesSide">
@@ -3693,7 +3450,7 @@
               <source data-desk="mrbins-clothes.mp4" type="video/mp4" />
             </video>
             <div class="tshadow"></div>
-            <div class="tchip">We sell clothing</div>
+            <div class="tchip">Fresh fits</div>
           </div>
           <div class="titem" id="binItem">
             <video
@@ -3707,14 +3464,14 @@
               <source data-desk="mrbins-cart.mp4" type="video/mp4" />
             </video>
             <div class="tshadow"></div>
-            <div class="tchip">One bin. One price.</div>
+            <div class="tchip">All one price</div>
           </div>
           <div class="tside" id="shoesSide">
             <video id="shoesvid" muted playsinline preload="none" poster="mrbins-shoes-poster.jpg">
               <source data-desk="mrbins-shoes.mp4" type="video/mp4" />
             </video>
             <div class="tshadow"></div>
-            <div class="tchip">We sell shoes</div>
+            <div class="tchip">Fresh kicks</div>
           </div>
         </div>
         <!-- BRAND TICKER — bottom strip, shares the screen with the bin -->
@@ -4018,15 +3775,16 @@
             <video
               class="lyhero"
               id="lywalkvid"
+              autoplay
               muted
+              loop
               playsinline
-              preload="auto"
+              preload="metadata"
               poster="mrbins-loyal-hero.png"
               aria-label="A loyalty member pushing a shopping cart piled high with brand-new finds"
             >
               <source src="mrbins-loyal-walk.mp4" type="video/mp4" />
             </video>
-            <div class="lyshadow"></div>
           </div>
         </div>
         <div class="lygrid">
@@ -4504,7 +4262,7 @@
               try {
                 s.parentNode.load();
               } catch (e) {}
-            } else if (!MRB_PHONE && desk) {
+            } else if (desk) {
               s.setAttribute("src", desk);
               try {
                 s.parentNode.load();
@@ -4536,63 +4294,6 @@
         }
       })();
 
-      /* ---- MOBILE SCROLL STAGES: bin / clothing / shoes, each pinned and scrubbed
-        by scroll exactly like the desktop show — you go through them in order ---- */
-      (function () {
-        if (!window.matchMedia("(max-width:767px)").matches) return;
-        [
-          ["wm1", "wm1v"],
-          ["wm2", "wm2v"],
-          ["wm3", "wm3v"],
-        ].forEach(function (p) {
-          var sec = document.getElementById(p[0]),
-            v = document.getElementById(p[1]);
-          if (!sec || !v) return;
-          var dur = 0,
-            ticking = false;
-          v.addEventListener("loadedmetadata", function () {
-            dur = v.duration || 4;
-            paint();
-          });
-          function paint() {
-            ticking = false;
-            var total = sec.offsetHeight - window.innerHeight;
-            if (total <= 0) return;
-            var pr = Math.max(0, Math.min(1, -sec.getBoundingClientRect().top / total));
-            if (dur) seekTo(v, Math.min(pr / 0.82, 1) * (dur - 0.05));
-            var cap = sec.querySelector(".wmcap");
-            if (cap) cap.classList.toggle("on", pr > 0.5);
-          }
-          function onS() {
-            if (!ticking) {
-              requestAnimationFrame(paint);
-              ticking = true;
-            }
-          }
-          window.addEventListener("scroll", onS, { passive: true });
-          window.addEventListener("resize", onS);
-          paint();
-        });
-        /* iOS: prime the stage decoders on the first touch so scrubbing paints frames */
-        ["touchstart", "pointerdown"].forEach(function (ev) {
-          window.addEventListener(
-            ev,
-            function h() {
-              window.removeEventListener(ev, h, true);
-              [].forEach.call(document.querySelectorAll("#wm1v,#wm2v,#wm3v"), function (x) {
-                try {
-                  var q = x.play();
-                  if (q && q.then)
-                    q.then(function () {
-                      x.pause();
-                    }).catch(function () {});
-                } catch (e) {}
-              });
-            },
-            { passive: true, capture: true, once: true },
-          );
-        });
-      })();
       var day = new Date().getDay(),
         tp = LADDER[day],
         FRI = 9;
@@ -4690,41 +4391,19 @@
         paint();
       })();
 
-      /* ---- LOYALTY: lady walks her cart across the section as you scroll ---- */
+      /* ---- LOYALTY: the walk clip plays its full loop when it scrolls into view ---- */
       (function () {
-        var wrap = document.getElementById("lywalk"),
-          v = document.getElementById("lywalkvid");
-        if (!wrap || !v) return;
-        var RM = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (RM) {
-          v.load();
-          return;
-        }
-        var ticking = false;
-        function paint() {
-          ticking = false;
-          if (!v.duration) return;
-          var r = wrap.getBoundingClientRect(),
-            vh = window.innerHeight;
-          var p = clampN((vh - r.top) / (vh + r.height));
-          /* stride: scrub the walk cycle */
-          seekTo(v, p * (v.duration - 0.05));
-          /* travel: she crosses her lane left → right as the section passes */
-          var lane = Math.min(160, window.innerWidth * 0.1);
-          wrap.style.setProperty("--lyx", ((p - 0.5) * 2 * lane).toFixed(1) + "px");
-          wrap.style.setProperty("--lysh", (0.92 + 0.08 * Math.sin(p * Math.PI)).toFixed(3));
-        }
-        function onS() {
-          if (!ticking) {
-            requestAnimationFrame(paint);
-            ticking = true;
-          }
-        }
-        v.addEventListener("loadedmetadata", onS);
-        window.addEventListener("scroll", onS, { passive: true });
-        window.addEventListener("resize", onS);
-        v.load();
-        paint();
+        var v = document.getElementById("lywalkvid");
+        if (!v || !("IntersectionObserver" in window)) return;
+        new IntersectionObserver(
+          function (es) {
+            es.forEach(function (e) {
+              if (e.isIntersecting) v.play().catch(function () {});
+              else v.pause();
+            });
+          },
+          { threshold: 0.2 },
+        ).observe(v);
       })();
       function seekTo(v, t) {
         if (v.fastSeek) {
@@ -4890,7 +4569,6 @@
       /* ---- CART TRIO: bin rolls in, clothes rack assembles, shoe box opens —
         all 100% scroll-controlled (all-intra + fastSeek), staggered choreography ---- */
       (function () {
-        if (MRB_PHONE) return; /* phone: #cart hidden, no scrub */
         var cart = document.getElementById("cart"),
           v = document.getElementById("cartvid");
         var cs = document.getElementById("clothesSide"),

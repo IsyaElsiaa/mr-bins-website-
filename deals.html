@@ -12,6 +12,67 @@
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="site.css" />
     
+      <style>
+      .deals-hero {
+        padding-top: calc(108px + clamp(96px, 13vw, 170px));
+      }
+      .dealsign {
+        position: absolute;
+        top: 108px; /* hangs off the bottom edge of the fixed header */
+        left: 50%;
+        transform-origin: 50% -10px;
+        animation: signswing 3.6s ease-in-out infinite;
+        z-index: 5;
+        width: 0;
+      }
+      .dealsign .rope {
+        position: absolute;
+        top: 0;
+        width: 3px;
+        height: 34px;
+        background: linear-gradient(#c9834f, #a3612f);
+        border-radius: 2px;
+      }
+      .dealsign .rope.l {
+        left: -52px;
+        transform: rotate(14deg);
+      }
+      .dealsign .rope.r {
+        left: 49px;
+        transform: rotate(-14deg);
+      }
+      .dealsign .board {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--orange);
+        color: #6b2b05;
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        font-size: clamp(22px, 3.4vw, 34px);
+        letter-spacing: 0.14em;
+        padding: 10px 30px 12px;
+        border-radius: 12px;
+        border: 3px solid #fff;
+        box-shadow:
+          0 14px 34px rgba(0, 0, 0, 0.35),
+          inset 0 -4px 0 rgba(0, 0, 0, 0.12);
+        white-space: nowrap;
+      }
+      @keyframes signswing {
+        0%, 100% { transform: rotate(3.2deg); }
+        50% { transform: rotate(-3.2deg); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .dealsign { animation: none; }
+      }
+      @media (max-width: 820px) {
+        .dealsign { top: 96px; }
+        .dealsign .rope { height: 26px; }
+        .dealsign .board { top: 22px; }
+      }
+    </style>
   </head>
   <body>
     <header class="bar">
@@ -47,7 +108,11 @@
       <a href="mystery-box.html"><span>05</span>Mystery Box</a>
       <a href="careers.html"><span>06</span>Careers</a>
     </nav>
-    <section class="phero">
+    <section class="phero deals-hero">
+      <div class="dealsign" aria-hidden="true">
+        <span class="rope l"></span><span class="rope r"></span>
+        <span class="board">DEALS</span>
+      </div>
       <div class="k">The weekly rhythm</div>
       <h1>Every day is <span class="o">a different deal.</span></h1>
       <p class="sub">One truckload, six selling days, one falling price. Learn the rhythm and you'll never overpay for brand-new again.</p>

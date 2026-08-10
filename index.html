@@ -1572,9 +1572,10 @@
       }
       .lygrid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 14px;
-        margin: clamp(28px, 4vw, 44px) 0;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 860px;
+        gap: 16px;
+        margin: clamp(28px, 4vw, 44px) auto;
       }
       .lycard {
         background: #fff;
@@ -1585,7 +1586,7 @@
         box-shadow: 0 16px 40px rgba(11, 36, 71, 0.07);
       }
       .lycard .limg {
-        height: 132px;
+        height: 190px;
         border-radius: 11px;
         background: #fff;
         border: 1px solid var(--grey);
@@ -3788,7 +3789,7 @@
         </div>
         <div class="lygrid">
           <div class="lycard">
-            <div class="limg"><img src="mrbins-loyal-drop.jpg" alt="" loading="lazy" /></div>
+            <div class="limg"><img src="mrbins-loyal-signup.png" alt="" loading="lazy" /></div>
             <h3>50 points at signup</h3>
             <p>
               Join free and start with 50 points &mdash; then earn 1 point for every dollar you dig up.
@@ -3796,12 +3797,7 @@
           </div>
           <div class="lycard">
             <div class="limg">
-              <img
-                src="mrbins-loyal-alerts.jpg"
-                alt=""
-                loading="lazy"
-                style="object-fit: contain; padding: 6px"
-              />
+              <img src="mrbins-loyal-alert3d.png" alt="" loading="lazy" />
             </div>
             <h3>Price-drop alerts</h3>
             <p>
@@ -3810,18 +3806,13 @@
             </p>
           </div>
           <div class="lycard">
-            <div class="limg"><img src="mrbins-loyal-card.jpg" alt="" loading="lazy" /></div>
+            <div class="limg"><img src="mrbins-loyal-cash.png" alt="" loading="lazy" /></div>
             <h3>$3 back per 100 points</h3>
             <p>Every 100 points turns into a $3 credit &mdash; plus member-only promotions all year.</p>
           </div>
           <div class="lycard">
             <div class="limg">
-              <img
-                src="mrbins-mystery-closed.png"
-                alt=""
-                loading="lazy"
-                style="object-fit: contain; padding: 8px"
-              />
+              <img src="mrbins-loyal-boxpts.png" alt="" loading="lazy" />
             </div>
             <h3>Points on every box</h3>
             <p>

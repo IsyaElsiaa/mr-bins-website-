@@ -3775,11 +3775,10 @@
             <video
               class="lyhero"
               id="lywalkvid"
-              autoplay
               muted
               loop
               playsinline
-              preload="metadata"
+              preload="none"
               poster="mrbins-loyal-hero.png"
               aria-label="A loyalty member pushing a shopping cart piled high with brand-new finds"
             >
@@ -3837,7 +3836,7 @@
           id="uburst"
           muted
           playsinline
-          preload="auto"
+          preload="metadata"
           poster="mrbins-mystery-closed.png"
           aria-label="A mystery box bursting open with toys, tech, and household finds"
         >
@@ -3852,30 +3851,6 @@
     </section>
 
     <!-- MYSTERY BOX SHOP :: opening -->
-    <section id="unbox">
-      <div class="ustage">
-        <div class="k">The Mr. Bins Mystery Box Shop</div>
-        <h2>Too good to keep <span class="o">local.</span></h2>
-        <p class="up">
-          We hand-pack brand-new finds from the bins into every box &mdash; always worth more than
-          you paid, and never the same box twice. Here&rsquo;s one getting opened at home.
-        </p>
-        <div class="uvid">
-          <video
-            class="couplevid"
-            id="couplevid"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="none"
-            poster="mrbins-couple.jpg"
-          >
-            <source src="mrbins-couple.mp4" type="video/mp4" />
-          </video>
-        </div>
-      </div>
-    </section>
 
     <!-- MYSTERY BOX SHOP :: pick your box -->
     <section id="online">
@@ -4025,15 +4000,7 @@
           Fast-paced, friendly, and never boring &mdash; help unload the truckloads, stock the bins,
           and make people&rsquo;s day across our four Northeast PA stores.
         </p>
-        <div class="cperks">
-          <div class="cperk">Flexible shifts<span>full &amp; part-time</span></div>
-          <div class="cperk">Team discount<span>on everything</span></div>
-          <div class="cperk">Room to grow<span>we promote from within</span></div>
-          <div class="cperk">Good people<span>a crew that has fun</span></div>
-        </div>
-        <a class="ccta" href="mailto:careers@primebins.com?subject=Careers%20at%20Mr.%20Bins"
-          >See open roles &rarr;</a
-        >
+        
       </div>
       <div class="secmore"><a class="dbtn primary" href="careers.html">See open roles &rarr;</a></div>
     </section>
@@ -4105,7 +4072,7 @@
       id="brandsign"
       style="
         background: #fff;
-        padding: clamp(28px, 6vh, 64px) 0;
+        padding: clamp(16px, 3vh, 34px) 0;
         display: flex;
         justify-content: center;
       "
@@ -4387,23 +4354,26 @@
         v.addEventListener("loadedmetadata", onS);
         window.addEventListener("scroll", onS, { passive: true });
         window.addEventListener("resize", onS);
-        v.load();
         paint();
       })();
 
       /* ---- LOYALTY: the walk clip plays its full loop when it scrolls into view ---- */
       (function () {
         var v = document.getElementById("lywalkvid");
-        if (!v || !("IntersectionObserver" in window)) return;
-        new IntersectionObserver(
-          function (es) {
-            es.forEach(function (e) {
-              if (e.isIntersecting) v.play().catch(function () {});
-              else v.pause();
-            });
-          },
-          { threshold: 0.2 },
-        ).observe(v);
+        if (!v) return;
+        function inView() {
+          var r = v.getBoundingClientRect();
+          return r.bottom > 0 && r.top < window.innerHeight;
+        }
+        function sync() {
+          if (inView()) {
+            if (v.paused) v.play().catch(function () {});
+          } else if (!v.paused) v.pause();
+        }
+        window.addEventListener("scroll", sync, { passive: true });
+        window.addEventListener("touchstart", sync, { passive: true });
+        window.addEventListener("click", sync, { passive: true });
+        sync();
       })();
       function seekTo(v, t) {
         if (v.fastSeek) {

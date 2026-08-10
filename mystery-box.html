@@ -18,6 +18,7 @@
         display: block;
         margin: 0 auto;
         mix-blend-mode: multiply;
+        filter: brightness(1.04);
         -webkit-mask-image: radial-gradient(115% 115% at 50% 50%, #000 62%, transparent 90%);
         mask-image: radial-gradient(115% 115% at 50% 50%, #000 62%, transparent 90%);
       }
@@ -117,7 +118,9 @@
     <header class="bar">
       <div class="row">
         <a class="brand" href="index.html" aria-label="Mr. Bins home">
-          <img class="brandlive" src="mrbins-navbin-navy.jpg" alt="" />
+          <video class="brandlive" autoplay muted loop playsinline poster="mrbins-navbin-navy.jpg" aria-hidden="true">
+            <source src="mrbins-navbin-navy.mp4" type="video/mp4" />
+          </video>
           <img class="brandlogo" src="mrbins-logo-dark.png" alt="Mr. Bins" />
         </a>
         <nav class="tabs">

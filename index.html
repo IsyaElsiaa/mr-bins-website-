@@ -315,9 +315,6 @@
       .cartbadge.show {
         transform: scale(1);
       }
-      .cartbadge.pop {
-        animation: cartpop 0.42s ease;
-      }
       @keyframes cartpop {
         0% {
           transform: scale(1);
@@ -328,34 +325,6 @@
         100% {
           transform: scale(1);
         }
-      }
-      .toast {
-        position: fixed;
-        left: 50%;
-        bottom: 26px;
-        transform: translateX(-50%) translateY(18px);
-        background: #0b2447;
-        color: #fff;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        padding: 12px 18px;
-        border-radius: 12px;
-        font-family: "Bricolage Grotesque";
-        font-weight: 700;
-        font-size: 14px;
-        z-index: 200;
-        opacity: 0;
-        pointer-events: none;
-        transition:
-          opacity 0.25s,
-          transform 0.25s;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-      }
-      .toast.show {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-      }
-      .toast b {
-        color: var(--bright);
       }
 
       /* WALKTHROUGH — the opening. Scroll drives the glide; captions swap on scroll */
@@ -1572,9 +1541,10 @@
         transform: translate3d(var(--lyx), 0, 0);
         will-change: transform;
         mix-blend-mode: multiply; /* pale studio bg of the clip melts into the paper section bg */
+        filter: brightness(1.16) saturate(1.06); /* white-point lift: 222-grey studio bg maps to pure white, multiply vanishes it */
         border-radius: 18px;
-        -webkit-mask-image: radial-gradient(115% 115% at 50% 50%, #000 62%, transparent 90%);
-        mask-image: radial-gradient(115% 115% at 50% 50%, #000 62%, transparent 90%);
+        -webkit-mask-image: radial-gradient(105% 105% at 50% 50%, #000 55%, transparent 82%);
+        mask-image: radial-gradient(105% 105% at 50% 50%, #000 55%, transparent 82%);
       }
       .lyshadow {
         position: absolute;
@@ -1697,58 +1667,6 @@
         text-transform: uppercase;
         color: var(--muted);
         margin-top: clamp(12px, 2vw, 22px);
-      }
-      .boxreveal {
-        position: relative;
-        height: clamp(320px, 42vw, 460px);
-        max-width: 760px;
-        margin: clamp(4px, 1vw, 10px) auto clamp(16px, 2.4vw, 28px);
-      }
-      .brglow {
-        position: absolute;
-        left: 50%;
-        bottom: 6%;
-        width: 70%;
-        height: 70%;
-        transform: translateX(-50%);
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 143, 82, 0.35), rgba(255, 143, 82, 0) 68%);
-        opacity: 0;
-        filter: blur(8px);
-      }
-      .brbox {
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%);
-        width: clamp(190px, 25vw, 290px);
-        height: auto;
-      }
-      .brbox.bopen {
-        opacity: 0;
-      }
-      .britem {
-        position: absolute;
-        left: 50%;
-        bottom: 26%;
-        width: clamp(62px, 8vw, 94px);
-        height: clamp(62px, 8vw, 94px);
-        margin-left: calc(-1 * clamp(31px, 4vw, 47px));
-        border-radius: 14px;
-        background: #fff;
-        border: 1px solid var(--grey);
-        box-shadow: 0 16px 38px rgba(11, 36, 71, 0.22);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        opacity: 0;
-        will-change: transform, opacity;
-      }
-      .britem img {
-        width: 84%;
-        height: 84%;
-        object-fit: contain;
       }
 
       /* featured categories */
@@ -2304,44 +2222,6 @@
         display: block;
         background: #fff;
       }
-      #boxitems {
-        background: #fff;
-        padding: clamp(34px, 5.5vh, 72px) 0 clamp(46px, 7vh, 88px);
-      }
-      .ucar {
-        width: 100%;
-      }
-      .ucar-h {
-        text-align: center;
-        font-family: "Bricolage Grotesque", sans-serif;
-        font-weight: 800;
-        font-size: clamp(23px, 3.2vw, 40px);
-        letter-spacing: -0.02em;
-        line-height: 1.06;
-        color: var(--navy);
-        margin: 0 auto clamp(20px, 3vh, 36px);
-        max-width: 840px;
-        padding: 0 24px;
-      }
-      .ustrip {
-        position: relative;
-        width: 100%;
-        height: clamp(84px, 12vh, 128px);
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-        mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-      }
-      .ucar .strack {
-        gap: clamp(30px, 3.6vw, 60px);
-      }
-      .ucar .strack img {
-        height: clamp(58px, 8vh, 96px);
-        width: auto;
-        object-fit: contain;
-        mix-blend-mode: multiply;
-      }
       /* endless product carousels (top + bottom borders) */
       .mstrip {
         position: absolute;
@@ -2363,24 +2243,6 @@
       .mstrip.bot {
         bottom: 0;
         border-top: 1px solid var(--grey);
-      }
-      .strack {
-        display: flex;
-        gap: clamp(28px, 3.6vw, 56px);
-        align-items: center;
-        width: max-content;
-        animation: sscroll 42s linear infinite;
-      }
-      .mstrip.bot .strack {
-        animation-direction: reverse;
-        animation-duration: 48s;
-      }
-      .strack img {
-        height: clamp(58px, 8vh, 92px);
-        width: auto;
-        object-fit: contain;
-        background: #fff;
-        mix-blend-mode: multiply;
       }
       @keyframes sscroll {
         from {
@@ -2598,208 +2460,6 @@
         .alertform {
           flex-direction: column;
         }
-      }
-
-      /* real hauls — the container for real phone footage (sample + film-this placeholders tonight) */
-      #hauls {
-        background: var(--navy);
-        padding: clamp(64px, 9vw, 110px) clamp(20px, 5vw, 44px);
-        text-align: center;
-      }
-      #hauls .k {
-        font-family: "Space Mono", monospace;
-        font-size: 13px;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--sky);
-      }
-      #hauls h2 {
-        font-size: clamp(30px, 5vw, 56px);
-        font-weight: 800;
-        margin-top: 10px;
-        color: #fff;
-      }
-      #hauls h2 .o {
-        color: var(--orange);
-      }
-      #hauls .sub {
-        color: rgba(255, 255, 255, 0.72);
-        font-size: 15px;
-        margin-top: 12px;
-      }
-      /* focus carousel — active clip center-stage and crisp, neighbors blurred & shrunk,
-   brand info card riding under each slide, arrows + auto-advance */
-      .hstage {
-        position: relative;
-        max-width: 1240px;
-        margin: clamp(30px, 3.5vw, 46px) auto 0;
-        height: calc(clamp(200px, 22vw, 300px) * 1.7778 + 112px);
-        overflow: hidden;
-        -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-        mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-      }
-      .hslides {
-        position: absolute;
-        inset: 0;
-      }
-      .hslide {
-        position: absolute;
-        left: 50%;
-        top: 0;
-        width: clamp(200px, 22vw, 300px);
-        margin: 0;
-        cursor: pointer;
-        transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
-        will-change: transform;
-      }
-      .hslide .hmedia {
-        position: relative;
-        aspect-ratio: 9/16;
-        border-radius: 18px;
-        overflow: hidden;
-        background: #0d2c55;
-        transition:
-          filter 0.5s ease,
-          opacity 0.5s ease;
-        box-shadow: 0 24px 54px rgba(0, 0, 0, 0.4);
-      }
-      .hslide .hmedia img,
-      .hslide .hmedia video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .hslide:not(.act) .hmedia {
-        filter: blur(7px) saturate(0.85);
-        opacity: 0.6;
-      }
-      .hslide:not(.act) {
-        pointer-events: auto;
-      }
-      .hslide .chip {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        z-index: 2;
-        font-family: "Space Mono", monospace;
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        background: rgba(255, 143, 82, 0.92);
-        color: #0b2447;
-        padding: 4px 8px;
-        border-radius: 6px;
-      }
-      .hslide .hinfo {
-        display: block;
-        margin-top: 12px;
-        background: linear-gradient(135deg, #1455d6, #0e3fa6);
-        border-radius: 14px;
-        padding: 12px 16px;
-        text-align: left;
-        opacity: 0;
-        transform: translateY(6px);
-        transition:
-          opacity 0.45s ease 0.12s,
-          transform 0.45s ease 0.12s;
-        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
-      }
-      .hslide.act .hinfo {
-        opacity: 1;
-        transform: none;
-      }
-      .hslide .hinfo b {
-        display: block;
-        font-family: "Bricolage Grotesque";
-        font-weight: 800;
-        font-size: 14.5px;
-        color: #fff;
-        line-height: 1.2;
-      }
-      .hslide .hinfo span {
-        display: block;
-        font-family: "Space Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.06em;
-        color: rgba(255, 255, 255, 0.75);
-        margin-top: 4px;
-      }
-      .hslide .hinfo span em {
-        font-style: normal;
-        color: var(--orange);
-        font-weight: 700;
-      }
-      .hslide .gbox {
-        position: absolute;
-        inset: 0;
-        border: 2px dashed rgba(255, 255, 255, 0.28);
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.04);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 18px;
-        text-align: center;
-      }
-      .hslide .gbox svg {
-        width: 30px;
-        height: 30px;
-        stroke: var(--sky);
-        fill: none;
-        stroke-width: 1.6;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      .hslide .gbox .gt {
-        font-family: "Space Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--sky);
-      }
-      .hslide .gbox .gd {
-        font-family: "Bricolage Grotesque";
-        font-weight: 800;
-        font-size: 16px;
-        color: #fff;
-        line-height: 1.25;
-      }
-      .hnav {
-        position: absolute;
-        top: calc(50% - 40px);
-        z-index: 30;
-        width: 46px;
-        height: 46px;
-        border-radius: 50%;
-        border: none;
-        background: #fff;
-        color: var(--navy);
-        font-family: "Bricolage Grotesque";
-        font-size: 26px;
-        font-weight: 800;
-        line-height: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-        transition: transform 0.18s;
-      }
-      .hnav:hover {
-        transform: scale(1.1);
-      }
-      .hnav.prev {
-        left: max(8px, 3vw);
-      }
-      .hnav.next {
-        right: max(8px, 3vw);
-      }
-      .hwrap {
-        position: relative;
       }
 
       /* faq */
@@ -3477,17 +3137,6 @@
           display: flex;
           flex-direction: column;
         }
-        /* hide the desktop theatre + cut sections (the walk-in #walk stays — it opens the phone site too) */
-        #cart,
-        #featured,
-        #deals,
-        #hauls,
-        #reviews,
-        #careers,
-        #brandsign,
-        #boxitems {
-          display: none !important;
-        }
         footer .locs,
         footer .fcta {
           display: none;
@@ -3905,64 +3554,11 @@
       <a href="careers.html">Careers</a>
       <a href="locations.html">Locations &amp; Hours</a>
     </nav>
-    <div class="toast" id="toast"></div>
 
     <!-- MOBILE SCROLL STAGES (phones <768px only). The page opens with the same
      scroll-scrubbed walk-in as desktop (#walk, mobile rendition), then each of
      these pinned stages scrubs its animation with the scroll — bin, clothing,
      shoes — so you go through them in order before the rest of the site. -->
-    <section id="wm1" aria-label="One bin, one price">
-      <div class="wmstage">
-        <video id="wm1v" muted playsinline preload="metadata" poster="mrbins-cart-poster.jpg">
-          <source data-mob="mrbins-cart.mp4" type="video/mp4" />
-        </video>
-        <div class="wmcap">
-          <div class="wk">In store</div>
-          <h3>One bin.<br />One price.</h3>
-          <div class="wprice" id="wmP1">$&mdash;</div>
-          <div class="wsub">everything in the bins today</div>
-        </div>
-      </div>
-    </section>
-    <section id="wm2" aria-label="Clothing">
-      <div class="wmstage">
-        <video id="wm2v" muted playsinline preload="metadata" poster="mrbins-clothes-poster.jpg">
-          <source data-mob="mrbins-clothes.mp4" type="video/mp4" />
-        </video>
-        <div class="wmcap">
-          <div class="wk">Restocked daily</div>
-          <h3>We sell<br />clothing.</h3>
-          <div class="wprice" id="wmP2">$&mdash;</div>
-          <div class="wsub">all clothing today</div>
-        </div>
-      </div>
-    </section>
-    <section id="wm3" aria-label="Shoes">
-      <div class="wmstage">
-        <video id="wm3v" muted playsinline preload="metadata" poster="mrbins-shoes-poster.jpg">
-          <source data-mob="mrbins-shoes.mp4" type="video/mp4" />
-        </video>
-        <div class="wmcap">
-          <div class="wk">Name brands</div>
-          <h3>We sell<br />shoes.</h3>
-          <div class="wprice" id="wmP3">$&mdash;</div>
-          <div class="wsub">all shoes today</div>
-        </div>
-      </div>
-    </section>
-    <section id="wmnav" aria-label="Quick links">
-      <div class="wm-btns">
-        <a class="wmb b1" href="#locm"
-          >Directions &rarr;<span>Four stores across Northeast PA &mdash; find yours</span></a
-        >
-        <a class="wmb b2" href="#discover"
-          >Discover &rarr;<span>See what&rsquo;s in the bins this week</span></a
-        >
-        <a class="wmb b3" href="#price"
-          >Deals &rarr;<span>One price for everything &mdash; it drops a dollar a day</span></a
-        >
-      </div>
-    </section>
 
     <!-- WALKTHROUGH — the opening: video plays, captions swap on scroll -->
     <section id="walk">
@@ -4023,6 +3619,58 @@
         </div>
         <div class="hcue bob" id="hcue">scroll to walk in &darr;</div>
         <div class="hprog" id="hprog"></div>
+      </div>
+    </section>
+    <section id="wm1" aria-label="One bin, one price">
+      <div class="wmstage">
+        <video id="wm1v" muted playsinline preload="metadata" poster="mrbins-cart-poster.jpg">
+          <source data-mob="mrbins-cart.mp4" type="video/mp4" />
+        </video>
+        <div class="wmcap">
+          <div class="wk">In store</div>
+          <h3>One bin.<br />One price.</h3>
+          <div class="wprice" id="wmP1">$&mdash;</div>
+          <div class="wsub">everything in the bins today</div>
+        </div>
+      </div>
+    </section>
+    <section id="wm2" aria-label="Clothing">
+      <div class="wmstage">
+        <video id="wm2v" muted playsinline preload="metadata" poster="mrbins-clothes-poster.jpg">
+          <source data-mob="mrbins-clothes.mp4" type="video/mp4" />
+        </video>
+        <div class="wmcap">
+          <div class="wk">Restocked daily</div>
+          <h3>We sell<br />clothing.</h3>
+          <div class="wprice" id="wmP2">$&mdash;</div>
+          <div class="wsub">all clothing today</div>
+        </div>
+      </div>
+    </section>
+    <section id="wm3" aria-label="Shoes">
+      <div class="wmstage">
+        <video id="wm3v" muted playsinline preload="metadata" poster="mrbins-shoes-poster.jpg">
+          <source data-mob="mrbins-shoes.mp4" type="video/mp4" />
+        </video>
+        <div class="wmcap">
+          <div class="wk">Name brands</div>
+          <h3>We sell<br />shoes.</h3>
+          <div class="wprice" id="wmP3">$&mdash;</div>
+          <div class="wsub">all shoes today</div>
+        </div>
+      </div>
+    </section>
+    <section id="wmnav" aria-label="Quick links">
+      <div class="wm-btns">
+        <a class="wmb b1" href="#locm"
+          >Directions &rarr;<span>Four stores across Northeast PA &mdash; find yours</span></a
+        >
+        <a class="wmb b2" href="#discover"
+          >Discover &rarr;<span>See what&rsquo;s in the bins this week</span></a
+        >
+        <a class="wmb b3" href="#price"
+          >Deals &rarr;<span>One price for everything &mdash; it drops a dollar a day</span></a
+        >
       </div>
     </section>
 
@@ -4128,13 +3776,9 @@
           <button class="cnav next" id="cnext" aria-label="Scroll right">&rsaquo;</button>
         </div>
         <div class="dbtns">
-          <a class="dbtn primary" href="https://primebins.com" target="_blank" rel="noopener"
-            >See all of this week&rsquo;s bins &rarr;</a
-          >
-          <a class="dbtn gold" href="https://primebins.com" target="_blank" rel="noopener"
-            >&#9733; Become a loyalty member</a
-          >
-          <a class="dbtn ghost" href="#footer">Directions &rarr;</a>
+          <a class="dbtn primary" href="deals.html">See all of this week&rsquo;s bins &rarr;</a>
+          <a class="dbtn gold" href="loyalty.html">&#9733; Become a loyalty member</a>
+          <a class="dbtn ghost" href="locations.html">Directions &rarr;</a>
         </div>
       </div>
     </section>
@@ -4174,7 +3818,7 @@
               Love the thrill of the hunt? Our hand-packed mystery boxes bring the treasure-hunt
               home &mdash; in standard and premium sizes, shipped to your door.
             </p>
-            <a class="flk" href="#online" data-buy="Mystery Box">Buy now &rarr;</a>
+            <a class="flk" href="mystery-box.html#boxes">Buy now &rarr;</a>
           </div>
           <div class="fcard c3">
             <div class="tagpill">From $25</div>
@@ -4442,9 +4086,7 @@
           <source src="mrbins-unbox-burst.mp4" type="video/mp4" />
         </video>
         <div class="lycta">
-          <a class="dbtn gold" href="https://primebins.com" target="_blank" rel="noopener"
-            >&#9733; Become a loyalty member</a
-          >
+          <a class="dbtn gold" href="loyalty.html">&#9733; Become a loyalty member</a>
           <div class="lynote">Free to join &middot; sign up in store or online</div>
           <a class="dbtn ghost" href="loyalty.html" style="margin-top:14px;display:inline-block">All member perks &rarr;</a>
         </div>
@@ -4532,12 +4174,7 @@
             </div>
           </div>
         </div>
-        <a
-          class="mcta big"
-          href="https://primebins.com"
-          target="_blank"
-          rel="noopener"
-          data-buy="Mystery Box"
+        <a class="mcta big" href="mystery-box.html#boxes"
           >Buy a mystery box today<span>Arrives in 1&ndash;2 business days typically</span></a
         >
       </div>
@@ -4545,82 +4182,6 @@
     </section>
 
     <!-- MYSTERY BOX SHOP :: what could be inside -->
-    <section id="boxitems">
-      <div class="ucar">
-        <h3 class="ucar-h">Real brands. Real finds. Every single box.</h3>
-        <div class="ustrip"><div class="strack" id="strackBot"></div></div>
-      </div>
-    </section>
-
-    <!-- REAL HAULS — runs on real phone footage from the floor (sample + film-this placeholders for the Shalom demo) -->
-    <section id="hauls">
-      <div class="k">Real hauls &middot; shot in store</div>
-      <h2>See it happen <span class="o">for real.</span></h2>
-      <p class="sub">
-        This section runs on real phone footage from the floor &mdash; new clips every week,
-        straight from the store.
-      </p>
-      <div class="hwrap">
-        <button class="hnav prev" id="hcprev" aria-label="Previous clip">&lsaquo;</button>
-        <div class="hstage">
-          <div class="hslides" id="hslidesEl">
-            <figure class="hslide">
-              <div class="hmedia">
-                <span class="chip">Sample</span
-                ><img src="mrbins-store.jpg" alt="Inside the Mr. Bins store" loading="lazy" />
-              </div>
-              <figcaption class="hinfo">
-                <b>Sunday: fresh bins hit the floor</b
-                ><span>Drop day &middot; <em>$14</em> &middot; best selection of the week</span>
-              </figcaption>
-            </figure>
-            <figure class="hslide">
-              <div class="hmedia">
-                <div class="gbox">
-                  <svg viewBox="0 0 24 24">
-                    <rect x="2.5" y="6.5" width="13" height="11" rx="2.5" />
-                    <path d="M15.5 10.5l6-3.2v9.4l-6-3.2z" />
-                  </svg>
-                  <div class="gt">Film this</div>
-                  <div class="gd">Someone pulling a big-brand find out of the pile</div>
-                </div>
-              </div>
-              <figcaption class="hinfo">
-                <b>The big-brand pull</b
-                ><span>New clips every week &middot; <em>coming soon</em></span>
-              </figcaption>
-            </figure>
-            <figure class="hslide">
-              <div class="hmedia">
-                <div class="gbox">
-                  <svg viewBox="0 0 24 24">
-                    <rect x="2.5" y="6.5" width="13" height="11" rx="2.5" />
-                    <path d="M15.5 10.5l6-3.2v9.4l-6-3.2z" />
-                  </svg>
-                  <div class="gt">Film this</div>
-                  <div class="gd">A full $9-Friday haul laid out on the tailgate</div>
-                </div>
-              </div>
-              <figcaption class="hinfo">
-                <b>The $9-Friday haul</b
-                ><span>Whole tailgate for pocket change &middot; <em>coming soon</em></span>
-              </figcaption>
-            </figure>
-            <figure class="hslide">
-              <div class="hmedia">
-                <span class="chip">Sample</span
-                ><img src="mrbins-couple.jpg" alt="Opening a mystery box at home" loading="lazy" />
-              </div>
-              <figcaption class="hinfo">
-                <b>Mystery box, opened at home</b
-                ><span>Shipped anywhere &middot; from <em>$25</em></span>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-        <button class="hnav next" id="hcnext" aria-label="Next clip">&rsaquo;</button>
-      </div>
-    </section>
 
     <!-- REVIEWS -->
     <section id="reviews">
@@ -5177,62 +4738,27 @@
         } catch (e) {}
       }
 
-      /* ---- shopping cart: live badge + toast (adds when you click an item) ---- */
+      /* ---- shopping cart: badge mirrors the real store cart (mystery-box.html) ---- */
       (function () {
-        var count = 0,
-          badge = document.getElementById("cartBadge"),
-          toast = document.getElementById("toast"),
-          tt;
-        function say(msg) {
-          if (!toast) return;
-          toast.innerHTML = msg;
-          toast.classList.add("show");
-          clearTimeout(tt);
-          tt = setTimeout(function () {
-            toast.classList.remove("show");
-          }, 2000);
-        }
-        function add(name) {
-          count++;
+        var badge = document.getElementById("cartBadge"),
+          cb = document.getElementById("cartBtn");
+        function refresh() {
+          var n = 0;
+          try {
+            var c = JSON.parse(localStorage.getItem("mrbins-cart") || "{}");
+            for (var k in c) n += c[k];
+          } catch (e) {}
           if (badge) {
-            badge.textContent = count;
-            badge.classList.add("show");
-            badge.classList.remove("pop");
-            void badge.offsetWidth;
-            badge.classList.add("pop");
+            badge.textContent = n;
+            badge.classList.toggle("show", n > 0);
           }
-          say(
-            "Added <b>" +
-              (name || "item") +
-              "</b> to cart &middot; " +
-              count +
-              " item" +
-              (count > 1 ? "s" : ""),
-          );
         }
-        window.mrbAddToCart = add;
-        /* only real buyable things (mystery boxes) add to the cart — in-store bin items are
-    browse-only, so tapping a product card no longer fakes an "Added to cart" */
-        document.addEventListener("click", function (e) {
-          var t = e.target;
-          var buy = t.closest ? t.closest("[data-buy]") : null;
-          if (buy) {
-            add(buy.getAttribute("data-buy") || "Mystery Box");
-          }
-        });
-        var cb = document.getElementById("cartBtn");
         if (cb)
           cb.addEventListener("click", function () {
-            say(
-              count
-                ? "Cart &middot; <b>" +
-                    count +
-                    "</b> item" +
-                    (count > 1 ? "s" : "") +
-                    " &middot; checkout on primebins.com"
-                : "Your cart is empty &mdash; tap an item to add it",
-            );
+            window.location.href = "mystery-box.html#boxes";
           });
+        window.addEventListener("pageshow", refresh);
+        refresh();
       })();
 
       /* ---- WALKTHROUGH opening: YOU drive the glide by scrolling (fastSeek) + captions swap ---- */
@@ -6134,7 +5660,6 @@
           "#price .alertcard",
           "#online .tier",
           "#online .mbox-vis",
-          "#hauls .hcard",
           "#faq details",
           "#careers .cperk",
           "#footer .loc",

@@ -12,12 +12,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="site.css" />
     
+      <style>
+      .steps { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 26px 0 8px; }
+      .stepdot {
+        width: 34px; height: 34px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
+        font-family: "Bricolage Grotesque"; font-weight: 800; font-size: 15px;
+        background: var(--paper); border: 2px solid var(--grey); color: var(--muted); transition: all 0.2s;
+      }
+      .stepdot.on { background: var(--blue); border-color: var(--blue); color: #fff; }
+      .stepdot.done { background: var(--green); border-color: var(--green); color: #fff; }
+      .stepbar { flex: 0 0 44px; height: 2px; background: var(--grey); border-radius: 2px; }
+      .appstep { display: none; border: 0; padding: 0; margin-top: 10px; }
+      .appstep.on { display: block; }
+      .appstep legend {
+        font-family: "Bricolage Grotesque"; font-weight: 800; font-size: 21px; padding: 14px 0 2px;
+      }
+      .field input.bad, .field select.bad { outline: 2px solid #d54; border-color: #d54; }
+      .dropzone {
+        margin-top: 16px; display: flex; flex-direction: column; align-items: center; gap: 8px;
+        border: 2px dashed var(--grey); border-radius: 16px; background: var(--paper);
+        padding: 34px 22px; cursor: pointer; text-align: center; transition: border-color 0.18s, background 0.18s;
+      }
+      .dropzone:hover, .dropzone.drag { border-color: var(--blue); background: #eef4ff; }
+      .dropzone.has { border-style: solid; border-color: var(--green); background: rgba(21, 163, 74, 0.06); }
+      .dropzone svg { width: 34px; height: 34px; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+      .dropzone b { font-family: "Bricolage Grotesque"; font-size: 17px; }
+      .dropzone span { color: var(--muted); font-size: 13px; }
+    </style>
   </head>
   <body>
     <header class="bar">
       <div class="row">
         <a class="brand" href="index.html" aria-label="Mr. Bins home">
-          <img class="brandlive" src="mrbins-navbin-navy.jpg" alt="" />
+          <video class="brandlive" autoplay muted loop playsinline poster="mrbins-navbin-navy.jpg" aria-hidden="true">
+            <source src="mrbins-navbin-navy.mp4" type="video/mp4" />
+          </video>
           <img class="brandlogo" src="mrbins-logo-dark.png" alt="Mr. Bins" />
         </a>
         <nav class="tabs">
@@ -67,11 +96,76 @@
           </div>
         </div>
         <div class="btnrow" style="justify-content: center">
-          <a class="btn primary" href="mailto:careers@primebins.com?subject=Careers%20at%20Mr.%20Bins">Email us your resume &rarr;</a>
+          <a class="btn orange" href="#apply">Apply online &darr;</a>
         </div>
-        <p class="sub center" style="max-width: 100%; text-align: center">careers@primebins.com &mdash; tell us which store and what role.</p>
       </div>
     </section>
+
+    <section class="psec white" id="apply">
+      <div class="pwrap" style="max-width: 660px">
+        <div class="center">
+          <div class="k">Apply in two minutes</div>
+          <h2>Three steps. <span class="b">No cover letter.</span></h2>
+        </div>
+        <div class="steps" aria-hidden="true">
+          <span class="stepdot on" data-step="1">1</span><span class="stepbar"></span>
+          <span class="stepdot" data-step="2">2</span><span class="stepbar"></span>
+          <span class="stepdot" data-step="3">3</span>
+        </div>
+        <form id="appform" novalidate>
+          <fieldset class="appstep on" data-step="1">
+            <legend>About you</legend>
+            <div class="field"><label for="aname">Full name</label><input id="aname" name="name" autocomplete="name" required /></div>
+            <div class="field"><label for="aphone">Phone</label><input id="aphone" name="phone" type="tel" autocomplete="tel" placeholder="(570) 555-0123" required /></div>
+            <div class="field"><label for="aemail">Email</label><input id="aemail" name="email" type="email" autocomplete="email" required /></div>
+            <div class="btnrow"><button class="btn primary" type="button" data-next>Next &rarr;</button></div>
+          </fieldset>
+          <fieldset class="appstep" data-step="2">
+            <legend>The job</legend>
+            <div class="field"><label for="arole">Role</label>
+              <select id="arole" name="role" required>
+                <option value="">Choose a role&hellip;</option>
+                <option>Floor Crew</option>
+                <option>Drop-Day Lead</option>
+                <option>Store Manager</option>
+              </select>
+            </div>
+            <div class="field"><label for="astore">Store</label>
+              <select id="astore" name="store" required>
+                <option value="">Choose a store&hellip;</option>
+                <option>Wilkes-Barre (Flagship)</option>
+                <option>Scranton</option>
+                <option>Hazleton</option>
+                <option>Allentown</option>
+              </select>
+            </div>
+            <div class="field"><label for="astart">When can you start?</label><input id="astart" name="start" placeholder="e.g. Right away / two weeks" /></div>
+            <div class="btnrow">
+              <button class="btn ghost" type="button" data-back>&larr; Back</button>
+              <button class="btn primary" type="button" data-next>Next &rarr;</button>
+            </div>
+          </fieldset>
+          <fieldset class="appstep" data-step="3">
+            <legend>Resume</legend>
+            <label class="dropzone" id="dropzone" for="aresume">
+              <input id="aresume" name="resume" type="file" accept=".pdf,.doc,.docx,.txt,.rtf,image/*" hidden />
+              <svg viewBox="0 0 24 24"><path d="M12 16V4m0 0l-4 4m4-4l4 4" /><path d="M4 17v2a1.6 1.6 0 001.6 1.6h12.8A1.6 1.6 0 0020 19v-2" /></svg>
+              <b>Drop your resume here</b>
+              <span id="dropname">PDF, Word or a photo &mdash; or tap to browse. Optional but it helps.</span>
+            </label>
+            <div class="btnrow">
+              <button class="btn ghost" type="button" data-back>&larr; Back</button>
+              <button class="btn orange" type="submit">Send my application &rarr;</button>
+            </div>
+          </fieldset>
+        </form>
+        <div class="formok" id="appok">&#10003; Application sent &mdash; we&rsquo;ll call you within a couple of days. If you added a resume, it&rsquo;s attached.</div>
+        <p class="sub center" style="max-width: 100%; text-align: center; font-size: 13px; margin-top: 14px">
+          Prefer email? <a href="mailto:careers@primebins.com?subject=Careers%20at%20Mr.%20Bins" style="color: var(--blue)">careers@primebins.com</a>
+        </p>
+      </div>
+    </section>
+
     <section class="psec white center">
       <div class="pwrap">
         <div class="k">Why here</div>
@@ -150,5 +244,87 @@
       })();
     </script>
 
+      <script>
+      /* three-step application. Submits to APPLY_ENDPOINT (Formspree or similar, supports
+         file uploads) when configured; until then falls back to a prefilled email draft. */
+      var APPLY_ENDPOINT = ""; // e.g. "https://formspree.io/f/xxxxxxxx"
+      (function () {
+        var form = document.getElementById("appform");
+        if (!form) return;
+        var steps = [].slice.call(form.querySelectorAll(".appstep")),
+          dots = [].slice.call(document.querySelectorAll(".stepdot")),
+          cur = 0;
+        function show(i) {
+          cur = i;
+          steps.forEach(function (s, k) { s.classList.toggle("on", k === i); });
+          dots.forEach(function (d, k) {
+            d.classList.toggle("on", k === i);
+            d.classList.toggle("done", k < i);
+            d.textContent = k < i ? "\u2713" : String(k + 1);
+          });
+        }
+        function valid(i) {
+          var ok = true;
+          steps[i].querySelectorAll("input[required], select[required]").forEach(function (f) {
+            var good = f.checkValidity();
+            f.classList.toggle("bad", !good);
+            if (!good) ok = false;
+          });
+          return ok;
+        }
+        form.addEventListener("click", function (e) {
+          var fs = e.target.closest(".appstep");
+          if (fs) cur = steps.indexOf(fs); /* trust the DOM, not the counter */
+          if (e.target.closest("[data-next]")) { if (valid(cur)) show(Math.min(cur + 1, steps.length - 1)); }
+          else if (e.target.closest("[data-back]")) show(Math.max(cur - 1, 0));
+        });
+        /* dropzone */
+        var dz = document.getElementById("dropzone"),
+          fi = document.getElementById("aresume"),
+          dn = document.getElementById("dropname");
+        function setFile() {
+          var f = fi.files && fi.files[0];
+          dz.classList.toggle("has", !!f);
+          dn.textContent = f ? f.name + " \u2713" : "PDF, Word or a photo \u2014 or tap to browse. Optional but it helps.";
+        }
+        fi.addEventListener("change", setFile);
+        ["dragover", "dragenter"].forEach(function (ev) {
+          dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.add("drag"); });
+        });
+        ["dragleave", "drop"].forEach(function (ev) {
+          dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.remove("drag"); });
+        });
+        dz.addEventListener("drop", function (e) {
+          if (e.dataTransfer && e.dataTransfer.files.length) { fi.files = e.dataTransfer.files; setFile(); }
+        });
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!valid(0) || !valid(1)) { show(!valid(0) ? 0 : 1); return; }
+          var done = function () {
+            form.style.display = "none";
+            document.querySelector(".steps").style.display = "none";
+            document.getElementById("appok").classList.add("on");
+          };
+          if (APPLY_ENDPOINT) {
+            var fd = new FormData(form);
+            fetch(APPLY_ENDPOINT, { method: "POST", body: fd, headers: { Accept: "application/json" } })
+              .then(function (r) { if (r.ok) done(); else throw 0; })
+              .catch(function () { emailFallback(); });
+          } else {
+            emailFallback();
+            done();
+          }
+          function emailFallback() {
+            var v = function (id) { return encodeURIComponent(document.getElementById(id).value); };
+            var body =
+              "Name: " + v("aname") + "%0APhone: " + v("aphone") + "%0AEmail: " + v("aemail") +
+              "%0ARole: " + v("arole") + "%0AStore: " + v("astore") + "%0AStart: " + v("astart") +
+              "%0A%0A(Please attach your resume to this email.)";
+            window.location.href =
+              "mailto:careers@primebins.com?subject=Application%20\u2014%20" + v("arole") + "&body=" + body;
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

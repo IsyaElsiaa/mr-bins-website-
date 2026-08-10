@@ -4463,13 +4463,21 @@
     killed phone load perf); everything else gets primed on the first touch —
     which on iOS always happens before any scrub is visible. Desktop unchanged. */
         if (mob) {
+          /* phones: scrubbing 60 seeks/s is jank — let the clip glide on its own */
+          v.loop = true;
           try {
             var q0 = v.play();
-            if (q0 && q0.then)
-              q0.then(function () {
-                v.pause();
-              }).catch(function () {});
+            if (q0 && q0.then) q0.catch(function () {});
           } catch (e) {}
+          ["touchstart", "scroll"].forEach(function (ev) {
+            window.addEventListener(
+              ev,
+              function () {
+                if (v.paused) v.play().catch(function () {});
+              },
+              { passive: true },
+            );
+          });
           [].forEach.call(document.querySelectorAll("#clothesvid,#shoesvid,.boxvid"), function (x) {
             try {
               x.preload = "metadata";
@@ -4497,8 +4505,8 @@
           /* fade captions out over the last 8% so the final line never clips under the header at the unpin */
           document.getElementById("wcaps").style.opacity =
             p > 0.97 ? String(clampN((1 - p) / 0.03)) : "1";
-          if (dur) {
-            seekTo(v, p * (dur - 0.05));
+          if (dur && !mob) {
+            seekTo(v, p * (dur - 0.05)); /* desktop: you drive the glide */
           }
           var seg = p * n,
             idx = Math.min(n - 1, Math.floor(seg * 0.9999));

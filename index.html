@@ -1563,10 +1563,17 @@
       }
       .lygrid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        max-width: 860px;
-        gap: 16px;
-        margin: clamp(28px, 4vw, 44px) auto;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin: clamp(28px, 4vw, 44px) 0;
+      }
+      @media (max-width: 1080px) {
+        .lygrid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          max-width: 720px;
+          margin-left: auto;
+          margin-right: auto;
+        }
       }
       .lycard {
         background: #fff;
@@ -1577,7 +1584,7 @@
         box-shadow: 0 16px 40px rgba(11, 36, 71, 0.07);
       }
       .lycard .limg {
-        height: 190px;
+        height: 150px;
         border-radius: 11px;
         background: #fff;
         border: 1px solid var(--grey);

@@ -1,22 +1,24 @@
 /* Mr. Bins mystery box store — static front-end cart + Stripe Checkout.
  *
  * HOW TO GO LIVE (5 minutes, no backend):
- *   1. In the client's Stripe dashboard create three Payment Links
- *      (Products → Taster $25 / Classic $50 / Loaded $100, enable
- *      "Let customers adjust quantity"). Apple Pay & Google Pay are ON
- *      automatically for Payment Links — nothing else to configure.
- *   2. Paste the three URLs below. Done.
+ *   1. In the client's Stripe dashboard create four Payment Links
+ *      (Amazon Sealed $75 / Premium $99 / Clothing $65 / Bin Store Unsold
+ *      $20 + $25 shipping, enable "Let customers adjust quantity").
+ *      Apple Pay & Google Pay are ON automatically — nothing to configure.
+ *   2. Paste the four URLs below. Done.
  */
 var STRIPE_LINKS = {
-  taster: "", // e.g. "https://buy.stripe.com/xxxxTaster"
-  classic: "", // e.g. "https://buy.stripe.com/xxxxClassic"
-  loaded: "", // e.g. "https://buy.stripe.com/xxxxLoaded"
+  sealed: "", // e.g. "https://buy.stripe.com/xxxxSealed"
+  premium: "", // e.g. "https://buy.stripe.com/xxxxPremium"
+  clothing: "", // e.g. "https://buy.stripe.com/xxxxClothing"
+  unsold: "", // e.g. "https://buy.stripe.com/xxxxUnsold"
 };
 
 var PRODUCTS = {
-  taster: { name: "Taster", price: 25, finds: "3–4 finds", img: "mrbins-box-small-poster.jpg" },
-  classic: { name: "Classic", price: 50, finds: "6–8 finds", img: "mrbins-box-med-poster.jpg" },
-  loaded: { name: "Loaded", price: 100, finds: "12–15 finds", img: "mrbins-box-large-poster.jpg" },
+  sealed: { name: "Amazon Sealed", price: 75, finds: "sealed, never opened", img: "mrbins-box-med-poster.jpg" },
+  premium: { name: "Premium", price: 99, finds: "hand-packed flagship", img: "mrbins-box-large-poster.jpg" },
+  clothing: { name: "Clothing", price: 65, finds: "15 pieces", img: "mrbins-clothes-poster.jpg" },
+  unsold: { name: "Bin Store Unsold", price: 20, finds: "+ $25 shipping", img: "mrbins-box-small-poster.jpg" },
 };
 
 (function () {
@@ -26,6 +28,8 @@ var PRODUCTS = {
   } catch (e) {
     cart = {};
   }
+  /* drop line items from retired catalogs so a stale cart can't break rendering */
+  for (var key in cart) if (!PRODUCTS[key]) delete cart[key];
 
   function save() {
     try {

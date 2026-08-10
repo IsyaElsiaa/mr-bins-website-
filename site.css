@@ -44,7 +44,7 @@ header.bar {
   left: 0;
   right: 0;
   z-index: 80;
-  background: #10263e;
+  background: #0e2540; /* exact match to the live-logo clip so it melts in */
   border-bottom: 1px solid rgba(255, 255, 255, 0.09);
 }
 .bar .row {
@@ -62,13 +62,7 @@ header.bar {
   text-decoration: none;
 }
 .brand .brandlive {
-  height: 84px;
-  width: auto;
-  object-fit: cover;
-  border-radius: 12px;
-  display: block;
-  background: #10263e;
-  margin: 2px 0;
+  display: none;
 }
 .brand .brandlogo {
   height: 40px;
@@ -722,5 +716,38 @@ footer {
 @media (max-width: 520px) {
   .locs {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .homebtn {
+    padding: 12px 18px;
+  }
+  .psec .sub a,
+  .paynote a,
+  p a {
+    display: inline-block;
+    padding: 10px 2px;
+    margin: -8px 0;
+  }
+  .fnav a,
+  .loc .tel,
+  .loc .dir {
+    display: inline-block;
+    padding: 12px 6px;
+    margin: -6px 0;
+  }
+  .fnav {
+    gap: 6px 14px;
+  }
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .btnrow {
+    flex-direction: column;
+  }
+  .phero h1 {
+    font-size: clamp(34px, 10vw, 44px);
   }
 }

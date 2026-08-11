@@ -190,6 +190,36 @@
           margin: -8px 0;
         }
     </style>
+      <style>
+      .heroprice {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 18px;
+        background: rgba(59, 227, 122, 0.12);
+        border: 1px solid rgba(59, 227, 122, 0.4);
+        color: #3be37a;
+        font-family: "Space Mono", monospace;
+        font-size: 15px;
+        padding: 10px 20px;
+        border-radius: 999px;
+      }
+      .hpdot { width: 9px; height: 9px; border-radius: 50%; background: #3be37a; box-shadow: 0 0 0 4px rgba(59, 227, 122, 0.18); }
+      .dealsbin {
+        display: block;
+        margin: 26px auto 0;
+        height: min(38svh, 66vw);
+        width: auto;
+        max-width: 88vw;
+        object-fit: contain;
+        background: #fff;
+        border-radius: 24px;
+        padding: clamp(8px, 1.6vw, 20px);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      }
+      .btn.ghostw { border: 2px solid rgba(255, 255, 255, 0.4); color: #fff; }
+      .btn.ghostw:hover { border-color: #fff; }
+    </style>
   </head>
   <body>
     <header class="bar">
@@ -227,9 +257,19 @@
         <span class="rope l"></span><span class="rope r"></span>
         <span class="board">DEALS</span>
       </div>
-      <div class="k">The weekly rhythm</div>
+      <div class="k">This week&rsquo;s bins</div>
       <h1>Every day is <span class="o">a different deal.</span></h1>
       <p class="sub">One truckload, six selling days, one falling price. Learn the rhythm and you'll never overpay for brand-new again.</p>
+      <div class="heroprice" id="heroprice">
+        <span class="hpdot"></span><span id="hpval">&mdash;</span>
+      </div>
+      <video class="dealsbin" muted playsinline autoplay loop preload="metadata" poster="mrbins-cart-poster.jpg">
+        <source src="mrbins-cart.mp4" type="video/mp4" />
+      </video>
+      <div class="btnrow" style="justify-content: center; margin-top: 22px">
+        <a class="btn orange" href="locations.html">Find your store &rarr;</a>
+        <a class="btn ghostw" href="#calendars">See the week&rsquo;s prices &darr;</a>
+      </div>
     </section>
 
     <!-- SOMETHING FOR EVERYONE (moved from home) -->
@@ -423,5 +463,13 @@
       })();
     </script>
 
+      <script>
+      (function () {
+        var L = { 0: 14, 1: 13, 2: 12, 3: 11, 4: 10, 5: 9, 6: null };
+        var tp = L[new Date().getDay()];
+        var e = document.getElementById("hpval");
+        if (e) e.textContent = tp === null ? "Closed today — bins restart Sunday at $14" : "$" + tp + " today — every item in every bin";
+      })();
+    </script>
   </body>
 </html>

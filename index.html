@@ -510,7 +510,7 @@
 
       /* cart roll-in: 100% scroll-controlled (all-intra + fastSeek) */
       #cart {
-        height: 430vh;
+        height: 200vh;
         position: relative;
       }
       .cartstage {
@@ -519,66 +519,90 @@
         height: 100svh;
         overflow: hidden;
         background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
       }
       /* trio: clothing rack · bin (smaller) · shoe rack — all scroll-driven */
       .trio {
-        position: absolute;
-        inset: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: clamp(16px, 3.4vw, 64px);
+        width: 100%;
+        padding: 0 3vw;
       }
       .titem,
       .tside {
-        position: absolute;
-        left: 50%;
-        top: 56%;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 12px;
-        opacity: 0;
-        will-change: transform, opacity;
       }
-      .titem video,
-      .tside video {
-        height: min(54svh, 74vw);
+      .titem video {
+        height: min(44svh, 42vw);
         width: auto;
-        max-width: 86vw;
+        max-width: 44vw;
         object-fit: contain;
         display: block;
-        background: #fff;
-        border-radius: 18px;
-        -webkit-mask-image: radial-gradient(130% 130% at 50% 50%, #000 58%, transparent 86%);
-        mask-image: radial-gradient(130% 130% at 50% 50%, #000 58%, transparent 86%);
+        -webkit-mask-image: radial-gradient(130% 130% at 50% 50%, #000 58%, transparent 88%);
+        mask-image: radial-gradient(130% 130% at 50% 50%, #000 58%, transparent 88%);
       }
-      .tword {
-        position: absolute;
-        top: 30%;
-        left: 0;
-        width: 100%;
-        transform: translateY(-50%);
-        font-family: "Bricolage Grotesque", sans-serif;
-        font-weight: 800;
-        font-size: clamp(96px, 24vw, 300px);
-        letter-spacing: 0.01em;
-        text-align: center;
-        color: transparent;
-        -webkit-text-stroke: 2.5px rgba(20, 85, 214, 0.45);
-        opacity: 0;
-        pointer-events: none;
-        white-space: nowrap;
-        will-change: transform, opacity;
+      .tside video {
+        height: min(36svh, 30vw);
+        width: auto;
+        max-width: 28vw;
+        object-fit: contain;
+        display: block;
+        -webkit-mask-image: radial-gradient(130% 130% at 50% 50%, #000 58%, transparent 88%);
+        mask-image: radial-gradient(130% 130% at 50% 50%, #000 58%, transparent 88%);
       }
-      .tword span {
-        color: var(--orange);
-        -webkit-text-stroke: 0;
+      .tbtns {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: clamp(10px, 2vh, 22px) 18px clamp(14px, 2.6vh, 26px);
       }
+      @media (max-width: 940px) {
+        .trio {
+          flex-wrap: wrap;
+          align-items: flex-end;
+          gap: 10px;
+        }
+        .titem {
+          order: 1;
+          width: 100%;
+        }
+        .titem video {
+          height: min(26svh, 58vw);
+          max-width: 74vw;
+          margin: 0 auto;
+        }
+        .tside {
+          order: 2;
+          width: 41vw;
+        }
+        .tside video {
+          height: min(21svh, 38vw);
+          width: auto;
+          max-width: 38vw;
+        }
+        .tchip {
+          font-size: 11px;
+        }
+        .tbtns .dbtn {
+          font-size: 13px;
+          padding: 11px 16px;
+        }
+      }
+
       .cartcap {
-        position: absolute;
-        top: clamp(64px, 9vh, 110px);
-        left: 0;
+        position: relative;
         width: 100%;
         text-align: center;
-        opacity: 0;
-        will-change: opacity, transform;
+        padding: clamp(84px, 11vh, 140px) 20px clamp(8px, 1.6vh, 20px);
       }
       .cartcap .k {
         color: var(--blue);
@@ -885,6 +909,63 @@
         #locm .lmhours b {
           color: var(--navy);
         }
+      }
+
+      /* ===== ITEM HEROES ===== */
+      .ihero {
+        padding: clamp(56px, 9vh, 108px) 20px clamp(40px, 6vh, 80px);
+        text-align: center;
+        overflow: hidden;
+      }
+      .ihero.white { background: #fff; color: var(--navy); }
+      .ihero.paper { background: var(--paper); color: var(--navy); }
+      .ihwrap { max-width: 720px; margin: 0 auto; }
+      .ihwrap .k {
+        font-family: "Space Mono", monospace;
+        font-size: 12.5px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+      .ihwrap h2 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        font-size: clamp(32px, 5.2vw, 60px);
+        margin-top: 8px;
+      }
+      .ihwrap h2 .o { color: var(--orange); }
+      .ihwrap h2 .b { color: var(--blue); }
+      .ihwrap .sub {
+        color: var(--muted);
+        font-size: clamp(14.5px, 1.6vw, 17px);
+        line-height: 1.55;
+        max-width: 520px;
+        margin: 12px auto 0;
+      }
+      .ihwrap .sub b { color: var(--navy); }
+      .ihvid {
+        display: block;
+        margin: clamp(18px, 3.4vh, 40px) auto 0;
+        height: min(52svh, 74vw);
+        width: auto;
+        max-width: 90vw;
+        object-fit: contain;
+        -webkit-mask-image: radial-gradient(130% 130% at 50% 50%, #000 58%, transparent 88%);
+        mask-image: radial-gradient(130% 130% at 50% 50%, #000 58%, transparent 88%);
+      }
+      .ihcta { margin-top: clamp(16px, 2.6vh, 30px); }
+      .ihero.paper .ihvid {
+        -webkit-mask-image: none;
+        mask-image: none;
+        background: #fff;
+        border-radius: 26px;
+        box-shadow: 0 24px 60px rgba(11, 36, 71, 0.1);
+        padding: clamp(10px, 2vw, 26px);
+      }
+      #binshero #brands {
+        position: relative;
+        margin-top: clamp(28px, 5vh, 56px);
+        height: clamp(88px, 13vh, 150px);
       }
       /* generic */
       section {
@@ -2689,13 +2770,11 @@
 
       /* brand ticker (fast marquee over a live store-video band, under the bin) */
       #brands {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        position: relative;
         width: 100%;
+        margin-top: auto;
         overflow: hidden;
-        height: clamp(124px, 18vh, 184px);
+        height: clamp(88px, 13vh, 150px);
         display: flex;
         align-items: center;
         border-top: 1px solid rgba(11, 36, 71, 0.1);
@@ -3035,7 +3114,7 @@
         }
         /* cart: trio stacks — bin on top, clothes + shoes side by side beneath */
         #cart {
-          height: 430vh;
+          height: 220vh;
         }
         .tchip {
           position: static;
@@ -3464,53 +3543,20 @@
       </div>
     </section>
 
-    <section id="cart">
-      <div class="cartstage">
-        <div class="tword" id="tword0" aria-hidden="true">BINS<span>.</span></div>
-        <div class="tword" id="tword1" aria-hidden="true">RACKS<span>.</span></div>
-        <div class="tword" id="tword2" aria-hidden="true">KICKS<span>.</span></div>
-        <div class="cartcap" id="cartcap">
-          <div class="k">One store. Three ways to score.</div>
-          <h2>Bins. Racks. <span class="o">Kicks.</span></h2>
-        </div>
-        <div class="trio">
-          <div class="tside" id="clothesSide">
-            <video
-              id="clothesvid"
-              muted
-              playsinline
-              preload="none"
-              poster="mrbins-clothes-poster.jpg"
-            >
-              <source data-desk="mrbins-clothes.mp4" type="video/mp4" />
-            </video>
-            <div class="tshadow"></div>
-            <div class="tchip">Fresh fits</div>
-          </div>
-          <div class="titem" id="binItem">
-            <video
-              class="cartvid"
-              id="cartvid"
-              muted
-              playsinline
-              preload="metadata"
-              poster="mrbins-cart-poster.jpg"
-            >
-              <source data-desk="mrbins-cart.mp4" type="video/mp4" />
-            </video>
-            <div class="tshadow"></div>
-            <div class="tchip">All one price</div>
-          </div>
-          <div class="tside" id="shoesSide">
-            <video id="shoesvid" muted playsinline preload="none" poster="mrbins-shoes-poster.jpg">
-              <source data-desk="mrbins-shoes.mp4" type="video/mp4" />
-            </video>
-            <div class="tshadow"></div>
-            <div class="tchip">Fresh kicks</div>
-          </div>
-        </div>
-        <!-- BRAND TICKER — bottom strip, shares the screen with the bin -->
-        <section id="brands" aria-label="Brands you'll find in the bins">
+
+
+    <!-- THREE HEROES: bins / racks / kicks — each fills as you scroll to it -->
+    <section class="ihero white" id="binshero">
+      <div class="ihwrap">
+        <div class="k">The bins</div>
+        <h2>Everything. <span class="o">One price.</span></h2>
+        <p class="sub">Truckloads of brand-new Amazon returns, dumped into the bins daily &mdash; today it&rsquo;s <b class="tprice">$14</b> for anything you can dig up.</p>
+      </div>
+      <video class="ihvid" id="cartvid" muted playsinline preload="metadata" poster="mrbins-cart-poster.jpg">
+        <source data-desk="mrbins-cart.mp4" type="video/mp4" />
+      </video>
+      <div class="ihcta"><a class="dbtn primary" href="deals.html">See what&rsquo;s inside &rarr;</a></div>
+<section id="brands" aria-label="Brands you'll find in the bins">
           <video
             class="bbg"
             id="bbg"
@@ -3529,7 +3575,30 @@
             <div class="bviewport"><div class="bmarq" id="bmarq"></div></div>
           </div>
         </section>
+    </section>
+
+    <section class="ihero paper" id="rackshero">
+      <div class="ihwrap">
+        <div class="k">The racks</div>
+        <h2>Fresh fits. <span class="b">$5.99 flat.</span></h2>
+        <p class="sub">Clothing restocked every single day &mdash; brand-new with the tags still on.</p>
       </div>
+      <video class="ihvid" id="clothesvid" muted playsinline preload="none" poster="mrbins-clothes-poster.jpg">
+        <source data-desk="mrbins-clothes.mp4" type="video/mp4" />
+      </video>
+      <div class="ihcta"><a class="dbtn primary" href="pricing.html">See clothing prices &rarr;</a></div>
+    </section>
+
+    <section class="ihero white" id="kickshero">
+      <div class="ihwrap">
+        <div class="k">The shoe wall</div>
+        <h2>Sealed kicks. <span class="o">$12 flat.</span></h2>
+        <p class="sub">Name-brand shoe boxes straight off the truck &mdash; every size, still sealed.</p>
+      </div>
+      <video class="ihvid" id="shoesvid" muted playsinline preload="none" poster="mrbins-shoes-poster.jpg">
+        <source data-desk="mrbins-shoes.mp4" type="video/mp4" />
+      </video>
+      <div class="ihcta"><a class="dbtn gold" href="pricing.html">See shoe prices &rarr;</a></div>
     </section>
 
 
@@ -4227,6 +4296,10 @@
         set("wmP1", tp);
         set("wmP2", CLOTH[day]);
         set("wmP3", SHOE[day]);
+        /* bins hero: live price in the copy */
+        [].forEach.call(document.querySelectorAll(".tprice"), function (e) {
+          e.textContent = tp === null ? "$" + LADDER[0] + " Sunday" : "$" + tp;
+        });
       })();
       if (tp === null) {
         var _d = document.querySelector(".clock .dot"),
@@ -4272,105 +4345,31 @@
         });
       })();
 
-      /* ---- CART TRIO, three acts: BINS -> RACKS -> KICKS. Each actor gets a
-        full-screen solo (video scrubbed by scroll, giant word gliding behind),
-        then tucks into its final slot; header lands in the settle phase. ---- */
+      /* ---- ITEM HEROES: each clip fills as its section crosses the viewport ---- */
       (function () {
-        var cart = document.getElementById("cart");
-        var actors = [
-          { el: document.getElementById("binItem"), v: document.getElementById("cartvid"), w: document.getElementById("tword0"), dur: 0 },
-          { el: document.getElementById("clothesSide"), v: document.getElementById("clothesvid"), w: document.getElementById("tword1"), dur: 0 },
-          { el: document.getElementById("shoesSide"), v: document.getElementById("shoesvid"), w: document.getElementById("tword2"), dur: 0 },
-        ];
-        var cap = document.getElementById("cartcap"),
-          brands = document.getElementById("brands"),
-          ticking = false;
-        actors.forEach(function (a) {
-          a.v.addEventListener("loadedmetadata", function () {
-            a.dur = a.v.duration || 5;
-            seek();
-          });
+        var vids = [
+          document.getElementById("cartvid"),
+          document.getElementById("clothesvid"),
+          document.getElementById("shoesvid"),
+        ].filter(Boolean);
+        if (!vids.length) return;
+        var ticking = false;
+        vids.forEach(function (v) {
+          v.addEventListener("loadedmetadata", seek);
           if (!MRB_MOB)
             try {
-              a.v.play().then(function () { a.v.pause(); }).catch(function () {});
+              v.play().then(function () { v.pause(); }).catch(function () {});
             } catch (e) {}
         });
-        function W(p, a, b) {
-          return clampN((p - a) / (b - a));
-        }
-        function ease(t) {
-          return t * t * (3 - 2 * t);
-        }
-        /* final slots (x,y in % of viewport off center; s = scale) */
-        function slots() {
-          if (window.matchMedia("(max-width: 940px)").matches)
-            return [
-              { x: 0, y: -20, s: 0.4 },
-              { x: -24, y: 10, s: 0.36 },
-              { x: 24, y: 10, s: 0.36 },
-            ];
-          return [
-            { x: 0, y: -2, s: 0.56 },
-            { x: -31, y: 4, s: 0.42 },
-            { x: 31, y: 4, s: 0.42 },
-          ];
-        }
-        /* act windows across the pin */
-        var ACT = [
-          [0.02, 0.3],
-          [0.31, 0.59],
-          [0.6, 0.88],
-        ];
-        var SETTLE = 0.88;
         function seek() {
           ticking = false;
-          var total = cart.offsetHeight - window.innerHeight;
-          var p = clampN(-cart.getBoundingClientRect().top / total);
-          var sl = slots();
-          var settleQ = ease(W(p, SETTLE, 0.985));
-          actors.forEach(function (a, i) {
-            var a0 = ACT[i][0],
-              a1 = ACT[i][1];
-            var act = W(p, a0, a1);
-            /* video fills during this actor's act */
-            if (a.dur) seekTo(a.v, Math.min(act * 1.12, 1) * (a.dur - 0.05));
-            var st = "",
-              op = 1;
-            if (p < a0) {
-              /* waiting below stage */
-              op = 0;
-              st = "translate(-50%, -34%) scale(0.82)";
-            } else if (act < 1 || p < a1 + 0.02) {
-              /* solo: rise in over the first 12% of the act */
-              var rise = ease(W(act, 0, 0.12));
-              op = rise;
-              st = "translate(-50%, " + (-50 + (1 - rise) * 16) + "%) scale(" + (0.82 + 0.18 * rise).toFixed(4) + ")";
-              /* tuck early so the next act starts clean */
-              var tuck = ease(W(p, a1 - 0.045, a1 + 0.02));
-              if (tuck > 0) {
-                var s2 = sl[i];
-                st =
-                  "translate(calc(-50% + " + (s2.x * tuck).toFixed(2) + "vw), calc(-50% + " + (s2.y * tuck).toFixed(2) + "vh)) scale(" + (1 - (1 - s2.s) * tuck).toFixed(4) + ")";
-                op = 1 - 0.62 * tuck;
-              }
-            } else {
-              /* parked in final slot — dimmed until everyone has landed */
-              var s3 = sl[i];
-              st = "translate(calc(-50% + " + s3.x + "vw), calc(-50% + " + s3.y + "vh)) scale(" + s3.s + ")";
-              op = 0.38 + 0.62 * settleQ;
-            }
-            a.el.style.opacity = op.toFixed(3);
-            a.el.style.transform = st;
-            /* giant word: parallax drift, alive only during its act */
-            var wo = act > 0 && act < 1 ? Math.min(ease(W(act, 0, 0.15)), 1 - ease(W(act, 0.82, 1))) : 0;
-            a.w.style.opacity = (wo * 0.9).toFixed(3);
-            a.w.style.transform = "translateY(-58%) translateX(" + ((0.5 - act) * 14).toFixed(2) + "vw)";
+          var vh = window.innerHeight;
+          vids.forEach(function (v) {
+            if (!v.duration) return;
+            var r = v.getBoundingClientRect();
+            var pp = clampN((vh * 0.92 - r.top) / (vh * 0.72));
+            seekTo(v, pp * (v.duration - 0.05));
           });
-          /* settle: header + ticker land together */
-          var q = ease(W(p, SETTLE, 0.985));
-          cap.style.opacity = q.toFixed(3);
-          cap.style.transform = "translateY(" + ((1 - q) * -14).toFixed(1) + "px)";
-          if (brands) brands.style.opacity = q.toFixed(3);
         }
         function onScroll() {
           if (!ticking) {

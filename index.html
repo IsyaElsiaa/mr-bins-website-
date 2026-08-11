@@ -967,6 +967,261 @@
         margin-top: clamp(28px, 5vh, 56px);
         height: clamp(88px, 13vh, 150px);
       }
+
+      /* ===== SPLIT HERO ===== */
+      #splithero {
+        background: #fff;
+        padding: clamp(56px, 9vh, 110px) clamp(20px, 4vw, 48px);
+      }
+      .shwrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+        gap: clamp(24px, 4vw, 64px);
+        align-items: center;
+      }
+      .shleft .k {
+        font-family: "Space Mono", monospace;
+        font-size: 12.5px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+      .shtitle {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        font-size: clamp(56px, 7.6vw, 108px);
+        line-height: 0.98;
+        margin-top: 12px;
+        letter-spacing: -0.02em;
+      }
+      .shtitle .n { color: var(--navy); }
+      .shtitle .b { color: var(--blue); }
+      .shtitle .o { color: var(--orange); }
+      .shleft .sub {
+        color: var(--muted);
+        font-size: clamp(15px, 1.7vw, 18px);
+        line-height: 1.55;
+        margin-top: 18px;
+        max-width: 380px;
+      }
+      .shbtns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 26px;
+      }
+      .shloc {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 20px;
+        color: var(--blue);
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+      }
+      .shloc svg {
+        width: 19px;
+        height: 19px;
+        fill: none;
+        stroke: var(--blue);
+        stroke-width: 1.8;
+      }
+      .shright img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      @media (max-width: 940px) {
+        .shwrap {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .shright { order: -1; }
+        .shright img { max-width: min(86vw, 460px); margin: 0 auto; }
+        .shleft .sub { margin-left: auto; margin-right: auto; }
+        .shbtns { justify-content: center; }
+        .shtitle { font-size: clamp(48px, 14vw, 72px); }
+      }
+      /* ===== LOCATIONS CAROUSEL ===== */
+      #locm {
+        background: #fff;
+        color: var(--navy);
+        padding: clamp(56px, 9vh, 104px) 0;
+      }
+      #locm .lmwrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(18px, 3.4vw, 40px); }
+      .lmhead {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .lmhead .k {
+        font-family: "Space Mono", monospace;
+        font-size: 12.5px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+      .lmhead h2 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        font-size: clamp(30px, 4.2vw, 52px);
+        margin-top: 6px;
+      }
+      .lmhead h2 .b { color: var(--blue); }
+      .lmhead .sub { color: var(--muted); margin-top: 8px; max-width: 420px; }
+      .lmcar {
+        display: flex;
+        gap: 14px;
+        margin-top: 28px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .lmcar::-webkit-scrollbar { display: none; }
+      .lmcar figure {
+        flex: 0 0 clamp(230px, 24vw, 300px);
+        scroll-snap-align: start;
+        margin: 0;
+      }
+      .lmcar img {
+        width: 100%;
+        height: clamp(150px, 16vw, 200px);
+        object-fit: cover;
+        border-radius: 16px;
+        display: block;
+        box-shadow: 0 14px 34px rgba(11, 36, 71, 0.12);
+      }
+      .lmcar figcaption {
+        margin-top: 10px;
+        font-weight: 700;
+        font-size: 14.5px;
+        text-align: center;
+      }
+      .lmcar figcaption span {
+        display: inline-block;
+        margin-left: 6px;
+        background: var(--orange);
+        color: var(--navy);
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+      #locm .lmhours { text-align: center; margin-top: 18px; color: var(--muted); font-size: 14px; }
+      #locm .lmhours b { color: var(--navy); }
+
+      .lyicons {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: clamp(14px, 2vw, 28px);
+        margin: clamp(30px, 5vh, 52px) 0 0;
+      }
+      @media (max-width: 940px) {
+        .lyicons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      .lyi {
+        text-align: center;
+        padding: clamp(18px, 2.4vw, 30px) clamp(12px, 1.6vw, 22px);
+        background: #fff;
+        border: 1px solid var(--grey);
+        border-radius: 18px;
+        box-shadow: 0 14px 36px rgba(11, 36, 71, 0.06);
+      }
+      .lyi svg {
+        width: 44px;
+        height: 44px;
+        fill: none;
+        stroke: var(--blue);
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        margin-bottom: 12px;
+      }
+      .lyi h3 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        font-size: clamp(15.5px, 1.6vw, 19px);
+        color: var(--navy);
+      }
+      .lyi p {
+        color: var(--muted);
+        font-size: 13.5px;
+        line-height: 1.5;
+        margin-top: 8px;
+      }
+
+      #splithero #brands {
+        position: relative;
+        margin-top: clamp(36px, 6vh, 72px);
+        height: clamp(88px, 13vh, 150px);
+      }
+      /* ===== COMPACT TRIO BAND ===== */
+      #trio3 {
+        background: var(--paper);
+        padding: clamp(44px, 7vh, 84px) 20px;
+      }
+      .t3wrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: clamp(16px, 3vw, 56px);
+      }
+      .t3item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        flex: 0 1 auto;
+      }
+      .t3item video {
+        height: min(30svh, 24vw);
+        width: auto;
+        max-width: 26vw;
+        object-fit: contain;
+        display: block;
+        background: #fff;
+        border-radius: 20px;
+        padding: clamp(6px, 1vw, 16px);
+        box-shadow: 0 18px 44px rgba(11, 36, 71, 0.09);
+      }
+      .t3item.big video {
+        height: min(38svh, 32vw);
+        max-width: 36vw;
+      }
+      .t3chip {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        font-size: clamp(12px, 1.3vw, 15.5px);
+        color: #fff;
+        background: var(--blue);
+        padding: 8px 16px;
+        border-radius: 999px;
+        white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .t3chip.on { background: var(--orange); color: var(--navy); }
+      .t3item:last-child .t3chip { background: var(--green); }
+      @media (max-width: 940px) {
+        .t3wrap { flex-wrap: wrap; gap: 12px; }
+        .t3item.big { width: 100%; order: -1; }
+        .t3item.big video { height: min(30svh, 60vw); max-width: 76vw; }
+        .t3item { width: 46%; }
+        .t3item video { height: auto; width: 86%; max-width: none; }
+        .t3chip { font-size: 11px; }
+      }
       /* generic */
       section {
         position: relative;
@@ -3543,19 +3798,23 @@
       </div>
     </section>
 
-
-
-    <!-- THREE HEROES: bins / racks / kicks — each fills as you scroll to it -->
-    <section class="ihero white" id="binshero">
-      <div class="ihwrap">
-        <div class="k">The bins</div>
-        <h2>Everything. <span class="o">One price.</span></h2>
-        <p class="sub">Truckloads of brand-new Amazon returns, dumped into the bins daily &mdash; today it&rsquo;s <b class="tprice">$14</b> for anything you can dig up.</p>
+    <!-- SPLIT HERO — Bins. Racks. Kicks. -->
+    <section id="splithero">
+      <div class="shwrap">
+        <div class="shleft">
+          <div class="k">One store &middot; three ways to score</div>
+          <h2 class="shtitle"><span class="n">Bins.</span><br /><span class="b">Racks.</span><br /><span class="o">Kicks.</span></h2>
+          <p class="sub">Crazy-good brands at crazy-low prices. Same great finds, three ways to shop.</p>
+          <div class="shbtns">
+            <a class="dbtn primary" href="pricing.html">Today&rsquo;s price &rarr;</a>
+            <a class="dbtn ghost" href="deals.html">This week&rsquo;s deals &rarr;</a>
+          </div>
+          <a class="shloc" href="locations.html"><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>Find a store near you &rarr;</a>
+        </div>
+        <div class="shright">
+          <img src="mrbins-hero-burst.jpg" alt="A Mr. Bins bin overflowing with brand-new finds — headphones, sneakers, toys and tech bursting out" />
+        </div>
       </div>
-      <video class="ihvid" id="cartvid" muted playsinline preload="metadata" poster="mrbins-cart-poster.jpg">
-        <source data-desk="mrbins-cart.mp4" type="video/mp4" />
-      </video>
-      <div class="ihcta"><a class="dbtn primary" href="deals.html">See what&rsquo;s inside &rarr;</a></div>
 <section id="brands" aria-label="Brands you'll find in the bins">
           <video
             class="bbg"
@@ -3575,31 +3834,36 @@
             <div class="bviewport"><div class="bmarq" id="bmarq"></div></div>
           </div>
         </section>
+
     </section>
 
-    <section class="ihero paper" id="rackshero">
-      <div class="ihwrap">
-        <div class="k">The racks</div>
-        <h2>Fresh fits. <span class="b">$5.99 flat.</span></h2>
-        <p class="sub">Clothing restocked every single day &mdash; brand-new with the tags still on.</p>
-      </div>
-      <video class="ihvid" id="clothesvid" muted playsinline preload="none" poster="mrbins-clothes-poster.jpg">
+    <!-- THREE WAYS — compact trio band -->
+    <section id="trio3">
+      <div class="t3wrap">
+        <div class="t3item">
+          <video class="ihvid" id="clothesvid" muted playsinline preload="none" poster="mrbins-clothes-poster.jpg">
         <source data-desk="mrbins-clothes.mp4" type="video/mp4" />
       </video>
-      <div class="ihcta"><a class="dbtn primary" href="pricing.html">See clothing prices &rarr;</a></div>
-    </section>
-
-    <section class="ihero white" id="kickshero">
-      <div class="ihwrap">
-        <div class="k">The shoe wall</div>
-        <h2>Sealed kicks. <span class="o">$12 flat.</span></h2>
-        <p class="sub">Name-brand shoe boxes straight off the truck &mdash; every size, still sealed.</p>
-      </div>
-      <video class="ihvid" id="shoesvid" muted playsinline preload="none" poster="mrbins-shoes-poster.jpg">
+          <div class="t3chip">The racks &mdash; clothing $5.99, tags on</div>
+        </div>
+        <div class="t3item big">
+          <video class="ihvid" id="cartvid" muted playsinline preload="metadata" poster="mrbins-cart-poster.jpg">
+        <source data-desk="mrbins-cart.mp4" type="video/mp4" />
+      </video>
+          <div class="t3chip on">The bins &mdash; everything one price</div>
+        </div>
+        <div class="t3item">
+          <video class="ihvid" id="shoesvid" muted playsinline preload="none" poster="mrbins-shoes-poster.jpg">
         <source data-desk="mrbins-shoes.mp4" type="video/mp4" />
       </video>
-      <div class="ihcta"><a class="dbtn gold" href="pricing.html">See shoe prices &rarr;</a></div>
+          <div class="t3chip">The shoe wall &mdash; sealed boxes, $12</div>
+        </div>
+      </div>
     </section>
+
+
+
+    <!-- THREE HEROES: bins / racks / kicks — each fills as you scroll to it -->
 
 
         <section id="price">
@@ -3692,37 +3956,26 @@
             </video>
           </div>
         </div>
-        <div class="lygrid">
-          <div class="lycard">
-            <div class="limg"><img src="mrbins-loyal-signup.png" alt="" loading="lazy" /></div>
+        <div class="lyicons">
+          <div class="lyi">
+            <svg viewBox="0 0 24 24"><path d="M12 2l2 2.6 3.2-.6.6 3.2L20.4 9l-1.6 2.8 1.6 2.8-2.6 1.8-.6 3.2-3.2-.6L12 21.6 10 19l-3.2.6-.6-3.2L3.6 14.6 5.2 11.8 3.6 9l2.6-1.8.6-3.2 3.2.6z"/><text x="12" y="14.6" text-anchor="middle" font-size="7.5" font-weight="800" fill="currentColor" stroke="none">50</text></svg>
             <h3>50 points at signup</h3>
-            <p>
-              Join free and start with 50 points &mdash; then earn 1 point for every dollar you dig up.
-            </p>
+            <p>Join free and start with 50 points &mdash; then earn 1 point for every dollar you dig up.</p>
           </div>
-          <div class="lycard">
-            <div class="limg">
-              <img src="mrbins-loyal-alert3d.png" alt="" loading="lazy" />
-            </div>
+          <div class="lyi">
+            <svg viewBox="0 0 24 24"><path d="M12 3a5.4 5.4 0 0 0-5.4 5.4c0 4.2-1.4 5.6-2.3 6.6h15.4c-.9-1-2.3-2.4-2.3-6.6A5.4 5.4 0 0 0 12 3z"/><path d="M9.8 18.6a2.3 2.3 0 0 0 4.4 0"/></svg>
             <h3>Price-drop alerts</h3>
-            <p>
-              A text the moment your department hits the price you&rsquo;re waiting for. Nothing
-              else, ever.
-            </p>
+            <p>A text the moment your department hits the price you&rsquo;re waiting for. Nothing else, ever.</p>
           </div>
-          <div class="lycard">
-            <div class="limg"><img src="mrbins-loyal-cash.png" alt="" loading="lazy" /></div>
+          <div class="lyi">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M14.8 9.2c-.5-1-1.5-1.5-2.8-1.5-1.6 0-2.8.8-2.8 2.1 0 2.9 5.8 1.5 5.8 4.3 0 1.3-1.3 2.2-3 2.2-1.4 0-2.6-.6-3.1-1.7"/></svg>
             <h3>$3 back per 100 points</h3>
             <p>Every 100 points turns into a $3 credit &mdash; plus member-only promotions all year.</p>
           </div>
-          <div class="lycard">
-            <div class="limg">
-              <img src="mrbins-loyal-boxpts.png" alt="" loading="lazy" />
-            </div>
+          <div class="lyi">
+            <svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="1.6"/><path d="M3 6.5h18V9H3zM12 6.5V20M12 6.5C10 6.5 8 5.6 8 4.2 8 3 9 2.4 10 2.6c1.5.3 2 2.3 2 3.9zm0 0c2 0 4-.9 4-2.3 0-1.2-1-1.8-2-1.6-1.5.3-2 2.3-2 3.9z"/></svg>
             <h3>Points on every box</h3>
-            <p>
-              Mystery boxes earn points too &mdash; and top point earners unlock extra perks.
-            </p>
+            <p>Mystery boxes earn points too &mdash; and top point earners unlock extra perks.</p>
           </div>
         </div>
         <div class="lycta">
@@ -3733,69 +3986,24 @@
       </div>
     </section>
 
-    <section id="locm" aria-label="Locations and hours">
+    <section id="locm" aria-label="Locations">
       <div class="lmwrap">
-        <div class="k">Five stores &middot; Northeast PA</div>
-        <h2>Come <span class="b">treasure hunt.</span></h2>
-        <div class="lmlist">
-          <div class="loc">
-            <div class="city">Wilkes-Barre <span class="flag">Flagship</span></div>
-            <div class="addr">400 S Main Street<br />Wilkes-Barre, PA 18701</div>
-            <a class="tel" href="tel:5705002637">(570) 500-2637</a
-            ><a
-              class="dir"
-              href="https://www.google.com/maps/search/?api=1&query=400+S+Main+Street+Wilkes-Barre+PA+18701"
-              target="_blank"
-              rel="noopener"
-              >Directions &rarr;</a
-            >
+        <div class="lmhead">
+          <div>
+            <div class="k">Five stores &middot; Northeast PA</div>
+            <h2>Real stores. <span class="b">Real finds.</span></h2>
+            <p class="sub">Visit one of our locations and experience the hunt in person.</p>
           </div>
-          <div class="loc">
-            <div class="city">Bethlehem</div>
-            <div class="addr">104 E 3rd St<br />Bethlehem, PA 18015</div>
-            <a class="tel" href="tel:5705002637">(570) 500-2637</a><a class="dir" href="https://www.google.com/maps/search/?api=1&query=104+E+3rd+St+Bethlehem+PA+18015" target="_blank" rel="noopener">Directions &rarr;</a>
-          </div>
-          <div class="loc">
-            <div class="city">Scranton</div>
-            <div class="addr">1790 N Keyser Ave<br />Scranton, PA 18508</div>
-            <a class="tel" href="tel:2722281375">(272) 228-1375</a
-            ><a
-              class="dir"
-              href="https://www.google.com/maps/search/?api=1&query=1790+N+Keyser+Ave+Scranton+PA+18508"
-              target="_blank"
-              rel="noopener"
-              >Directions &rarr;</a
-            >
-          </div>
-          <div class="loc">
-            <div class="city">Hazleton</div>
-            <div class="addr">1099 N Church St<br />Hazle Township, PA 18202</div>
-            <a class="tel" href="tel:2722237093">(272) 223-7093</a
-            ><a
-              class="dir"
-              href="https://www.google.com/maps/search/?api=1&query=1099+N+Church+St+Hazle+Township+PA+18202"
-              target="_blank"
-              rel="noopener"
-              >Directions &rarr;</a
-            >
-          </div>
-          <div class="loc">
-            <div class="city">Allentown</div>
-            <div class="addr">2300 Lehigh St<br />Allentown, PA 18103</div>
-            <a class="tel" href="tel:5707635862">(570) 763-5862</a
-            ><a
-              class="dir"
-              href="https://www.google.com/maps/search/?api=1&query=2300+Lehigh+St+Allentown+PA+18103"
-              target="_blank"
-              rel="noopener"
-              >Directions &rarr;</a
-            >
-          </div>
+          <a class="dbtn primary" href="locations.html">Find a store &rarr;</a>
         </div>
-        <div class="lmhours">
-          <b>Hours</b> &nbsp;Sun&ndash;Thurs 9a&ndash;7p &middot; Fri 9a&ndash;5p &middot;
-          <b>Sat closed</b> (restock)
+        <div class="lmcar" id="lmcar">
+          <figure><img src="store-dji-0937.jpg" alt="Mr. Bins Wilkes-Barre from above" loading="lazy" /><figcaption>Wilkes-Barre <span>Flagship</span></figcaption></figure>
+          <figure><img src="store-dsc-0394.jpg" alt="Inside Mr. Bins Bethlehem" loading="lazy" /><figcaption>Bethlehem</figcaption></figure>
+          <figure><img src="store-dsc-0389.jpg" alt="Inside Mr. Bins Allentown" loading="lazy" /><figcaption>Allentown</figcaption></figure>
+          <figure><img src="store-dsc-0232.jpg" alt="Inside Mr. Bins Hazleton" loading="lazy" /><figcaption>Hazleton</figcaption></figure>
+          <figure><img src="store-dsc-0262.jpg" alt="Inside Mr. Bins Scranton" loading="lazy" /><figcaption>Scranton</figcaption></figure>
         </div>
+        <div class="lmhours"><b>Sun&ndash;Thu 9am&ndash;7pm</b> &middot; Fri 9am&ndash;5pm &middot; Sat closed</div>
       </div>
     </section>
 
@@ -3841,137 +4049,7 @@
       </div>
     </section>
 
-    <section id="discover">
-      <div class="dstage">
-        <!-- mobile-only light-switch bit -->
-        <div class="dnite" aria-hidden="true"></div>
-        <img class="sw-lamp" src="mrbins-lamp-cute.png" alt="" aria-hidden="true" />
-        <div class="sw-glow" aria-hidden="true"></div>
-        <div class="sw-hint" aria-hidden="true">psst&hellip; hit the lights &rarr;</div>
-        <button class="sw-btn" id="swBtn" aria-label="Turn on the savings light">
-          <img class="off" src="mrbins-switch-off.png" alt="" /><img
-            class="on"
-            src="mrbins-switch-on.png"
-            alt=""
-          />
-        </button>
-        <div class="sw-mode" aria-hidden="true">
-          <span class="dot"></span>SAVINGS MODE&nbsp;ACTIVATED
-        </div>
-        <div class="dnight"></div>
-        <div class="lamp" aria-hidden="true">
-          <div class="cord"></div>
-          <img class="shade" src="mrbins-lamp.png" alt="" />
-          <div class="glow"></div>
-        </div>
-        <div class="beam" aria-hidden="true"></div>
-        <div class="dhead">
-          <div class="k">In the bins right now</div>
-          <h2>See <span class="o">this week&rsquo;s bins.</span></h2>
-          <div class="today" id="dtoday"></div>
-        </div>
-        <div class="carousel-wrap">
-          <button class="cnav prev" id="cprev" aria-label="Scroll left">&lsaquo;</button>
-          <div class="carousel" id="carousel"><div class="track" id="track"></div></div>
-          <button class="cnav next" id="cnext" aria-label="Scroll right">&rsaquo;</button>
-        </div>
-        <div class="dbtns">
-          <a class="dbtn primary" href="deals.html">See all of this week&rsquo;s bins &rarr;</a>
-          <a class="dbtn gold" href="loyalty.html">&#9733; Become a loyalty member</a>
-          <a class="dbtn ghost" href="locations.html">Directions &rarr;</a>
-        </div>
-      </div>
-    </section>
 
-    <section id="deals">
-      <div class="dzwrap">
-        <div class="dzhead">
-          <div class="k">Special prices &middot; every department</div>
-          <h2>Even <span class="o">better deals.</span></h2>
-          <p class="sub">
-            Every department runs its own weekly price ladder &mdash; one price for everything in
-            that section, changing daily. Time it right and steal the deal.
-          </p>
-        </div>
-        <div class="dealrow dz-blue">
-          <div class="dlabel">
-            <h3>General Bin Items</h3>
-            <div class="restock">New stock every Friday!</div>
-            <div class="dtag">&#9733; New stock. Best selection. Unbeatable prices.</div>
-          </div>
-          <div class="dweek">
-            <div class="dday"><span class="dn">Sun</span><span class="dp">$7</span></div>
-            <div class="dday"><span class="dn">Mon</span><span class="dp">$5</span></div>
-            <div class="dday"><span class="dn">Tue</span><span class="dp">$3</span></div>
-            <div class="dday"><span class="dn">Wed</span><span class="dp">$2</span></div>
-            <div class="dday"><span class="dn">Thu</span><span class="dp">$1</span></div>
-            <div class="dday drop">
-              <span class="dn">Fri</span><span class="badge">Drop day!</span
-              ><span class="dp">$9</span>
-            </div>
-            <div class="dday closed"><span class="dn">Sat</span><span class="dp">Closed</span></div>
-          </div>
-        </div>
-        <div class="dealrow dz-green">
-          <div class="dlabel">
-            <h3>Shoes</h3>
-            <div class="restock">New stock every Friday!</div>
-            <div class="dtag">&#9733; Top brands. Great prices.</div>
-          </div>
-          <div class="dweek">
-            <div class="dday"><span class="dn">Sun</span><span class="dp">$10</span></div>
-            <div class="dday"><span class="dn">Mon</span><span class="dp">$6</span></div>
-            <div class="dday"><span class="dn">Tue</span><span class="dp">$6</span></div>
-            <div class="dday"><span class="dn">Wed</span><span class="dp">$3</span></div>
-            <div class="dday"><span class="dn">Thu</span><span class="dp">$3</span></div>
-            <div class="dday drop">
-              <span class="dn">Fri</span><span class="badge">Drop day!</span
-              ><span class="dp">$10</span>
-            </div>
-            <div class="dday closed"><span class="dn">Sat</span><span class="dp">Closed</span></div>
-          </div>
-        </div>
-        <div class="dealrow dz-purple">
-          <div class="dlabel">
-            <h3>Clothing</h3>
-            <div class="restock">New stock every Sunday!</div>
-            <div class="dtag">&#9733; All clothing. All week.</div>
-          </div>
-          <div class="dweek">
-            <div class="dday drop">
-              <span class="dn">Sun</span><span class="badge">Drop day!</span
-              ><span class="dp">$6</span>
-            </div>
-            <div class="dday"><span class="dn">Mon</span><span class="dp">$6</span></div>
-            <div class="dday"><span class="dn">Tue</span><span class="dp">$6</span></div>
-            <div class="dday"><span class="dn">Wed</span><span class="dp">$6</span></div>
-            <div class="dday"><span class="dn">Thu</span><span class="dp">$6</span></div>
-            <div class="dday"><span class="dn">Fri</span><span class="dp">$4</span></div>
-            <div class="dday closed"><span class="dn">Sat</span><span class="dp">Closed</span></div>
-          </div>
-        </div>
-        <div class="dealrow dz-orange">
-          <div class="dlabel">
-            <h3>Food</h3>
-            <div class="restock">New stock every Wednesday!</div>
-            <div class="dtag">&#9733; Fresh stock. Great savings.</div>
-          </div>
-          <div class="dweek">
-            <div class="dday"><span class="dn">Sun</span><span class="dp">$3</span></div>
-            <div class="dday"><span class="dn">Mon</span><span class="dp">$2</span></div>
-            <div class="dday"><span class="dn">Tue</span><span class="dp">$1</span></div>
-            <div class="dday drop">
-              <span class="dn">Wed</span><span class="badge">Drop day!</span
-              ><span class="dp">$7</span>
-            </div>
-            <div class="dday"><span class="dn">Thu</span><span class="dp">$5</span></div>
-            <div class="dday"><span class="dn">Fri</span><span class="dp">$4</span></div>
-            <div class="dday closed"><span class="dn">Sat</span><span class="dp">Closed</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="secmore"><a class="dbtn primary" href="deals.html">See the full deals guide &rarr;</a></div>
-    </section>
 
 
 

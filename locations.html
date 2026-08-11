@@ -12,6 +12,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="site.css" />
     
+      <style>
+      .locard .cimg img { height: 190px; width: 100%; object-fit: cover; }
+      .flagchip {
+        font-family: "Space Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        color: var(--navy);
+        background: var(--orange);
+        padding: 2px 8px;
+        border-radius: 999px;
+        vertical-align: middle;
+      }
+      .locnote { color: var(--muted); font-size: 13px; }
+      .loctel {
+        color: var(--blue);
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .locard .btnrow .btn { font-size: 13.5px; padding: 10px 16px; }
+    </style>
   </head>
   <body>
     <header class="bar">
@@ -52,40 +73,55 @@
     <section class="psec">
       <div class="pwrap">
         <div class="cardgrid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
-          <div class="card">
-            <div class="cimg"><img src="mrbins-store.jpg" alt="Inside the Wilkes-Barre flagship" /></div>
-            <h3>Wilkes-Barre <span style="font-family:'Space Mono';font-size:10px;letter-spacing:.08em;color:#0d7a37;background:rgba(21,163,74,.1);border:1px solid rgba(21,163,74,.35);padding:2px 7px;border-radius:6px;vertical-align:middle">FLAGSHIP</span></h3>
-            <p>400 S Main Street<br />Wilkes-Barre, PA 18701</p>
-            <p><a href="tel:5705002637" style="color:var(--blue);font-family:'Space Mono';font-weight:700;text-decoration:none">(570) 500-2637</a></p>
-            <div class="btnrow"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=400+S+Main+Street+Wilkes-Barre+PA+18701" target="_blank" rel="noopener">Get directions</a></div>
-          <div class="card">
-            <div class="cimg"><img src="mrbins-loyal-drop.jpg" alt="Shoppers at the doors on drop day" /></div>
+          <div class="card locard">
+            <div class="cimg"><img src="store-dji-0937.jpg" alt="Mr. Bins Wilkes-Barre from above" loading="lazy" /></div>
+            <h3>Wilkes-Barre <span class="flagchip">FLAGSHIP</span></h3>
+            <p>400 S Main Street<br />Wilkes-Barre, PA 18701<br /><span class="locnote">Downtown, on South Main</span></p>
+            <p><a class="loctel" href="tel:5705002637">(570) 500-2637</a></p>
+            <div class="btnrow">
+              <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=400+S+Main+Street+Wilkes-Barre+PA+18701" target="_blank" rel="noopener">Get directions</a>
+              <a class="btn ghost" href="https://www.facebook.com/MrBinsWilkes" target="_blank" rel="noopener">Facebook</a>
+            </div>
+          </div>
+          <div class="card locard">
+            <div class="cimg"><img src="store-dsc-0394.jpg" alt="Inside Mr. Bins Bethlehem" loading="lazy" /></div>
             <h3>Bethlehem</h3>
-            <p>104 E 3rd St<br />Bethlehem, PA 18015<br /><span style="color:var(--muted);font-size:13px">SouthSide, minutes from the Steel Stacks</span></p>
-            <p><a href="tel:5705002637" style="color:var(--blue);font-family:'Space Mono';font-weight:700;text-decoration:none">(570) 500-2637</a></p>
-            <div class="btnrow"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=104+E+3rd+St+Bethlehem+PA+18015" target="_blank" rel="noopener">Get directions</a></div>
+            <p>104 E 3rd St<br />Bethlehem, PA 18015<br /><span class="locnote">SouthSide, minutes from the Steel Stacks</span></p>
+            <p><a class="loctel" href="tel:5705002637">(570) 500-2637</a></p>
+            <div class="btnrow">
+              <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=104+E+3rd+St+Bethlehem+PA+18015" target="_blank" rel="noopener">Get directions</a>
+              <a class="btn ghost" href="https://www.facebook.com/MrBinsWilkes" target="_blank" rel="noopener">Facebook</a>
+            </div>
           </div>
-          </div>
-          <div class="card">
-            <div class="cimg"><img src="mrbins-birdseye.jpg" alt="Bins from above" /></div>
-            <h3>Scranton</h3>
-            <p>1790 N Keyser Ave<br />Scranton, PA 18508<br /><span style="color:var(--muted);font-size:13px">Keyser Oak Shopping Center</span></p>
-            <p><a href="tel:2722281375" style="color:var(--blue);font-family:'Space Mono';font-weight:700;text-decoration:none">(272) 228-1375</a></p>
-            <div class="btnrow"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=1790+N+Keyser+Ave+Scranton+PA+18508" target="_blank" rel="noopener">Get directions</a></div>
-          </div>
-          <div class="card">
-            <div class="cimg"><img src="mrbins-navbin-navy.jpg" alt="A Mr. Bins bin" /></div>
-            <h3>Hazleton</h3>
-            <p>1099 N Church St<br />Hazle Township, PA 18202<br /><span style="color:var(--muted);font-size:13px">Inside Church Hill Mall</span></p>
-            <p><a href="tel:2722237093" style="color:var(--blue);font-family:'Space Mono';font-weight:700;text-decoration:none">(272) 223-7093</a></p>
-            <div class="btnrow"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=1099+N+Church+St+Hazle+Township+PA+18202" target="_blank" rel="noopener">Get directions</a></div>
-          </div>
-          <div class="card">
-            <div class="cimg"><img src="mrbins-couple.jpg" alt="Shoppers digging" /></div>
+          <div class="card locard">
+            <div class="cimg"><img src="store-dsc-0389.jpg" alt="Inside Mr. Bins Allentown" loading="lazy" /></div>
             <h3>Allentown</h3>
             <p>2300 Lehigh St<br />Allentown, PA 18103</p>
-            <p><a href="tel:5707635862" style="color:var(--blue);font-family:'Space Mono';font-weight:700;text-decoration:none">(570) 763-5862</a></p>
-            <div class="btnrow"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=2300+Lehigh+St+Allentown+PA+18103" target="_blank" rel="noopener">Get directions</a></div>
+            <p><a class="loctel" href="tel:5707635862">(570) 763-5862</a></p>
+            <div class="btnrow">
+              <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=2300+Lehigh+St+Allentown+PA+18103" target="_blank" rel="noopener">Get directions</a>
+              <a class="btn ghost" href="https://www.facebook.com/MrBinsWilkes" target="_blank" rel="noopener">Facebook</a>
+            </div>
+          </div>
+          <div class="card locard">
+            <div class="cimg"><img src="store-dsc-0232.jpg" alt="Inside Mr. Bins Hazleton" loading="lazy" /></div>
+            <h3>Hazleton</h3>
+            <p>1099 N Church St<br />Hazle Township, PA 18202<br /><span class="locnote">Inside Church Hill Mall</span></p>
+            <p><a class="loctel" href="tel:2722237093">(272) 223-7093</a></p>
+            <div class="btnrow">
+              <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=1099+N+Church+St+Hazle+Township+PA+18202" target="_blank" rel="noopener">Get directions</a>
+              <a class="btn ghost" href="https://www.facebook.com/MrBinsWilkes" target="_blank" rel="noopener">Facebook</a>
+            </div>
+          </div>
+          <div class="card locard">
+            <div class="cimg"><img src="store-dsc-0262.jpg" alt="Inside Mr. Bins Scranton" loading="lazy" /></div>
+            <h3>Scranton</h3>
+            <p>1790 N Keyser Ave<br />Scranton, PA 18508<br /><span class="locnote">Keyser Oak Shopping Center</span></p>
+            <p><a class="loctel" href="tel:2722281375">(272) 228-1375</a></p>
+            <div class="btnrow">
+              <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=1790+N+Keyser+Ave+Scranton+PA+18508" target="_blank" rel="noopener">Get directions</a>
+              <a class="btn ghost" href="https://www.facebook.com/MrBinsWilkes" target="_blank" rel="noopener">Facebook</a>
+            </div>
           </div>
         </div>
       </div>

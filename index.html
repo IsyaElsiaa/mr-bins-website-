@@ -819,7 +819,7 @@
         justify-content: center;
       }
       #boxopen .uburst {
-        height: min(88svh, 96vw);
+        height: min(80svh, 88vw, 900px);
         width: auto;
         max-width: 96vw;
         object-fit: contain;
@@ -1047,8 +1047,8 @@
       }
       /* ===== LOCATIONS CAROUSEL ===== */
       #locm {
-        background: #fff;
-        color: var(--navy);
+        background: var(--navy);
+        color: #fff;
         padding: clamp(56px, 9vh, 104px) 0;
       }
       #locm .lmwrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(18px, 3.4vw, 40px); }
@@ -1064,7 +1064,7 @@
         font-size: 12.5px;
         letter-spacing: 0.24em;
         text-transform: uppercase;
-        color: var(--blue);
+        color: var(--sky);
       }
       .lmhead h2 {
         font-family: "Bricolage Grotesque", sans-serif;
@@ -1072,8 +1072,8 @@
         font-size: clamp(30px, 4.2vw, 52px);
         margin-top: 6px;
       }
-      .lmhead h2 .b { color: var(--blue); }
-      .lmhead .sub { color: var(--muted); margin-top: 8px; max-width: 420px; }
+      .lmhead h2 .b { color: var(--sky); }
+      .lmhead .sub { color: rgba(255, 255, 255, 0.78); margin-top: 8px; max-width: 420px; }
       .lmcar {
         display: flex;
         gap: 14px;
@@ -1103,6 +1103,7 @@
         font-weight: 700;
         font-size: 14.5px;
         text-align: center;
+        color: #fff;
       }
       .lmcar figcaption span {
         display: inline-block;
@@ -1116,8 +1117,8 @@
         padding: 2px 8px;
         border-radius: 999px;
       }
-      #locm .lmhours { text-align: center; margin-top: 18px; color: var(--muted); font-size: 14px; }
-      #locm .lmhours b { color: var(--navy); }
+      #locm .lmhours { text-align: center; margin-top: 18px; color: rgba(255, 255, 255, 0.72); font-size: 14px; }
+      #locm .lmhours b { color: #fff; }
 
       .lyicons {
         display: grid;
@@ -1222,6 +1223,22 @@
         .t3item video { height: auto; width: 86%; max-width: none; }
         .t3chip { font-size: 11px; }
       }
+
+      #locm { position: relative; overflow: hidden; }
+      .lmbg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.05);
+      }
+      .lmscrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(rgba(11, 36, 71, 0.88), rgba(11, 36, 71, 0.78));
+      }
+      #locm .lmwrap { position: relative; z-index: 2; }
       /* generic */
       section {
         position: relative;
@@ -2044,15 +2061,6 @@
         }
       }
       /* UNBOX — prize burst video, scrubbed by scroll */
-      .uburst {
-        width: min(430px, 88%);
-        margin: clamp(18px, 3vw, 30px) auto 0;
-        display: block;
-        mix-blend-mode: multiply;
-        border-radius: 18px;
-        -webkit-mask-image: radial-gradient(115% 115% at 50% 50%, #000 62%, transparent 90%);
-        mask-image: radial-gradient(115% 115% at 50% 50%, #000 62%, transparent 90%);
-      }
       @media (max-width: 820px) {
         .lyintro {
           grid-template-columns: 1fr;
@@ -3987,6 +3995,10 @@
     </section>
 
     <section id="locm" aria-label="Locations">
+      <video class="lmbg" autoplay muted loop playsinline preload="none" poster="mrbins-store-reel-poster.jpg" aria-hidden="true">
+        <source src="mrbins-store-reel.mp4" type="video/mp4" />
+      </video>
+      <div class="lmscrim" aria-hidden="true"></div>
       <div class="lmwrap">
         <div class="lmhead">
           <div>

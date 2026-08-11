@@ -803,66 +803,6 @@
         text-align: center;
         margin-top: 6px;
       }
-      /* ===== SIGNATURE BOX-OPEN — pinned, scroll-scrubbed ===== */
-      #boxopen {
-        height: 300vh;
-        position: relative;
-        background: #fff;
-      }
-      .bostage {
-        position: sticky;
-        top: 0;
-        height: 100svh;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      #boxopen .uburst {
-        height: min(80svh, 88vw, 900px);
-        width: auto;
-        max-width: 96vw;
-        object-fit: contain;
-        display: block;
-        -webkit-mask-image: radial-gradient(135% 135% at 50% 50%, #000 60%, transparent 88%);
-        mask-image: radial-gradient(135% 135% at 50% 50%, #000 60%, transparent 88%);
-      }
-      .bocap {
-        position: absolute;
-        top: clamp(70px, 10vh, 130px);
-        left: 0;
-        width: 100%;
-        text-align: center;
-        pointer-events: none;
-      }
-      .bocap .k {
-        font-family: "Space Mono", monospace;
-        font-size: 13px;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--blue);
-      }
-      .bocap .bhint {
-        margin-top: 8px;
-        font-family: "Space Mono", monospace;
-        font-size: 12.5px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .bocta {
-        position: absolute;
-        bottom: clamp(30px, 6vh, 70px);
-        left: 0;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-      }
-      .bocta.on {
-        pointer-events: auto;
-      }
 
       /* locations: in the main flow on every viewport */
       @media (min-width: 941px) {
@@ -3741,7 +3681,7 @@
       </div>
     </header>
     <nav class="mnav" id="mnav" aria-label="Mobile menu">
-      <a href="#discover">This Week&rsquo;s Bins</a>
+      <a href="deals.html">This Week&rsquo;s Bins</a>
       <a href="pricing.html">Pricing</a>
       <a href="deals.html">Daily Deals</a>
       <a href="loyalty.html">Loyalty Rewards</a>
@@ -3995,7 +3935,7 @@
     </section>
 
     <section id="locm" aria-label="Locations">
-      <video class="lmbg" autoplay muted loop playsinline preload="none" poster="mrbins-store-reel-poster.jpg" aria-hidden="true">
+      <video class="lmbg" data-lazyplay muted loop playsinline preload="none" poster="mrbins-store-reel-poster.jpg" aria-hidden="true">
         <source src="mrbins-store-reel.mp4" type="video/mp4" />
       </video>
       <div class="lmscrim" aria-hidden="true"></div>
@@ -4033,33 +3973,86 @@
       <div class="secmore"><a class="dbtn orange" href="mystery-box.html">Explore mystery boxes &rarr;</a></div>
     </section>
 
-    <!-- SIGNATURE: scroll-controlled mystery box opening -->
-    <section id="boxopen">
-      <div class="bostage">
-
-        <div class="brhint">Every box is a surprise &mdash; scroll to open one &darr;</div>
-        <video
-          class="uburst"
-          id="uburst"
-          muted
-          playsinline
-          preload="metadata"
-          poster="mrbins-mystery-closed.png"
-          aria-label="A mystery box bursting open with toys, tech, and household finds"
-        >
+    <!-- MYSTERY BOX REVEAL — self-contained, scroll-scrubbed -->
+    <section id="bxsec">
+      <div id="bxpin">
+        <div id="bxcap">
+          <span class="bxk">Every box is a surprise</span>
+          <span class="bxhint">scroll to open &darr;</span>
+        </div>
+        <video id="bxvid" muted playsinline preload="auto" poster="mrbins-mystery-closed.png">
           <source src="mrbins-unbox-burst.mp4" type="video/mp4" />
         </video>
-        <div class="bocap" id="bocap">
-          <div class="k">Every box is a surprise</div>
-          <div class="bhint">scroll to open &darr;</div>
-        </div>
-        <div class="bocta" id="bocta">
+        <div id="bxcta">
           <a class="mcta big" href="mystery-box.html#boxes"
             >Buy a mystery box today<span>Arrives in 1&ndash;2 business days typically</span></a
           >
         </div>
       </div>
     </section>
+    <style>
+      #bxsec {
+        height: 320vh;
+        position: relative;
+        background: #fff;
+      }
+      #bxpin {
+        position: sticky;
+        top: 0;
+        height: 100svh;
+        overflow: hidden;
+      }
+      #bxvid {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        height: min(84svh, 94vw);
+        max-width: 94vw;
+        width: auto;
+        object-fit: contain;
+        object-position: bottom center;
+        display: block;
+      }
+      #bxcap {
+        position: absolute;
+        top: clamp(76px, 11vh, 140px);
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 2;
+        pointer-events: none;
+      }
+      #bxcap .bxk {
+        display: block;
+        font-family: "Space Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+      #bxcap .bxhint {
+        display: block;
+        margin-top: 8px;
+        font-family: "Space Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      #bxcta {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: clamp(26px, 5vh, 64px);
+        display: flex;
+        justify-content: center;
+        z-index: 2;
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+
 
 
 
@@ -4149,7 +4142,7 @@
           <p>
             That&rsquo;s what the <b>mystery boxes</b> are for &mdash; we hand-pack finds from the
             bins and ship them anywhere.
-            <a href="#online" style="color: var(--blue); font-weight: 700; display: inline-block; padding: 12px 6px">Pick your size &uarr;</a>
+            <a href="mystery-box.html#boxes" style="color: var(--blue); font-weight: 700; display: inline-block; padding: 12px 6px">Pick your box &rarr;</a>
           </p>
         </details>
       </div>
@@ -4181,8 +4174,8 @@
         justify-content: center;
       "
     >
-      <video
-        autoplay
+      <video data-lazyplay
+        data-lazyplay
         muted
         loop
         playsinline
@@ -4472,52 +4465,24 @@
         seek();
       })();
 
-      /* ---- SIGNATURE BOX-OPEN: your scroll physically opens the mystery box.
-        Pinned stage; video scrubbed 1:1 with pin progress; caption hands off to
-        the CTA as the burst completes. Reduced motion: show the finale. ---- */
+
+
+      /* ---- lazy loops: any [data-lazyplay] video plays only while on screen ---- */
       (function () {
-        var sec = document.getElementById("boxopen"),
-          v = document.getElementById("uburst"),
-          cap = document.getElementById("bocap"),
-          cta = document.getElementById("bocta");
-        if (!sec || !v) return;
-        var RM = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (RM) {
-          v.addEventListener("loadeddata", function () {
-            seekTo(v, Math.max(0, (v.duration || 0) - 0.05));
+        var vids = [].slice.call(document.querySelectorAll("video[data-lazyplay]"));
+        if (!vids.length) return;
+        function sync() {
+          vids.forEach(function (v) {
+            var r = v.getBoundingClientRect();
+            var vis = r.bottom > -200 && r.top < window.innerHeight + 200;
+            if (vis && v.paused) v.play().catch(function () {});
+            else if (!vis && !v.paused) v.pause();
           });
-          v.load();
-          if (cta) cta.style.opacity = 1;
-          return;
         }
-        var ticking = false;
-        function paint() {
-          ticking = false;
-          if (!v.duration) return;
-          var total = sec.offsetHeight - window.innerHeight;
-          var p = clampN(-sec.getBoundingClientRect().top / total);
-          seekTo(v, p * (v.duration - 0.05));
-          if (cap) {
-            var co = 1 - clampN((p - 0.12) / 0.1);
-            cap.style.opacity = co.toFixed(3);
-          }
-          if (cta) {
-            var q = clampN((p - 0.84) / 0.12);
-            cta.style.opacity = q.toFixed(3);
-            cta.style.transform = "translateY(" + ((1 - q) * 18).toFixed(1) + "px)";
-            cta.classList.toggle("on", q > 0.5);
-          }
-        }
-        function onS() {
-          if (!ticking) {
-            requestAnimationFrame(paint);
-            ticking = true;
-          }
-        }
-        v.addEventListener("loadedmetadata", onS);
-        window.addEventListener("scroll", onS, { passive: true });
-        window.addEventListener("resize", onS);
-        paint();
+        ["scroll", "touchstart", "click"].forEach(function (ev) {
+          window.addEventListener(ev, sync, { passive: true });
+        });
+        sync();
       })();
 
       /* ---- LOYALTY: the walk clip plays its full loop when it scrolls into view ---- */
@@ -4889,8 +4854,9 @@
         el.innerHTML = h;
       })();
 
-      /* ---- discover carousel ---- */
+      /* ---- discover carousel (section lives on subpages; guard when absent) ---- */
       (function () {
+        if (!document.getElementById("dtoday") || !document.getElementById("track")) return;
         var todayP = tp === null ? "$" + LADDER[0] : "$" + tp;
         document.getElementById("dtoday").innerHTML =
           "Everything below is <b>" + todayP + " today.</b> Tomorrow it drops another dollar.";
@@ -5469,6 +5435,56 @@
         if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
         else run();
         window.addEventListener("load", run);
+      })();
+    </script>
+    <script>
+      /* Mystery box reveal — standalone so nothing else on the page can break it.
+         Your scroll IS the timeline: p 0..1 across the pin maps to video 0..end. */
+      (function () {
+        var sec = document.getElementById("bxsec"),
+          v = document.getElementById("bxvid"),
+          cap = document.getElementById("bxcap"),
+          cta = document.getElementById("bxcta");
+        if (!sec || !v) return;
+        function clamp(x) {
+          return x < 0 ? 0 : x > 1 ? 1 : x;
+        }
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          v.addEventListener("loadeddata", function () {
+            try { v.currentTime = Math.max(0, (v.duration || 0) - 0.05); } catch (e) {}
+          });
+          if (cta) { cta.style.opacity = 1; cta.style.pointerEvents = "auto"; }
+          return;
+        }
+        var ticking = false;
+        function paint() {
+          ticking = false;
+          if (!v.duration) return;
+          var total = sec.offsetHeight - window.innerHeight;
+          if (total < 1) return;
+          var pr = clamp(-sec.getBoundingClientRect().top / total);
+          try {
+            v.currentTime = pr * (v.duration - 0.05);
+          } catch (e) {}
+          if (cap) cap.style.opacity = String(1 - clamp((pr - 0.1) / 0.1));
+          if (cta) {
+            var q = clamp((pr - 0.85) / 0.12);
+            cta.style.opacity = String(q);
+            cta.style.transform = "translateY(" + (1 - q) * 16 + "px)";
+            cta.style.pointerEvents = q > 0.5 ? "auto" : "none";
+          }
+        }
+        function onS() {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(paint);
+          }
+        }
+        v.addEventListener("loadedmetadata", onS);
+        window.addEventListener("scroll", onS, { passive: true });
+        window.addEventListener("resize", onS);
+        try { v.load(); } catch (e) {}
+        paint();
       })();
     </script>
   </body>

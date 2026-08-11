@@ -73,6 +73,123 @@
         .dealsign .board { top: 22px; }
       }
     </style>
+      <style>
+      /* featured categories */
+      #featured {
+        position: relative;
+        background: #fff;
+        color: var(--navy);
+        text-align: center;
+        overflow: hidden;
+      }
+      .fgrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(16px, 2vw, 26px);
+        max-width: 1160px;
+        margin: clamp(34px, 4vw, 52px) auto 0;
+      }
+      .fgrid {
+          grid-template-columns: 1fr;
+        }
+      .fcard {
+        position: relative;
+        background: #fff;
+        border: 1px solid var(--grey);
+        border-radius: 22px;
+        padding: 26px 24px 28px;
+        text-align: left;
+        box-shadow: 0 16px 40px rgba(11, 36, 71, 0.07);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+        overflow: hidden;
+      }
+      .fcard:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 26px 56px rgba(11, 36, 71, 0.14);
+      }
+      .fcard .tagpill {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        font-family: "Space Mono", monospace;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--orange);
+        background: rgba(255, 143, 82, 0.12);
+        border: 1px solid rgba(255, 143, 82, 0.3);
+        padding: 5px 10px;
+        border-radius: 999px;
+      }
+      .fcard .fimg {
+        width: 100%;
+        height: clamp(150px, 17vw, 190px);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .fcard .fimg img,
+      .fcard .fimg video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 12px;
+        display: block;
+        background: #fff;
+      }
+      .fcard h3 {
+        font-size: clamp(21px, 2.4vw, 27px);
+        font-weight: 800;
+      }
+      .fcard p {
+        color: var(--muted);
+        font-size: 14.5px;
+        line-height: 1.55;
+        margin-top: 9px;
+      }
+      .fcard .flk {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 18px;
+        font-family: "Bricolage Grotesque";
+        font-size: clamp(16px, 1.7vw, 19px);
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        text-transform: none;
+        color: var(--blue);
+        text-decoration: none;
+        transition:
+          gap 0.2s ease,
+          color 0.2s ease;
+      }
+      .fcard .flk:hover {
+        gap: 13px;
+        color: var(--orange);
+      }
+      .fcard:hover {
+          transform: none;
+          box-shadow: 0 16px 40px rgba(11, 36, 71, 0.07);
+        }
+      .fcard .flk:hover {
+          gap: 8px;
+          color: var(--blue);
+        }
+      /* comfortable thumbs: every text link becomes a 44px target */
+        .flk,
+        .lk {
+          display: inline-block;
+          padding: 12px 4px;
+          margin: -8px 0;
+        }
+    </style>
   </head>
   <body>
     <header class="bar">
@@ -114,6 +231,72 @@
       <h1>Every day is <span class="o">a different deal.</span></h1>
       <p class="sub">One truckload, six selling days, one falling price. Learn the rhythm and you'll never overpay for brand-new again.</p>
     </section>
+
+    <!-- SOMETHING FOR EVERYONE (moved from home) -->
+    <!-- FEATURED CATEGORIES -->
+    <section id="featured">
+      <div class="fstage">
+        <div class="fhead">
+          <div class="k">Something for everyone</div>
+          <h2>More than just <span class="o">the bins.</span></h2>
+          <p class="sub">Fresh stock lands daily &mdash; here&rsquo;s what people come back for.</p>
+        </div>
+        <div class="fgrid">
+          <div class="fcard c1">
+            <div class="tagpill">Refilled daily</div>
+            <div class="fimg">
+              <img src="mrbins-feat-clothes.jpg" alt="Brand-new clothes and shoes" loading="lazy" />
+            </div>
+            <h3>Clothes &amp; Shoes</h3>
+            <p>
+              Clothing and shoes get restocked every single day &mdash; so there&rsquo;s always a
+              fresh pile to dig through. Blink and you&rsquo;ll miss the good stuff.
+            </p>
+            <a class="flk" href="pricing.html">See pricing &rarr;</a>
+          </div>
+          <div class="fcard c2">
+            <div class="tagpill">Standard &amp; premium</div>
+            <div class="fimg">
+              <img
+                src="mrbins-feat-mystery.jpg"
+                alt="An open Mr. Bins mystery box full of finds"
+                loading="lazy"
+              />
+            </div>
+            <h3>Mystery Boxes</h3>
+            <p>
+              Love the thrill of the hunt? Our hand-packed mystery boxes bring the treasure-hunt
+              home &mdash; in standard and premium sizes, shipped to your door.
+            </p>
+            <a class="flk" href="mystery-box.html#boxes">Buy now &rarr;</a>
+          </div>
+          <div class="fcard c3">
+            <div class="tagpill">From $20</div>
+            <div class="fimg">
+              <video
+                class="fvid"
+                id="bikevid"
+                muted
+                loop
+                playsinline
+                autoplay
+                preload="none"
+                poster="mrbins-feat-bike.jpg"
+              >
+                <source src="mrbins-feat-bike.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <h3>Bikes</h3>
+            <p>
+              Name-brand bikes, just <b>$25</b> for a limited time, with a wide range to choose
+              from. Roll out for less than the cost of a tune-up.
+            </p>
+            <a class="flk" href="locations.html">Find a store &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="psec">
       <div class="pwrap">
         <div class="cardgrid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))">

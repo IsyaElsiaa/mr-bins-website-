@@ -510,83 +510,92 @@
 
       /* cart roll-in: 100% scroll-controlled (all-intra + fastSeek) */
       #cart {
-        height: 170vh;
+        height: 430vh;
         position: relative;
       }
       .cartstage {
         position: sticky;
         top: 0;
         height: 100svh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        background: #fff;
         overflow: hidden;
+        background: #fff;
       }
       /* trio: clothing rack · bin (smaller) · shoe rack — all scroll-driven */
       .trio {
-        flex: 0 1 auto;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        gap: clamp(14px, 3vw, 60px);
-        margin: auto;
-        width: 100%;
-        padding: 0 2vw;
+        position: absolute;
+        inset: 0;
       }
-      .cartvid {
-        height: min(46vh, calc(44vw * 0.748), 400px);
-        width: auto;
-        max-width: 46vw;
-        display: block;
-        background: #fff;
-      }
+      .titem,
       .tside {
-        position: relative;
+        position: absolute;
+        left: 50%;
+        top: 56%;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 12px;
         opacity: 0;
+        will-change: transform, opacity;
       }
+      .titem video,
       .tside video {
-        height: min(42vh, 32vw, 340px);
+        height: min(54svh, 74vw);
         width: auto;
-        max-width: 30vw;
+        max-width: 86vw;
         object-fit: contain;
         display: block;
         background: #fff;
+        border-radius: 18px;
+        -webkit-mask-image: radial-gradient(130% 130% at 50% 50%, #000 58%, transparent 86%);
+        mask-image: radial-gradient(130% 130% at 50% 50%, #000 58%, transparent 86%);
       }
-      #shoesSide video {
-        height: min(45vh, 34vw, 380px);
+      .tword {
+        position: absolute;
+        top: 30%;
+        left: 0;
+        width: 100%;
+        transform: translateY(-50%);
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        font-size: clamp(96px, 24vw, 300px);
+        letter-spacing: 0.01em;
+        text-align: center;
+        color: transparent;
+        -webkit-text-stroke: 2.5px rgba(20, 85, 214, 0.45);
+        opacity: 0;
+        pointer-events: none;
+        white-space: nowrap;
+        will-change: transform, opacity;
       }
-      /* realistic ground shadows — soft elliptical contact shadow under each piece */
-      .titem {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
+      .tword span {
+        color: var(--orange);
+        -webkit-text-stroke: 0;
       }
-      .tshadow {
-        width: 74%;
-        height: clamp(10px, 2.4vh, 22px);
-        border-radius: 50%;
-        filter: blur(6px);
-        margin-top: calc(-1 * clamp(6px, 1.5vh, 14px));
-        background: radial-gradient(
-          ellipse at center,
-          rgba(11, 36, 71, 0.26),
-          rgba(11, 36, 71, 0.09) 52%,
-          rgba(11, 36, 71, 0) 74%
-        );
+      .cartcap {
+        position: absolute;
+        top: clamp(64px, 9vh, 110px);
+        left: 0;
+        width: 100%;
+        text-align: center;
+        opacity: 0;
+        will-change: opacity, transform;
       }
-      .titem .tshadow {
-        width: 64%;
+      .cartcap .k {
+        color: var(--blue);
+        font-family: "Space Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
       }
-      .tside .tshadow {
-        margin-bottom: -4px;
+      .cartcap h2 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        font-size: clamp(30px, 4.6vw, 56px);
+        color: var(--navy);
+        margin-top: 6px;
+      }
+      .cartcap h2 .o {
+        color: var(--orange);
       }
       .tchip {
         position: absolute;
@@ -691,29 +700,6 @@
       }
       .cartscrim {
         display: none;
-      }
-      .cartcap {
-        position: relative;
-        z-index: 3;
-        text-align: center;
-        color: var(--navy);
-        padding: clamp(150px, 18vh, 190px) 24px 0;
-      }
-      .cartcap .k {
-        font-family: "Space Mono", monospace;
-        font-size: clamp(12px, 1.4vw, 15px);
-        letter-spacing: 0.26em;
-        text-transform: uppercase;
-        color: var(--blue);
-      }
-      .cartcap h2 {
-        font-weight: 800;
-        font-size: clamp(30px, 4.8vw, 62px);
-        margin-top: 8px;
-        color: var(--navy);
-      }
-      .cartcap h2 .o {
-        color: var(--orange);
       }
 
       /* generic */
@@ -1643,15 +1629,6 @@
         color: var(--muted);
         margin-top: clamp(12px, 2vw, 22px);
       }
-
-      /* featured categories */
-      #featured {
-        position: relative;
-        background: #fff;
-        color: var(--navy);
-        text-align: center;
-        overflow: hidden;
-      }
       .fstage {
         display: flex;
         flex-direction: column;
@@ -1682,99 +1659,7 @@
         font-size: clamp(15px, 1.7vw, 18px);
         line-height: 1.5;
       }
-      .fgrid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: clamp(16px, 2vw, 26px);
-        max-width: 1160px;
-        margin: clamp(34px, 4vw, 52px) auto 0;
-      }
-      .fcard {
-        position: relative;
-        background: #fff;
-        border: 1px solid var(--grey);
-        border-radius: 22px;
-        padding: 26px 24px 28px;
-        text-align: left;
-        box-shadow: 0 16px 40px rgba(11, 36, 71, 0.07);
-        transition:
-          transform 0.25s,
-          box-shadow 0.25s;
-        overflow: hidden;
-      }
-      .fcard:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 26px 56px rgba(11, 36, 71, 0.14);
-      }
-      .fcard .tagpill {
-        position: absolute;
-        top: 18px;
-        right: 18px;
-        font-family: "Space Mono", monospace;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--orange);
-        background: rgba(255, 143, 82, 0.12);
-        border: 1px solid rgba(255, 143, 82, 0.3);
-        padding: 5px 10px;
-        border-radius: 999px;
-      }
-      .fcard .fimg {
-        width: 100%;
-        height: clamp(150px, 17vw, 190px);
-        border-radius: 14px;
-        overflow: hidden;
-        background: #fff;
-        margin-bottom: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .fcard .fimg img,
-      .fcard .fimg video {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        padding: 12px;
-        display: block;
-        background: #fff;
-      }
-      .fcard h3 {
-        font-size: clamp(21px, 2.4vw, 27px);
-        font-weight: 800;
-      }
-      .fcard p {
-        color: var(--muted);
-        font-size: 14.5px;
-        line-height: 1.55;
-        margin-top: 9px;
-      }
-      .fcard .flk {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        margin-top: 18px;
-        font-family: "Bricolage Grotesque";
-        font-size: clamp(16px, 1.7vw, 19px);
-        font-weight: 800;
-        letter-spacing: -0.01em;
-        text-transform: none;
-        color: var(--blue);
-        text-decoration: none;
-        transition:
-          gap 0.2s ease,
-          color 0.2s ease;
-      }
-      .fcard .flk:hover {
-        gap: 13px;
-        color: var(--orange);
-      }
       @media (max-width: 780px) {
-        .fgrid {
-          grid-template-columns: 1fr;
-        }
       }
 
       /* price */
@@ -2620,10 +2505,11 @@
 
       /* brand ticker (fast marquee over a live store-video band, under the bin) */
       #brands {
-        position: relative;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
         width: 100%;
-        margin-top: auto;
-        flex: 0 0 auto;
         overflow: hidden;
         height: clamp(124px, 18vh, 184px);
         display: flex;
@@ -2965,30 +2851,7 @@
         }
         /* cart: trio stacks — bin on top, clothes + shoes side by side beneath */
         #cart {
-          height: 190vh;
-        }
-        .trio {
-          flex-wrap: wrap;
-          gap: 14px;
-          align-items: flex-end;
-        }
-        .cartvid {
-          height: auto;
-          width: min(74vw, 44svh);
-          max-width: 74vw;
-          order: 1;
-        }
-        .tside {
-          order: 2;
-          width: 41vw;
-        }
-        .tside video {
-          max-height: 30svh;
-          object-fit: contain;
-        }
-        .tside video {
-          height: auto;
-          width: 100%;
+          height: 430vh;
         }
         .tchip {
           position: static;
@@ -3049,9 +2912,6 @@
         }
         .wcap {
           padding-top: clamp(116px, 14vh, 155px);
-        }
-        .cartcap {
-          padding-top: clamp(110px, 13vh, 140px);
         }
         /* comfortable ≥44px tap targets (Apple HIG) */
         .cartbtn,
@@ -3271,10 +3131,6 @@
           transform: none;
           box-shadow: 0 14px 30px rgba(11, 36, 71, 0.1);
         }
-        .fcard:hover {
-          transform: none;
-          box-shadow: 0 16px 40px rgba(11, 36, 71, 0.07);
-        }
         .dbtn:hover,
         .mcta:hover,
         .ccta:hover {
@@ -3283,10 +3139,6 @@
         .mcta.big:hover {
           transform: none;
           box-shadow: 0 10px 26px rgba(240, 120, 40, 0.3);
-        }
-        .fcard .flk:hover {
-          gap: 8px;
-          color: var(--blue);
         }
         .tabs a:hover::after {
           right: 100%;
@@ -3297,13 +3149,6 @@
         }
       }
           @media (max-width: 767px) {
-        /* comfortable thumbs: every text link becomes a 44px target */
-        .flk,
-        .lk {
-          display: inline-block;
-          padding: 12px 4px;
-          margin: -8px 0;
-        }
         .fnav a,
         .loc .tel,
         .loc .dir {
@@ -3444,8 +3289,11 @@
 
     <section id="cart">
       <div class="cartstage">
-        <div class="cartcap">
-          <div class="k">Scroll &mdash; watch the store fill up</div>
+        <div class="tword" id="tword0" aria-hidden="true">BINS<span>.</span></div>
+        <div class="tword" id="tword1" aria-hidden="true">RACKS<span>.</span></div>
+        <div class="tword" id="tword2" aria-hidden="true">KICKS<span>.</span></div>
+        <div class="cartcap" id="cartcap">
+          <div class="k">One store. Three ways to score.</div>
           <h2>Bins. Racks. <span class="o">Kicks.</span></h2>
         </div>
         <div class="trio">
@@ -3550,69 +3398,6 @@
       </div>
     </section>
 
-    <!-- FEATURED CATEGORIES -->
-    <section id="featured">
-      <div class="fstage">
-        <div class="fhead">
-          <div class="k">Something for everyone</div>
-          <h2>More than just <span class="o">the bins.</span></h2>
-          <p class="sub">Fresh stock lands daily &mdash; here&rsquo;s what people come back for.</p>
-        </div>
-        <div class="fgrid">
-          <div class="fcard c1">
-            <div class="tagpill">Refilled daily</div>
-            <div class="fimg">
-              <img src="mrbins-feat-clothes.jpg" alt="Brand-new clothes and shoes" loading="lazy" />
-            </div>
-            <h3>Clothes &amp; Shoes</h3>
-            <p>
-              Clothing and shoes get restocked every single day &mdash; so there&rsquo;s always a
-              fresh pile to dig through. Blink and you&rsquo;ll miss the good stuff.
-            </p>
-            <a class="flk" href="#price">See pricing &rarr;</a>
-          </div>
-          <div class="fcard c2">
-            <div class="tagpill">Standard &amp; premium</div>
-            <div class="fimg">
-              <img
-                src="mrbins-feat-mystery.jpg"
-                alt="An open Mr. Bins mystery box full of finds"
-                loading="lazy"
-              />
-            </div>
-            <h3>Mystery Boxes</h3>
-            <p>
-              Love the thrill of the hunt? Our hand-packed mystery boxes bring the treasure-hunt
-              home &mdash; in standard and premium sizes, shipped to your door.
-            </p>
-            <a class="flk" href="mystery-box.html#boxes">Buy now &rarr;</a>
-          </div>
-          <div class="fcard c3">
-            <div class="tagpill">From $20</div>
-            <div class="fimg">
-              <video
-                class="fvid"
-                id="bikevid"
-                muted
-                loop
-                playsinline
-                autoplay
-                preload="none"
-                poster="mrbins-feat-bike.jpg"
-              >
-                <source data-desk="mrbins-feat-bike.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <h3>Bikes</h3>
-            <p>
-              Name-brand bikes, just <b>$25</b> for a limited time, with a wide range to choose
-              from. Roll out for less than the cost of a tune-up.
-            </p>
-            <a class="flk" href="#footer">Find a store &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- PRICE -->
     <section id="price">
@@ -4472,21 +4257,13 @@
     killed phone load perf); everything else gets primed on the first touch —
     which on iOS always happens before any scrub is visible. Desktop unchanged. */
         if (mob) {
-          /* phones: scrubbing 60 seeks/s is jank — let the clip glide on its own */
-          v.loop = true;
           try {
             var q0 = v.play();
-            if (q0 && q0.then) q0.catch(function () {});
+            if (q0 && q0.then)
+              q0.then(function () {
+                v.pause();
+              }).catch(function () {});
           } catch (e) {}
-          ["touchstart", "scroll"].forEach(function (ev) {
-            window.addEventListener(
-              ev,
-              function () {
-                if (v.paused) v.play().catch(function () {});
-              },
-              { passive: true },
-            );
-          });
           [].forEach.call(document.querySelectorAll("#clothesvid,#shoesvid,.boxvid"), function (x) {
             try {
               x.preload = "metadata";
@@ -4514,8 +4291,8 @@
           /* fade captions out over the last 8% so the final line never clips under the header at the unpin */
           document.getElementById("wcaps").style.opacity =
             p > 0.97 ? String(clampN((1 - p) / 0.03)) : "1";
-          if (dur && !mob) {
-            seekTo(v, p * (dur - 0.05)); /* desktop: you drive the glide */
+          if (dur) {
+            seekTo(v, p * (dur - 0.05)); /* you drive the glide by scrolling */
           }
           var seg = p * n,
             idx = Math.min(n - 1, Math.floor(seg * 0.9999));
@@ -4553,61 +4330,105 @@
         paint();
       })();
 
-      /* ---- CART TRIO: bin rolls in, clothes rack assembles, shoe box opens —
-        all 100% scroll-controlled (all-intra + fastSeek), staggered choreography ---- */
+      /* ---- CART TRIO, three acts: BINS -> RACKS -> KICKS. Each actor gets a
+        full-screen solo (video scrubbed by scroll, giant word gliding behind),
+        then tucks into its final slot; header lands in the settle phase. ---- */
       (function () {
-        var cart = document.getElementById("cart"),
-          v = document.getElementById("cartvid");
-        var cs = document.getElementById("clothesSide"),
-          cv = document.getElementById("clothesvid");
-        var ss = document.getElementById("shoesSide"),
-          sv = document.getElementById("shoesvid");
-        var dur = 0,
-          cdur = 0,
-          sdur = 0,
+        var cart = document.getElementById("cart");
+        var actors = [
+          { el: document.getElementById("binItem"), v: document.getElementById("cartvid"), w: document.getElementById("tword0"), dur: 0 },
+          { el: document.getElementById("clothesSide"), v: document.getElementById("clothesvid"), w: document.getElementById("tword1"), dur: 0 },
+          { el: document.getElementById("shoesSide"), v: document.getElementById("shoesvid"), w: document.getElementById("tword2"), dur: 0 },
+        ];
+        var cap = document.getElementById("cartcap"),
+          brands = document.getElementById("brands"),
           ticking = false;
-        v.addEventListener("loadedmetadata", function () {
-          dur = v.duration || 4;
-          seek();
-        });
-        cv.addEventListener("loadedmetadata", function () {
-          cdur = cv.duration || 5;
-          seek();
-        });
-        sv.addEventListener("loadedmetadata", function () {
-          sdur = sv.duration || 5;
-          seek();
-        });
-        if (!MRB_MOB)
-          [v, cv, sv].forEach(function (x) {
+        actors.forEach(function (a) {
+          a.v.addEventListener("loadedmetadata", function () {
+            a.dur = a.v.duration || 5;
+            seek();
+          });
+          if (!MRB_MOB)
             try {
-              x.play()
-                .then(function () {
-                  x.pause();
-                })
-                .catch(function () {});
+              a.v.play().then(function () { a.v.pause(); }).catch(function () {});
             } catch (e) {}
-          }); /* mobile: primed on first touch instead */
-        /* window helper: progress 0→1 across [a,b] of the pin */
-        function win(p, a, b) {
+        });
+        function W(p, a, b) {
           return clampN((p - a) / (b - a));
         }
-        var bi = document.getElementById("binItem");
+        function ease(t) {
+          return t * t * (3 - 2 * t);
+        }
+        /* final slots (x,y in % of viewport off center; s = scale) */
+        function slots() {
+          if (window.matchMedia("(max-width: 940px)").matches)
+            return [
+              { x: 0, y: -20, s: 0.4 },
+              { x: -24, y: 10, s: 0.36 },
+              { x: 24, y: 10, s: 0.36 },
+            ];
+          return [
+            { x: 0, y: -2, s: 0.56 },
+            { x: -31, y: 4, s: 0.42 },
+            { x: 31, y: 4, s: 0.42 },
+          ];
+        }
+        /* act windows across the pin */
+        var ACT = [
+          [0.02, 0.3],
+          [0.31, 0.59],
+          [0.6, 0.88],
+        ];
+        var SETTLE = 0.88;
         function seek() {
           ticking = false;
           var total = cart.offsetHeight - window.innerHeight;
           var p = clampN(-cart.getBoundingClientRect().top / total);
-          /* everything moves TOGETHER: bin spins in, clothes fill the rack,
-     shoe box opens — one shared scroll window, settled by 82% */
-          var pp = win(p, 0.06, 0.82);
-          cs.style.opacity = ss.style.opacity = win(p, 0, 0.1).toFixed(3);
-          if (dur) seekTo(v, pp * (dur - 0.05));
-          if (cdur) seekTo(cv, pp * (cdur - 0.05));
-          if (sdur) seekTo(sv, pp * (sdur - 0.05));
-          var done = pp >= 0.92;
-          cs.classList.toggle("on", done);
-          ss.classList.toggle("on", done);
-          bi.classList.toggle("on", done);
+          var sl = slots();
+          var settleQ = ease(W(p, SETTLE, 0.985));
+          actors.forEach(function (a, i) {
+            var a0 = ACT[i][0],
+              a1 = ACT[i][1];
+            var act = W(p, a0, a1);
+            /* video fills during this actor's act */
+            if (a.dur) seekTo(a.v, Math.min(act * 1.12, 1) * (a.dur - 0.05));
+            var st = "",
+              op = 1;
+            if (p < a0) {
+              /* waiting below stage */
+              op = 0;
+              st = "translate(-50%, -34%) scale(0.82)";
+            } else if (act < 1 || p < a1 + 0.02) {
+              /* solo: rise in over the first 12% of the act */
+              var rise = ease(W(act, 0, 0.12));
+              op = rise;
+              st = "translate(-50%, " + (-50 + (1 - rise) * 16) + "%) scale(" + (0.82 + 0.18 * rise).toFixed(4) + ")";
+              /* tuck early so the next act starts clean */
+              var tuck = ease(W(p, a1 - 0.045, a1 + 0.02));
+              if (tuck > 0) {
+                var s2 = sl[i];
+                st =
+                  "translate(calc(-50% + " + (s2.x * tuck).toFixed(2) + "vw), calc(-50% + " + (s2.y * tuck).toFixed(2) + "vh)) scale(" + (1 - (1 - s2.s) * tuck).toFixed(4) + ")";
+                op = 1 - 0.62 * tuck;
+              }
+            } else {
+              /* parked in final slot — dimmed until everyone has landed */
+              var s3 = sl[i];
+              st = "translate(calc(-50% + " + s3.x + "vw), calc(-50% + " + s3.y + "vh)) scale(" + s3.s + ")";
+              op = 0.38 + 0.62 * settleQ;
+            }
+            a.el.style.opacity = op.toFixed(3);
+            a.el.style.transform = st;
+            /* giant word: parallax drift, alive only during its act */
+            var wo = act > 0 && act < 1 ? Math.min(ease(W(act, 0, 0.15)), 1 - ease(W(act, 0.82, 1))) : 0;
+            a.w.style.opacity = (wo * 0.9).toFixed(3);
+            a.w.style.transform = "translateY(-58%) translateX(" + ((0.5 - act) * 14).toFixed(2) + "vw)";
+          });
+          /* settle: header + ticker land together */
+          var q = ease(W(p, SETTLE, 0.985));
+          cap.style.opacity = q.toFixed(3);
+          cap.style.transform = "translateY(" + ((1 - q) * -14).toFixed(1) + "px)";
+          if (brands) brands.style.opacity = q.toFixed(3);
         }
         function onScroll() {
           if (!ticking) {
@@ -5319,7 +5140,6 @@
           return;
         }
         var sels = [
-          "#featured .fcard",
           "#price .day",
           "#price .when",
           "#price .alertcard",

@@ -3927,10 +3927,6 @@
     <!-- MYSTERY BOX REVEAL — self-contained, scroll-scrubbed -->
     <section id="bxsec">
       <div id="bxpin">
-        <div id="bxcap">
-          <span class="bxk">Every box is a surprise</span>
-          <span class="bxhint">scroll to open &darr;</span>
-        </div>
         <video id="bxvid" muted playsinline preload="auto" poster="mrbins-boxopen-poster.jpg"></video>
         <div id="bxend">
           <h3>The Mystery Box</h3>
@@ -3951,7 +3947,7 @@
       #bxsec {
         height: 340vh;
         position: relative;
-        background: #fff;
+        background: #edecec; /* the clip's exact studio tone — zero seam */
       }
       #bxpin {
         position: sticky;
@@ -3962,6 +3958,25 @@
         place-items: center;
         overflow: hidden;
       }
+      /* ease the studio tone into the white sections above and below */
+      #bxpin::before,
+      #bxpin::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 14svh;
+        z-index: 1;
+        pointer-events: none;
+      }
+      #bxpin::before {
+        top: 0;
+        background: linear-gradient(#fff, rgba(255, 255, 255, 0));
+      }
+      #bxpin::after {
+        bottom: 0;
+        background: linear-gradient(rgba(255, 255, 255, 0), #fff);
+      }
       #bxvid {
         max-width: 90vw;
         max-height: min(86svh, 86dvh);
@@ -3969,32 +3984,9 @@
         height: min(86svh, 86dvh);
         object-fit: contain;
         display: block;
-      }
-      #bxcap {
-        position: absolute;
-        top: calc(clamp(70px, 9dvh, 120px) + env(safe-area-inset-top, 0px));
-        left: 16px;
-        right: 16px;
-        text-align: center;
-        z-index: 2;
-        pointer-events: none;
-      }
-      #bxcap .bxk {
-        display: block;
-        font-family: "Space Mono", monospace;
-        font-size: clamp(11px, 3.2vw, 13px);
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--blue);
-      }
-      #bxcap .bxhint {
-        display: block;
-        margin-top: 8px;
-        font-family: "Space Mono", monospace;
-        font-size: clamp(10px, 3vw, 12px);
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--muted);
+        /* soft edge fade into the matched stage tone */
+        -webkit-mask-image: radial-gradient(130% 130% at 50% 52%, #000 62%, transparent 92%);
+        mask-image: radial-gradient(130% 130% at 50% 52%, #000 62%, transparent 92%);
       }
       #bxcta {
         position: absolute;
@@ -4031,8 +4023,7 @@
       @media (max-height: 460px) {
         /* landscape phones: caption and box share less height — shrink frame further */
         #bxvid { width: min(84vw, 72svh, 72dvh); }
-        #bxcap { top: 12px; }
-      }
+        }
     </style>
 
 
@@ -5425,7 +5416,6 @@
       (function () {
         var sec = document.getElementById("bxsec"),
           v = document.getElementById("bxvid"),
-          cap = document.getElementById("bxcap"),
           endc = document.getElementById("bxend"),
           cta = document.getElementById("bxcta");
         if (!sec || !v) return;
@@ -5452,7 +5442,6 @@
           try {
             v.currentTime = pr * (v.duration - 0.05);
           } catch (e) {}
-          if (cap) cap.style.opacity = String(1 - clamp((pr - 0.1) / 0.1));
           if (cta) {
             var q = clamp((pr - 0.85) / 0.12);
             cta.style.opacity = String(q);

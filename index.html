@@ -3931,9 +3931,7 @@
           <span class="bxk">Every box is a surprise</span>
           <span class="bxhint">scroll to open &darr;</span>
         </div>
-        <video id="bxvid" muted playsinline preload="auto" poster="mrbins-mystery-closed.png">
-          <source src="mrbins-unbox-burst.mp4" type="video/mp4" />
-        </video>
+        <video id="bxvid" muted playsinline preload="auto" poster="mrbins-boxopen-poster.jpg"></video>
         <div id="bxend">
           <h3>The Mystery Box</h3>
           <p>You don&rsquo;t know what&rsquo;s inside. That&rsquo;s the point.</p>
@@ -3965,9 +3963,10 @@
         overflow: hidden;
       }
       #bxvid {
-        width: min(88vw, 84svh, 84dvh, 860px);
-        height: auto;
-        aspect-ratio: 1 / 1;
+        max-width: 90vw;
+        max-height: min(86svh, 86dvh);
+        width: auto;
+        height: min(86svh, 86dvh);
         object-fit: contain;
         display: block;
       }
@@ -5430,6 +5429,9 @@
           endc = document.getElementById("bxend"),
           cta = document.getElementById("bxcta");
         if (!sec || !v) return;
+        var portrait = window.matchMedia("(orientation: portrait)").matches;
+        v.poster = portrait ? "mrbins-boxopen-poster.jpg" : "mrbins-boxopen-sq-poster.jpg";
+        v.src = portrait ? "mrbins-boxopen-v.mp4" : "mrbins-boxopen-sq.mp4";
         function clamp(x) {
           return x < 0 ? 0 : x > 1 ? 1 : x;
         }

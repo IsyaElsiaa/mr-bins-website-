@@ -3833,10 +3833,13 @@
       .mbxhead {
         position: sticky;
         top: 0;
-        padding-top: calc(clamp(66px, 9dvh, 110px));
+        padding-top: 84px; /* constant — never shifts with browser chrome */
+        padding-bottom: 14px;
         text-align: center;
         z-index: 3;
         pointer-events: none;
+        /* solid backdrop so rising items pass cleanly behind it */
+        background: linear-gradient(#f7f0e8 78%, rgba(247, 240, 232, 0));
       }
       .mbxhead a { pointer-events: auto; }
       .mbxseen {

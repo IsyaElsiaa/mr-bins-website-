@@ -3800,12 +3800,12 @@
       <div class="mbxreel">
         <h3 class="mbxreelh">Real people. <span>Real finds.</span> &#8594;</h3>
         <div class="mbxcards">
-          <figure><span class="chip">The shoe wall!</span><video muted loop playsinline preload="none" data-lazyplay poster="mrbins-shoes-poster.jpg"><source src="mrbins-shoes.mp4" type="video/mp4" /></video></figure>
-          <figure><span class="chip">Fresh racks &#128293;</span><video muted loop playsinline preload="none" data-lazyplay poster="mrbins-clothes-poster.jpg"><source src="mrbins-clothes.mp4" type="video/mp4" /></video></figure>
-          <figure><span class="chip">Drop day!</span><video muted loop playsinline preload="none" data-lazyplay poster="mrbins-birdseye.jpg"><source src="mrbins-birdseye.mp4" type="video/mp4" /></video></figure>
-          <figure><span class="chip">The dig &#128171;</span><video muted loop playsinline preload="none" data-lazyplay poster="mrbins-couple.jpg"><source src="mrbins-couple.mp4" type="video/mp4" /></video></figure>
-          <figure><span class="chip">One bin. One price.</span><video muted loop playsinline preload="none" data-lazyplay poster="mrbins-cart-poster.jpg"><source src="mrbins-cart.mp4" type="video/mp4" /></video></figure>
-        </div>
+          <figure><span class="chip">The shoe wall!</span><div class="ph" aria-hidden="true"><span class="phplay"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div></figure>
+          <figure><span class="chip">Fresh racks &#128293;</span><div class="ph" aria-hidden="true"><span class="phplay"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div></figure>
+          <figure><span class="chip">Drop day!</span><div class="ph" aria-hidden="true"><span class="phplay"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div></figure>
+          <figure><span class="chip">The dig &#128171;</span><div class="ph" aria-hidden="true"><span class="phplay"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div></figure>
+          <figure><span class="chip">One bin. One price.</span><div class="ph" aria-hidden="true"><span class="phplay"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></div></figure>
+        
       </div>
 
       <div class="mbxwhy">
@@ -3901,11 +3901,14 @@
       .mbxbox {
         position: absolute;
         left: 50%;
-        bottom: clamp(10px, 4dvh, 60px);
+        bottom: 24px;
         transform: translateX(-50%);
-        width: min(80vw, 56dvh, 660px);
+        width: min(80vw, 440px);
         height: auto;
         z-index: 2; /* occludes the items until they clear the rim */
+      }
+      @media (min-width: 940px) {
+        .mbxbox { width: min(46vw, 620px); bottom: 30px; }
       }
       .mbxit {
         position: absolute;
@@ -3948,7 +3951,25 @@
         background: #17162b;
         box-shadow: 0 16px 36px rgba(11, 36, 71, 0.22);
       }
-      .mbxcards video { width: 100%; aspect-ratio: 9 / 14; object-fit: cover; display: block; }
+      .mbxcards .ph {
+        width: 100%;
+        aspect-ratio: 9 / 14;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(160deg, #d8dbe1, #b9bec8);
+      }
+      .mbxcards .phplay {
+        width: 54px;
+        height: 54px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 22px rgba(11, 36, 71, 0.25);
+      }
+      .mbxcards .phplay svg { width: 24px; height: 24px; fill: #172b4d; margin-left: 3px; }
       .mbxcards .chip {
         position: absolute;
         top: 10px;

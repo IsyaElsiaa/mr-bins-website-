@@ -3789,8 +3789,11 @@
           <img class="mbxit" id="mbxit3" src="mbx-camera.webp" alt="" />
           <img class="mbxit" id="mbxit4" src="mbx-mixer.webp" alt="" />
           <img class="mbxit" id="mbxit5" src="mbx-tumbler.webp" alt="" />
-          <img class="mbxbox" src="mbx-box.jpg" alt="An open Mr. Bins mystery box" />
-          <div class="mbxblob" id="mbxblob">You never know<br />what you&rsquo;ll get.<br /><span>That&rsquo;s the fun.</span> &#9786;</div>
+          <img class="mbxit" id="mbxit6" src="mbx-drone.webp" alt="" />
+          <img class="mbxit" id="mbxit7" src="mbx-lego.webp" alt="" />
+          <img class="mbxit" id="mbxit8" src="mbx-espresso.webp" alt="" />
+          <img class="mbxit" id="mbxit9" src="mbx-basketball.webp" alt="" />
+          <img class="mbxbox" src="mbx-box.webp" alt="An open Mr. Bins mystery box" />
         </div>
       </div>
 
@@ -3897,37 +3900,21 @@
         left: 50%;
         bottom: clamp(10px, 4dvh, 60px);
         transform: translateX(-50%);
-        width: min(78vw, 54dvh, 640px);
+        width: min(80vw, 56dvh, 660px);
         height: auto;
-        mix-blend-mode: multiply;
+        z-index: 2; /* occludes the items until they clear the rim */
       }
       .mbxit {
         position: absolute;
         left: 50%;
-        top: 58%;
+        top: 74%; /* deep inside the box mouth */
+        z-index: 1;
         width: clamp(70px, 19vw, 170px);
         height: auto;
         opacity: 0;
         will-change: transform, opacity;
         filter: drop-shadow(0 14px 22px rgba(11, 36, 71, 0.18));
       }
-      .mbxblob {
-        position: absolute;
-        right: max(10px, 4vw);
-        bottom: clamp(90px, 20dvh, 220px);
-        background: #172b4d;
-        color: #fff;
-        font-family: "Permanent Marker", cursive;
-        font-size: clamp(15px, 4vw, 22px);
-        line-height: 1.35;
-        padding: clamp(14px, 3.4vw, 26px) clamp(18px, 4.4vw, 32px);
-        border-radius: 18px 26px 20px 30px / 26px 18px 30px 20px;
-        transform: rotate(-3deg);
-        opacity: 0;
-        will-change: opacity, transform;
-        max-width: min(62vw, 320px);
-      }
-      .mbxblob span { color: var(--orange); }
       .mbxreel { padding: clamp(40px, 7vh, 80px) 0 clamp(10px, 2vh, 26px); }
       .mbxreelh {
         text-align: center;
@@ -5438,30 +5425,37 @@
     <script>
       /* Mystery box: products rise from the box and hover at the top as you scroll. */
       (function () {
-        var pin = document.getElementById("mbxpin"),
-          blob = document.getElementById("mbxblob");
+        var pin = document.getElementById("mbxpin");
         if (!pin) return;
         var items = [];
-        for (var i = 0; i < 6; i++) items.push(document.getElementById("mbxit" + i));
+        for (var i = 0; i < 10; i++) items.push(document.getElementById("mbxit" + i));
         /* final hover slots: x in vw off center, y in dvh above stage center, rot deg */
         function slots() {
           var phone = window.innerWidth < 700;
           return phone
             ? [
-                { x: -30, y: -30, r: -14, s: 1 },
-                { x: 0, y: -35, r: 6, s: 0.92 },
-                { x: 30, y: -29, r: 14, s: 0.95 },
-                { x: -15, y: -20, r: -6, s: 0.85 },
-                { x: 16, y: -19, r: 8, s: 0.9 },
-                { x: -34, y: -10, r: -10, s: 0.7 },
+                { x: -28, y: -38, r: -14, s: 1 },
+                { x: 2, y: -42, r: 6, s: 0.92 },
+                { x: 30, y: -37, r: 14, s: 0.95 },
+                { x: -32, y: -22, r: -8, s: 0.85 },
+                { x: 0, y: -26, r: 5, s: 0.9 },
+                { x: 32, y: -21, r: 10, s: 0.8 },
+                { x: -18, y: -10, r: -6, s: 0.75 },
+                { x: 18, y: -9, r: 8, s: 0.75 },
+                { x: -36, y: -4, r: -12, s: 0.62 },
+                { x: 36, y: -5, r: 12, s: 0.62 },
               ]
             : [
-                { x: -22, y: -28, r: -12, s: 1 },
-                { x: -8, y: -34, r: 5, s: 0.95 },
-                { x: 8, y: -33, r: 12, s: 0.95 },
-                { x: 0, y: -21, r: -4, s: 0.85 },
-                { x: 20, y: -26, r: 10, s: 0.95 },
-                { x: -30, y: -18, r: -8, s: 0.8 },
+                { x: -24, y: -36, r: -12, s: 1 },
+                { x: -8, y: -42, r: 5, s: 0.95 },
+                { x: 8, y: -41, r: 12, s: 0.95 },
+                { x: 24, y: -35, r: 10, s: 0.95 },
+                { x: -32, y: -22, r: -8, s: 0.85 },
+                { x: 0, y: -26, r: -4, s: 0.85 },
+                { x: 32, y: -21, r: 8, s: 0.8 },
+                { x: -14, y: -12, r: -6, s: 0.72 },
+                { x: 14, y: -11, r: 6, s: 0.72 },
+                { x: 38, y: -8, r: 14, s: 0.6 },
               ];
         }
         function clamp(x) {
@@ -5481,7 +5475,7 @@
           var sl = slots();
           items.forEach(function (el, i) {
             if (!el) return;
-            var w = clamp((pr - 0.06 - i * 0.09) / 0.38);
+            var w = clamp((pr - 0.05 - i * 0.062) / 0.34);
             var e = ease(w);
             var s2 = sl[i];
             var bob = Math.sin(Date.now() / 900 + i * 1.7) * (w >= 1 ? 0.6 : 0); /* gentle hover */
@@ -5490,11 +5484,6 @@
               "translate(calc(-50% + " + (s2.x * e).toFixed(2) + "vw), calc(-50% + " + (s2.y * e + (1 - e) * 6 + bob).toFixed(2) + "dvh)) " +
               "rotate(" + (s2.r * e).toFixed(1) + "deg) scale(" + (0.4 + (s2.s - 0.4) * e).toFixed(3) + ")";
           });
-          if (blob) {
-            var q = clamp((pr - 0.72) / 0.14);
-            blob.style.opacity = String(q);
-            blob.style.transform = "rotate(-3deg) translateY(" + ((1 - q) * 14).toFixed(1) + "px)";
-          }
           if (hoverOn) requestAnimationFrame(function () { onS(); });
         }
         var hoverOn = false;
